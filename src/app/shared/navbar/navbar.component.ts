@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
   
-  constructor(config: NgbDropdownConfig) {
+  constructor(config: NgbDropdownConfig,private router:Router) {
     config.placement = 'bottom-right';
   }
 
@@ -41,6 +42,11 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('sidebar-hidden');
       }
     }
+  }
+
+  logOut(){
+    localStorage.removeItem("isLoggedIn")
+    this.router.navigate(['/Accounts/login'])
   }
 
   // toggle right sidebar

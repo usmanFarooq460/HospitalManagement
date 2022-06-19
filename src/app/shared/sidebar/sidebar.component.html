@@ -98,23 +98,24 @@
 
 
     <!-- <li class="nav-item" [ngClass]="{ 'active': icons.isActive }">
-      <a class="nav-link" routerLink="icons/mdi" routerLinkActive #icons="routerLinkActive">
+      <a class="nav-link" routerLink="/icons/mdi" routerLinkActive #icons="routerLinkActive">
         <span class="menu-title">Icons</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li> -->
+
     <li class="nav-item" [ngClass]="{
         active:
         addingNewMedicine.isActive ||
         medicine_Invoice.isActive
       }">
-      <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed"
-        [attr.aria-expanded]="samplePagesCollapsed" aria-controls="auth">
+      <a class="nav-link" (click)="PharmacyCollapsed = !PharmacyCollapsed"
+        [attr.aria-expanded]="PharmacyCollapsed" aria-controls="auth">
         <span class="menu-title">Pharmacy</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-medical-bag menu-icon"></i>
       </a>
-      <div class="collapse" id="auth" [ngbCollapse]="!samplePagesCollapsed">
+      <div class="collapse" id="auth" [ngbCollapse]="!PharmacyCollapsed">
         <ul class="nav flex-column sub-menu">
 
           <li class="nav-item">
@@ -127,32 +128,6 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/pharmacy/Medicine-sale-invoice" routerLinkActive="active" #medicine_Invoice="routerLinkActive">
               Medicine-sale-invoice
-            </a>
-          </li>
-        </ul>
-      </div>
-    </li>
-    <li class="nav-item" [ngClass]="{
-        active:
-          login.isActive ||
-          register.isActive
-      }">
-      <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed"
-        [attr.aria-expanded]="samplePagesCollapsed" aria-controls="auth">
-        <span class="menu-title">User Account</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-medical-bag menu-icon"></i>
-      </a>
-      <div class="collapse" id="auth" [ngbCollapse]="!samplePagesCollapsed">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/Accounts/login" routerLinkActive="active" #login="routerLinkActive">
-              Login
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/Accounts/register" routerLinkActive="active" #register="routerLinkActive">
-              Register
             </a>
           </li>
         </ul>

@@ -1,4 +1,39 @@
-<div class="d-flex align-items-center auth px-0">
+<div class="container-fluid main-page">
+  <div class="box-form">
+    <div class="left">
+      <div class="overlay">
+        <h1>Hospital Management System.</h1>
+        <p>
+          Our Hospital management systems allows You the ability to optimize and digitize all the processes within the
+          Hospital, which will help to improve customer service, reduce process costs, streamline the search of
+          medical records, bills, patients, doctors, etc.; thus, having a database of each module implemented
+        </p>
+
+      </div>
+    </div>
+
+    <div class="right">
+      <h5 class="Login-text">Login</h5>
+      <form [formGroup]="loginForm">
+        <div class="inputs">
+          <input type="text" formControlName="userName" placeholder="username" />
+          <br />
+          <input type="password" formControlName="pasword" placeholder="password" />
+        </div>
+      </form>
+      <br /><br />
+      <div class="remember-me--forget-password">
+        <p>forget password?</p>
+      </div>
+      <br />
+      <button (click)="submit()">Login </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="d-flex align-items-center auth px-0">
   <div class="row w-100 mx-0">
     <div class="col-lg-4 mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
@@ -39,4 +74,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>   -->

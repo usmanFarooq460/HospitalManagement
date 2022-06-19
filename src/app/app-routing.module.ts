@@ -7,14 +7,18 @@ const routes: Routes = [
   { path: "", redirectTo: "/dashboards", pathMatch: "full" },
   {
     path: "basic-ui",
-    component: MainLayoutdesignComponent,
     loadChildren: () =>
       import("./basic-ui/basic-ui.module").then((m) => m.BasicUiModule),
     canActivate: [AuthGuardGuard],
   },
   {
+    path: "icons",
+    loadChildren: () =>
+      import("./icons/icons.module").then((m) => m.IconsModule),
+    canActivate: [AuthGuardGuard],
+  },
+  {
     path: "dashboards",
-    component: MainLayoutdesignComponent,
     loadChildren: () =>
       import("./app-main/dashboards/dashboards.module").then(
         (m) => m.DashboardsModule
@@ -22,7 +26,6 @@ const routes: Routes = [
   },
   {
     path: "pharmacy",
-    component: MainLayoutdesignComponent,
     loadChildren: () =>
       import("./app-main/pharmacy/pharmacy.module").then(
         (m) => m.PharmacyModule
@@ -36,17 +39,16 @@ const routes: Routes = [
   },
   {
     path: "definitions",
-    component:MainLayoutdesignComponent,
     loadChildren: () =>
       import("./app-main/definitons/definitons.module").then(
         (m) => m.DefinitonsModule
       ),
-    canActivate:[AuthGuardGuard]
+    canActivate: [AuthGuardGuard],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: "legacy" })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

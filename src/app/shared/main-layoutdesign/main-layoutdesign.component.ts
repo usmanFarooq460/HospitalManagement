@@ -25,7 +25,7 @@ export class MainLayoutdesignComponent implements OnInit {
       if (event instanceof NavigationStart) {
         // this.CheckingForLogin();
         if (
-          event["url"] == "/user-pages/login" ||
+          event["url"] == "/Accounts/login" ||
           event["url"] == "/user-pages/register" ||
           event["url"] == "/error-pages/404" ||
           event["url"] == "/error-pages/500"
