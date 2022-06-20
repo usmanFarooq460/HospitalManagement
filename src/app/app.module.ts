@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
+import { HttpClientModule } from "@angular/common/http"; 
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -33,6 +34,7 @@ import { MainLayoutdesignComponent } from './shared/main-layoutdesign/main-layou
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    HttpClientModule
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent],
