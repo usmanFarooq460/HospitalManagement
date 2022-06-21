@@ -9,8 +9,10 @@ import { AccountsService } from "../accounts.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean;
   loginForm: any;
+  isMatched: boolean = false;
+  allUserslist = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -21,31 +23,51 @@ export class LoginComponent implements OnInit {
       pasword: ["", Validators.required],
     });
   }
+  get form() { return this.loginForm.controls; }
+  
   ngOnInit(): void {
-    this.adminGetAll();
+    this.getAllUsers();
   }
 
-  adminGetAll() {
-    this.service.getAdmin().subscribe(
+  getAllUsers() {
+    this.service.getAllUsers().subscribe(
       (resp) => {
-        console.log("admin resp: ", resp);
+        this.allUserslist = resp;
+        console.log("all users list : ", resp);
       },
-      (err) => console.log("err: ", err)
+      (err) => console.log("error in getting all users: ", err)
     );
   }
 
   submit() {
-    let username = "admin";
-    let pass = "123";
-    console.log("Form Fields", this.loginForm);
-    console.log("Password Value", this.loginForm.value.pasword);
-    if (
-      this.loginForm.value.pasword == pass &&
-      this.loginForm.value.userName == username
-    ) {
-      var encodedToken = btoa("User has logged in");
-      localStorage.setItem("isLoggedIn", encodedToken);
-      this.router.navigate(["/"]);
+    if (this.loginForm.valid == false) {
+      this.loginForm.markAllAsTouched();
+      return
+    }
+    if (this.loginForm.valid) {
+      console.log("Form Fields", this.loginForm);
+      console.log("Password Value", this.loginForm.value.pasword);
+      for (let i = 0; i < this.allUserslist?.length; i++) {
+        if (
+          this.loginForm.value.userName == this.allUserslist[i].userNameForLogin &&
+          this.loginForm.value.pasword == this.allUserslist[i].passwordForLogin
+        ) {
+          this.isMatched = true;
+          var encodedToken = btoa("User has logged in");
+          localStorage.setItem("isLoggedIn", encodedToken);
+          localStorage.setItem(
+            "UserName",
+            this.allUserslist[i].userNameForLogin
+          );
+          localStorage.setItem("UserId", this.allUserslist[i]._id);
+          this.router.navigate(["/"]);
+        } else {
+          console.log(this.allUserslist[i].userNameForLogin,this.allUserslist[i].passwordForLogin);
+          console.log(this.loginForm.value.userName,this.loginForm.value.pasword);
+          
+          this.isMatched = false;
+        }
+      }
     }
   }
 }

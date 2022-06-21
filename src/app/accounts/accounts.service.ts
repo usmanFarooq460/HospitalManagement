@@ -1,17 +1,17 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AccountsService {
-  header = new HttpHeaders({ 'Content-Type': 'application/json' });
+  header = new HttpHeaders({ "Content-Type": "application/json" });
   ApiUrl = environment.apiUrl;
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  getAdmin() {
-    return this.http.get<any>(this.ApiUrl + 'admin/getAll', {
+  getAllUsers() {
+    return this.http.get<any>(this.ApiUrl + "allUsers/getAll", {
       headers: this.header,
     });
   }

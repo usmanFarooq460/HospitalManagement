@@ -1,3 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="register-waraper">
+        <div class="logo-in-register">
+          <img src="./../../../assets/images/my_images/hms-logo-6FC6E7E493-seeklogo.com.png" alt="logo">
+        </div>
+        <div class="text-center mt-4 font-weight-light">
+          Already have an account? <a routerLink="/Accounts/login" class="text-primary">Login</a>
+        </div>
+        <div class="form-fields">
+          <form class="form" [formGroup]="registerAdminForm" (ngSubmit)="registerAdmin()">
+            <div class="form-group">
+                <input type="text" class="form-control " formControlName="AdminName" placeholder="Admin Name">
+            </div> 
+            <div class="form-group">
+                <input type="text" class="form-control form-control-lg" formControlName="AdminName" placeholder="Phone Number">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
 <div class="d-flex align-items-center auth px-0">
   <div class="row w-100 mx-0">
     <div class="col-lg-4 mx-auto">
@@ -15,17 +42,8 @@
             <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
           </div>
           <div class="form-group">
-            <select class="form-control form-control-lg" id="exampleFormControlSelect2">
-              <option>Country</option>
-              <option>United States of America</option>
-              <option>United Kingdom</option>
-              <option>India</option>
-              <option>Germany</option>
-              <option>Argentina</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
+              placeholder="Password">
           </div>
           <div class="mb-4">
             <div class="form-check">
@@ -37,7 +55,8 @@
             </div>
           </div>
           <div class="mt-3">
-            <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" routerLink="/dashboard">SIGN UP</a>
+            <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" routerLink="/dashboard">SIGN
+              UP</a>
           </div>
           <div class="text-center mt-4 font-weight-light">
             Already have an account? <a routerLink="/login" class="text-primary">Login</a>

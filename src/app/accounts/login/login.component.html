@@ -17,16 +17,26 @@
       <form [formGroup]="loginForm">
         <div class="inputs">
           <input type="text" formControlName="userName" placeholder="username" />
-          <br />
+          <div *ngIf="form.userName.invalid && form.userName.touched" class="invalid-feedback d-block">
+            <div *ngIf="form.userName.errors.required" class="invalid-feedback d-block">User Name is required
+            </div>
+          </div>
           <input type="password" formControlName="pasword" placeholder="password" />
+          <div *ngIf="form.pasword.invalid && form.pasword.touched" class="invalid-feedback d-block">
+            <div *ngIf="form.pasword.errors.required" class="invalid-feedback d-block">Password is required
+            </div>
+          </div>
         </div>
       </form>
-      <br /><br />
-      <div class="remember-me--forget-password">
+      <div class="remember-me--forget-password mt-2">
         <p>forget password?</p>
       </div>
-      <br />
       <button (click)="submit()">Login </button>
+      <div class="new-here mt-4">
+        New Here?<a routerLink="/Accounts/register">
+          register Yourself
+        </a>
+      </div>
     </div>
   </div>
 </div>
