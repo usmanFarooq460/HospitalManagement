@@ -10,6 +10,7 @@ import { AccountsService } from "../accounts.service";
 })
 export class RegisterComponent implements OnInit {
   registerAdminForm: any;
+  ExistingAdmin = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -23,13 +24,39 @@ export class RegisterComponent implements OnInit {
       userNameForLogin: ["", Validators.required],
       passwordForLogin: ["", Validators.required],
       forgotPasswordEmail: ["", Validators.email],
-      createdAt: new Date(),
+      createdAt: new Date().toLocaleString(),
     });
   }
 
-  ngOnInit() {}
+  get form() {
+    return this.registerAdminForm.controls;
+  }
+
+  ngOnInit() {
+    this.getExistingAdmin();
+  }
+
+  getExistingAdmin() {
+    this.service.getExistingAdmin().subscribe(
+      (resp) => {
+        console.log("Existing Admin", resp);
+        this.ExistingAdmin = resp;
+      },
+      (err) => console.log("error in getting existing admin: ", err)
+    );
+  }
 
   registerAdmin() {
-    
+    if (this.registerAdminForm.valid == false) {
+      this.registerAdminForm.markAllAsTouched();
+      return;
+    }
+    console.log("Form: ", this.registerAdminForm.value);
+    this.service.RegisterAdmin(this.registerAdminForm.value).subscribe(
+      (resp) => {
+        console.log("Submitted Succesfully");
+      },
+      (err) => console.log("Error While Registering admin")
+    );
   }
 }

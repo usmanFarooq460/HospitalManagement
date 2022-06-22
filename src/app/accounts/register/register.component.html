@@ -4,20 +4,79 @@
     <div class="col-md-8">
       <div class="register-waraper">
         <div class="logo-in-register">
-          <img src="./../../../assets/images/my_images/hms-logo-6FC6E7E493-seeklogo.com.png" alt="logo">
+          <img src="assets/images/my_images/hms-logo-6FC6E7E493-seeklogo.com.png" alt="logo">
         </div>
         <div class="text-center mt-4 font-weight-light">
           Already have an account? <a routerLink="/Accounts/login" class="text-primary">Login</a>
         </div>
-        <div class="form-fields">
-          <form class="form" [formGroup]="registerAdminForm" (ngSubmit)="registerAdmin()">
+        <div class="form-fields mt-4">
+          <form class="form register-form" [formGroup]="registerAdminForm" (ngSubmit)="registerAdmin()">
             <div class="form-group">
-                <input type="text" class="form-control " formControlName="AdminName" placeholder="Admin Name">
-            </div> 
-            <div class="form-group">
-                <input type="text" class="form-control form-control-lg" formControlName="AdminName" placeholder="Phone Number">
+              <div class="row my-3">
+                <div class="col-sm-6 my-2">
+                  <input type="text" class="form-control " formControlName="AdminName" placeholder="Admin Name">
+                  <div *ngIf="form.AdminName.invalid && form.AdminName.touched" class="invalid-feedback d-block">
+                    <div *ngIf="form.AdminName.errors.required" class="invalid-feedback d-block">Admin Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 my-2">
+                  <input type="text" class="form-control form-control-lg" formControlName="AdminName"
+                    placeholder="Phone Number">
+                </div>
+                <div class="col-sm-6 my-2">
+                  <input type="text" class="form-control " formControlName="Address" placeholder="Address">
+                  <div *ngIf="form.Address.invalid && form.Address.touched" class="invalid-feedback d-block">
+                    <div *ngIf="form.Address.errors.required" class="invalid-feedback d-block">Hospital Address is
+                      required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 my-2">
+                  <input type="text" class="form-control " formControlName="HospitalName" placeholder="Hospital Name">
+                  <div *ngIf="form.HospitalName.invalid && form.HospitalName.touched" class="invalid-feedback d-block">
+                    <div *ngIf="form.HospitalName.errors.required" class="invalid-feedback d-block">Hospital Name is
+                      required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6  my-2">
+                  <input type="text" class="form-control " formControlName="userNameForLogin" placeholder="User Name">
+                  <div *ngIf="form.userNameForLogin.invalid && form.userNameForLogin.touched"
+                    class="invalid-feedback d-block">
+                    <div *ngIf="form.userNameForLogin.errors.required" class="invalid-feedback d-block">User Name is
+                      required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 my-2">
+                  <input type="password" class="form-control" formControlName="passwordForLogin" placeholder="Password">
+                  <div *ngIf="form.passwordForLogin.invalid && form.passwordForLogin.touched"
+                    class="invalid-feedback d-block">
+                    <div *ngIf="form.passwordForLogin.errors.required" class="invalid-feedback d-block">Passwrod is
+                      required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 my-2">
+                  <input type="email" class="form-control" formControlName="forgotPasswordEmail"
+                    placeholder="Email in case forgot user Password">
+                  <div *ngIf="form.forgotPasswordEmail.invalid && form.forgotPasswordEmail.touched"
+                    class="invalid-feedback d-block">
+                    <div *ngIf="form.forgotPasswordEmail.errors.required" class="invalid-feedback d-block">email is
+                      required
+                    </div>
+                    <div *ngIf="form.forgotPasswordEmail.errors.email" class="invalid-feedback d-block">email is
+                      Give Valid Email
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
+          <div class="d-flex justify-content-end">
+            <button class="custom-btn" (click)="registerAdmin()">Register </button>
+          </div>
         </div>
       </div>
     </div>
@@ -25,7 +84,7 @@
   </div>
 </div>
 
-<div class="d-flex align-items-center auth px-0">
+<!-- <div class="d-flex align-items-center auth px-0">
   <div class="row w-100 mx-0">
     <div class="col-lg-4 mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
@@ -65,4 +124,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -15,4 +15,16 @@ export class AccountsService {
       headers: this.header,
     });
   }
+
+  //*************************** Register Component **********************************/
+  RegisterAdmin(data) {
+    return this.http.post<any>(this.ApiUrl + "admin/AddNew", data, {
+      headers: this.header,
+    });
+  }
+  getExistingAdmin() {
+    return this.http.get<any>(this.ApiUrl + "admin/getAll", {
+      headers: this.header,
+    });
+  }
 }
