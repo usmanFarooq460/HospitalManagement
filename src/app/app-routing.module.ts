@@ -45,6 +45,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardGuard],
   },
+  // {
+  //   path: "commonUi",
+  //   loadChildren: () =>
+  //     import("./common-ui-pages/common-ui-pages.module").then(
+  //       (m) => m.CommonUiPagesModule
+  //     ),
+  //   canActivate: [AuthGuardGuard],
+  // },
 ];
 
 @NgModule({

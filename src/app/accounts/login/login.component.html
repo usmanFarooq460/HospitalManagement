@@ -2,8 +2,8 @@
   <div class="box-form">
     <div class="left">
       <div class="overlay">
-        <h1>Hospital Management System.</h1>
-        <p>
+        <h3 class="side-heading">Hospital Management System.</h3>
+        <p class="Login-description">
           Our Hospital management systems allows You the ability to optimize and digitize all the processes within the
           Hospital, which will help to improve customer service, reduce process costs, streamline the search of
           medical records, bills, patients, doctors, etc.; thus, having a database of each module implemented
@@ -14,7 +14,10 @@
 
     <div class="right">
       <h5 class="Login-text">Login</h5>
-      <form [formGroup]="loginForm">
+      <div class="error-message" *ngIf="isMatched==false">
+        Email or password is wrong
+      </div>
+      <form class="login-form" [formGroup]="loginForm">
         <div class="inputs">
           <input type="text" formControlName="userName" placeholder="username" />
           <div *ngIf="form.userName.invalid && form.userName.touched" class="invalid-feedback d-block">

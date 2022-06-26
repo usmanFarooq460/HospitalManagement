@@ -11,7 +11,7 @@ import { AccountsService } from "../accounts.service";
 export class LoginComponent implements OnInit {
   isLoggedIn: boolean;
   loginForm: any;
-  isMatched: boolean = false;
+  isMatched: boolean = true;
   allUserslist = [];
   constructor(
     private formBuilder: FormBuilder,
@@ -23,8 +23,10 @@ export class LoginComponent implements OnInit {
       pasword: ["", Validators.required],
     });
   }
-  get form() { return this.loginForm.controls; }
-  
+  get form() {
+    return this.loginForm.controls;
+  }
+
   ngOnInit(): void {
     this.getAllUsers();
   }
@@ -42,14 +44,24 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.loginForm.valid == false) {
       this.loginForm.markAllAsTouched();
-      return
+      return;
     }
     if (this.loginForm.valid) {
-      console.log("Form Fields", this.loginForm);
-      console.log("Password Value", this.loginForm.value.pasword);
+      // // temp
+      // var encodedToken = btoa("User has logged in");
+      // localStorage.setItem("isLoggedIn", encodedToken);
+      // this.router.navigate(["/"]);
+      // console.log("Temporary login");
+
+      // // temp
+      if (this.allUserslist?.length>0==false){
+        console.log("User list not foud");
+        return;
+      }
       for (let i = 0; i < this.allUserslist?.length; i++) {
         if (
-          this.loginForm.value.userName == this.allUserslist[i].userNameForLogin &&
+          this.loginForm.value.userName ==
+            this.allUserslist[i].userNameForLogin &&
           this.loginForm.value.pasword == this.allUserslist[i].passwordForLogin
         ) {
           this.isMatched = true;
@@ -62,9 +74,6 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("UserId", this.allUserslist[i]._id);
           this.router.navigate(["/"]);
         } else {
-          console.log(this.allUserslist[i].userNameForLogin,this.allUserslist[i].passwordForLogin);
-          console.log(this.loginForm.value.userName,this.loginForm.value.pasword);
-          
           this.isMatched = false;
         }
       }

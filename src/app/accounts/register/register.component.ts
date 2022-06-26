@@ -16,9 +16,13 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private service: AccountsService
   ) {
+    this.initForm()
+  }
+
+  initForm(){
     this.registerAdminForm = this.formBuilder.group({
       AdminName: ["", Validators.required],
-      phoneNumber: null,
+      phoneNumber: [null],
       Address: "",
       HospitalName: ["", Validators.required],
       userNameForLogin: ["", Validators.required],
@@ -49,14 +53,17 @@ export class RegisterComponent implements OnInit {
   registerAdmin() {
     if (this.registerAdminForm.valid == false) {
       this.registerAdminForm.markAllAsTouched();
-      return;
+    }
+    if(this.ExistingAdmin?.length>0){
+      
     }
     console.log("Form: ", this.registerAdminForm.value);
     this.service.RegisterAdmin(this.registerAdminForm.value).subscribe(
       (resp) => {
         console.log("Submitted Succesfully");
+        this.initForm()
       },
-      (err) => console.log("Error While Registering admin")
+      (err) => console.log("Error While Registering admin",err)
     );
   }
 }

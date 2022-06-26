@@ -23,8 +23,8 @@
     border-radius: 5px;
     outline: none;
     color: white;
-    font-size: 12px;
-    padding:7px 20px;
+    font-size: 15px;
+    padding:10px 25px;
     border: 1px solid;
     transition: all 0.5s;
     &:hover,&:focus{
@@ -32,4 +32,17 @@
         border: 1px solid rgb(9, 9, 148);
         color:rgb(9, 9, 148);
     }
+}
+.form{
+  background: rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  border-radius: 4px;
+  color: #fff;
+  box-shadow: 3px 3px 4px rgba(0,0,0,0.2);
+}
+
+.form-control{
+  border:1px solid;
+  border-radius: 5px;
+  // margin: -40px;
 }

@@ -9,19 +9,19 @@
         <div class="text-center mt-4 font-weight-light">
           Already have an account? <a routerLink="/Accounts/login" class="text-primary">Login</a>
         </div>
-        <div class="form-fields mt-4">
-          <form class="form register-form" [formGroup]="registerAdminForm" (ngSubmit)="registerAdmin()">
+        <div class="form mt-4">
+          <form class="register-form" [formGroup]="registerAdminForm" (ngSubmit)="registerAdmin()">
             <div class="form-group">
               <div class="row my-3">
                 <div class="col-sm-6 my-2">
-                  <input type="text" class="form-control " formControlName="AdminName" placeholder="Admin Name">
+                  <input type="text" class="form-control form-control-lg" formControlName="AdminName" placeholder="Admin Name">
                   <div *ngIf="form.AdminName.invalid && form.AdminName.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.AdminName.errors.required" class="invalid-feedback d-block">Admin Name is required
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 my-2">
-                  <input type="text" class="form-control form-control-lg" formControlName="AdminName"
+                  <input type="number" class="form-control form-control-lg" formControlName="phoneNumber"
                     placeholder="Phone Number">
                 </div>
                 <div class="col-sm-6 my-2">
