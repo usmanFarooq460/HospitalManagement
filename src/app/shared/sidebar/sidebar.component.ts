@@ -10,6 +10,7 @@ export class SidebarComponent implements OnInit {
   uiBasicCollapsed = false;
   samplePagesCollapsed = false;
   PharmacyCollapsed = false;
+  Definitions = false;
   
   constructor(private router:Router) { }
 

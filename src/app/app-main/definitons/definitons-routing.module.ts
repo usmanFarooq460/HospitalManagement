@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserDefineComponent } from "./user-define/user-define.component"
 
 
 const routes: Routes = [
-  // { path: '', component: DefinitonsComponent }
+  { path: 'user-define', component:UserDefineComponent }
 ];
 
 @NgModule({

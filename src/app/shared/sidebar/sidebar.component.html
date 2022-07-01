@@ -109,8 +109,8 @@
         addingNewMedicine.isActive ||
         medicine_Invoice.isActive
       }">
-      <a class="nav-link" (click)="PharmacyCollapsed = !PharmacyCollapsed"
-        [attr.aria-expanded]="PharmacyCollapsed" aria-controls="auth">
+      <a class="nav-link" (click)="PharmacyCollapsed = !PharmacyCollapsed" [attr.aria-expanded]="PharmacyCollapsed"
+        aria-controls="auth">
         <span class="menu-title">Pharmacy</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-medical-bag menu-icon"></i>
@@ -126,15 +126,39 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/pharmacy/Medicine-sale-invoice" routerLinkActive="active" #medicine_Invoice="routerLinkActive">
+            <a class="nav-link" routerLink="/pharmacy/Medicine-sale-invoice" routerLinkActive="active"
+              #medicine_Invoice="routerLinkActive">
               Medicine-sale-invoice
             </a>
           </li>
         </ul>
       </div>
     </li>
+    <li class="nav-item" [ngClass]="{
+        active:
+        addingNewMedicine.isActive ||
+        medicine_Invoice.isActive
+      }">
+      <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="PharmacyCollapsed"
+        aria-controls="auth">
+        <span class="menu-title">Definitions</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-medical-bag menu-icon"></i>
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!Definitions">
+        <ul class="nav flex-column sub-menu">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
+              #addingNewMedicine="routerLinkActive">
+              Define User
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
     <li class="nav-item">
-      <a class="nav-link" (click)="logOut()" >
+      <a class="nav-link" (click)="logOut()">
         <span class="menu-title">Logout</span>
         <i class="mdi mdi-power menu-icon"></i>
       </a>

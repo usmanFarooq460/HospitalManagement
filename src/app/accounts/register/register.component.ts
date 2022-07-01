@@ -55,6 +55,7 @@ export class RegisterComponent extends BaseActions implements OnInit {
   registerAdmin() {
     if (this.registerAdminForm.valid == false) {
       this.registerAdminForm.markAllAsTouched();
+      return;
     }
     if (this.ExistingAdmin?.length > 0) {
       this.errorPopup("Admin already exists, You can only Update it");
