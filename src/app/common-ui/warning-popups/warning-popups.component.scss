@@ -1,0 +1,40 @@
+// .modal-header{
+//     margin-right: 34px;
+// }
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  flex-direction: column;
+  .header {
+    .ICONS {
+      font-size: 70px;
+      color: green;
+    }
+    .warning-icon {
+      font-size: 50px;
+      color: white;
+      background-color: rgb(141, 141, 23);
+      border-radius: 50%;
+    }
+    .error-icon {
+      font-size: 50px;
+      color: white;
+      background-color: rgb(126, 13, 5);
+      border-radius: 50%;
+    }
+    .body {
+      color: black;
+      font-weight: 600;
+      padding-top: 29px;
+      text-align: center;
+      margin: auto;
+    }
+  }
+}
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

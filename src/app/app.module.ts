@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SpinnerComponent } from "./shared/spinner/spinner.component";
 import { ContentAnimateDirective } from "./shared/directives/content-animate.directive";
 import { MainLayoutdesignComponent } from './shared/main-layoutdesign/main-layoutdesign.component';
+import { CommonUiModule } from "./common-ui/common-ui.module"
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MainLayoutdesignComponent } from './shared/main-layoutdesign/main-layou
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonUiModule
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent],

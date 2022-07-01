@@ -1,1 +1,14 @@
 <p>adding-new-medicine works!</p>
+
+
+
+<div class="row">
+    <div class="col-12">
+        <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+            (closePopup)="onOkClicked($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+            (closePopup)="onOkClicked($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+            (closePopup)="onOkClicked($event)"></app-warning-popups>
+    </div>
+</div>

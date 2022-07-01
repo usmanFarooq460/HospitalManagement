@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ɵangular_packages_router_router_b } from "@angular/router";
+import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 import { AccountsService } from "../accounts.service";
 
 @Component({
@@ -8,7 +9,7 @@ import { AccountsService } from "../accounts.service";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends BaseActions implements OnInit {
   registerAdminForm: any;
   ExistingAdmin = [];
   constructor(
@@ -16,10 +17,11 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private service: AccountsService
   ) {
-    this.initForm()
+    super();
+    this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.registerAdminForm = this.formBuilder.group({
       AdminName: ["", Validators.required],
       phoneNumber: [null],
@@ -54,16 +56,17 @@ export class RegisterComponent implements OnInit {
     if (this.registerAdminForm.valid == false) {
       this.registerAdminForm.markAllAsTouched();
     }
-    if(this.ExistingAdmin?.length>0){
-      
+    if (this.ExistingAdmin?.length > 0) {
+      this.errorPopup("Admin already exists, You can only Update it");
+      return;
     }
     console.log("Form: ", this.registerAdminForm.value);
     this.service.RegisterAdmin(this.registerAdminForm.value).subscribe(
       (resp) => {
         console.log("Submitted Succesfully");
-        this.initForm()
+        this.initForm();
       },
-      (err) => console.log("Error While Registering admin",err)
+      (err) => console.log("Error While Registering admin", err)
     );
   }
 }

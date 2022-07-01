@@ -2,13 +2,15 @@ import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { AccountsService } from "../accounts.service";
+import { extend } from "chartist";
+import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseActions implements OnInit {
   isLoggedIn: boolean;
   loginForm: any;
   isMatched: boolean = true;
@@ -18,6 +20,11 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private service: AccountsService
   ) {
+    super();
+    this.initForm();
+  }
+
+  initForm() {
     this.loginForm = this.formBuilder.group({
       userName: ["", Validators.required],
       pasword: ["", Validators.required],
@@ -37,7 +44,10 @@ export class LoginComponent implements OnInit {
         this.allUserslist = resp;
         console.log("all users list : ", resp);
       },
-      (err) => console.log("error in getting all users: ", err)
+      (err) => {
+        this.errorPopup(err.message);
+        console.log("error in getting all users: ", err);
+      }
     );
   }
 
@@ -52,10 +62,11 @@ export class LoginComponent implements OnInit {
       // localStorage.setItem("isLoggedIn", encodedToken);
       // this.router.navigate(["/"]);
       // console.log("Temporary login");
-
       // // temp
-      if (this.allUserslist?.length>0==false){
-        console.log("User list not foud");
+      if (this.allUserslist?.length > 0 == false) {
+        this.WarningPopup("Data base is not Running on live");
+        console.log("still runug");
+
         return;
       }
       for (let i = 0; i < this.allUserslist?.length; i++) {
