@@ -1,4 +1,4 @@
-<div class="container-fluid main-page " [ngStyle]="{'height':browserHeight+'px' }">
+<div class="container-fluid main-page " [ngStyle]="{height:gridHeight+'px' }">
   <div class="box-form">
     <div class="left">
       <div class="overlay">
@@ -14,8 +14,11 @@
 
     <div class="right">
       <h5 class="Login-text">Login</h5>
-      <div class="error-message" *ngIf="isMatched==false">
+      <!-- <div class="error-message" *ngIf="isMatched==false">
         Email or password is wrong
+      </div> -->
+      <div class="alert alert-danger error-message" role="alert" *ngIf="isMatched==false">
+       UserName or Password is wrong
       </div>
       <form class="login-form" [formGroup]="loginForm">
         <div class="inputs">

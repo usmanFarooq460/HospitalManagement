@@ -30,15 +30,16 @@ export class LoginComponent extends BaseActions implements OnInit {
       pasword: ["", Validators.required],
     });
   }
+
   get form() {
     return this.loginForm.controls;
   }
 
-  ngOnInit(): void {
-    this.getAllUsers();
+  async ngOnInit() {
+    await this.getAllUsers();
   }
 
-  getAllUsers() {
+ async getAllUsers() {
     this.service.getAllUsers().subscribe(
       (resp) => {
         this.allUserslist = resp;
@@ -51,22 +52,22 @@ export class LoginComponent extends BaseActions implements OnInit {
     );
   }
 
-  submit() {
+  async submit() {
     if (this.loginForm.valid == false) {
       this.loginForm.markAllAsTouched();
       return;
     }
     if (this.loginForm.valid) {
-      // // temp
-      // var encodedToken = btoa("User has logged in");
-      // localStorage.setItem("isLoggedIn", encodedToken);
-      // this.router.navigate(["/"]);
-      // console.log("Temporary login");
-      // // temp
+      // temp
+      var encodedToken = btoa("User has logged in");
+      localStorage.setItem("isLoggedIn", encodedToken);
+      this.router.navigate(["/"]);
+      console.log("Temporary login");
+      // temp
+      // await this.getAllUsers()
       if (this.allUserslist?.length > 0 == false) {
         this.WarningPopup("Data base is not Running on live");
         console.log("still runug");
-
         return;
       }
       for (let i = 0; i < this.allUserslist?.length; i++) {

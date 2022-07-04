@@ -1,5 +1,5 @@
-<div class="container" >
-  <div class="main-page" [style]="">
+<div class="container">
+  <div class="main-page">
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -18,7 +18,8 @@
                     <input type="text" class="form-control form-control-lg" formControlName="AdminName"
                       placeholder="Admin Name">
                     <div *ngIf="form.AdminName.invalid && form.AdminName.touched" class="invalid-feedback d-block">
-                      <div *ngIf="form.AdminName.errors.required" class="invalid-feedback d-block">Admin Name is required
+                      <div *ngIf="form.AdminName.errors.required" class="invalid-feedback d-block">Admin Name is
+                        required
                       </div>
                     </div>
                   </div>
@@ -36,7 +37,8 @@
                   </div>
                   <div class="col-sm-6 my-2">
                     <input type="text" class="form-control " formControlName="HospitalName" placeholder="Hospital Name">
-                    <div *ngIf="form.HospitalName.invalid && form.HospitalName.touched" class="invalid-feedback d-block">
+                    <div *ngIf="form.HospitalName.invalid && form.HospitalName.touched"
+                      class="invalid-feedback d-block">
                       <div *ngIf="form.HospitalName.errors.required" class="invalid-feedback d-block">Hospital Name is
                         required
                       </div>
@@ -52,7 +54,8 @@
                     </div>
                   </div>
                   <div class="col-sm-6 my-2">
-                    <input type="password" class="form-control" formControlName="passwordForLogin" placeholder="Password">
+                    <input type="password" class="form-control" formControlName="passwordForLogin"
+                      placeholder="Password">
                     <div *ngIf="form.passwordForLogin.invalid && form.passwordForLogin.touched"
                       class="invalid-feedback d-block">
                       <div *ngIf="form.passwordForLogin.errors.required" class="invalid-feedback d-block">Passwrod is
@@ -85,7 +88,7 @@
       <div class="col-md-2"></div>
     </div>
   </div>
- 
+
   <div class="row">
     <div class="col-12">
       <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"

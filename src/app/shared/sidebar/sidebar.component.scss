@@ -41,7 +41,6 @@
         transition-property: color;
         -webkit-transition-property: color;
         cursor: pointer;
-
         i {
           color: inherit;
 
@@ -53,7 +52,8 @@
               margin-left: 0;
               margin-right: auto;
             }
-            color: $sidebar-menu-icon-color;
+            color: $blue_color;
+            // color: $sidebar-menu-icon-color;
             &:before {
               vertical-align: middle;
             }
@@ -90,6 +90,7 @@
           display: inline-block;
           font-size: $sidebar-menu-font-size;
           line-height: 1;
+          font-weight: 600;
           vertical-align: middle;
         }
 
@@ -110,11 +111,13 @@
       &.active {
         .nav-link {
           .menu-title {
-            color: $sidebar-menu-active-color;
+            // color: $sidebar-menu-active-color;
+            color: $red_color;
             font-family: $type1-medium;            
           }
           i {
-            color: theme-color(primary);
+            color: $red_color;
+            // color: theme-color(primary);
           }
         }
       }

@@ -136,21 +136,27 @@
     </li>
     <li class="nav-item" [ngClass]="{
         active:
-        addingNewMedicine.isActive ||
-        medicine_Invoice.isActive
+        DefineUser.isActive ||
+        userHistory.isActive
       }">
-      <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="PharmacyCollapsed"
+      <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="Definitions"
         aria-controls="auth">
         <span class="menu-title">Definitions</span>
         <i class="menu-arrow"></i>
-        <i class="mdi mdi-medical-bag menu-icon"></i>
+        <i class="mdi mdi-book-plus menu-icon"></i>
       </a>
       <div class="collapse" id="auth" [ngbCollapse]="!Definitions">
         <ul class="nav flex-column sub-menu">
 
           <li class="nav-item">
             <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
-              #addingNewMedicine="routerLinkActive">
+              #DefineUser="routerLinkActive">
+              Define User
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
+              #userHistory="routerLinkActive">
               Define User
             </a>
           </li>

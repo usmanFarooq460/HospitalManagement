@@ -32,12 +32,15 @@ export abstract class BaseActions {
 
   // =========================Popups open and Close============================== ends //
 
-  browserHeight = window.innerHeight-100;
+  browserHeight = window.innerHeight;
+  browserwidth = window.innerWidth;
+  gridHeight = window.innerHeight - 150;
   @HostListener("window:resize", ["$event"])
   onResize(event) {
     event.target.innerWidth;
     let height = event.target.innerHeight;
     let width = event.target.innerWidth;
     this.browserHeight = height;
+    this.browserHeight = height - 100;
   }
 }

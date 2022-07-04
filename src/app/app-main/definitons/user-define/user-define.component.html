@@ -1,7 +1,84 @@
 <div class="container-fluid">
     <page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
-
-    <div class="main-page" [ngStyle]="{'height':browserHeight+'px' }">
-        asdfadsfadsfads
+    <div class="">
+        <button type="button" class="btn blue-color text-white btn-sm" (click)="openPopup(userDefineModalContent)">Add
+            New User<i class="mdi mdi-account-plus ml-1"></i></button>
     </div>
 </div>
+
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="custom-card-body">
+                <ng-template #userDefineModalContent let-modal class="modal fade" id="exampleModal-2"
+                    aria-labelledby="userDefineModalContent">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="body my-4">
+                                <form class="register-form" [formGroup]="userDefineFormData" (ngSubmit)="SaveUser()">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <input type="text" class="form-control form-control-lg"
+                                            formControlName="userName">
+                                        <div *ngIf="form.AdminName.invalid && form.AdminName.touched"
+                                            class="invalid-feedback d-block">
+                                            <div *ngIf="form.AdminName.errors.required"
+                                                class="invalid-feedback d-block">Admin Name is
+                                                required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <input type="text" class="form-control form-control-lg"
+                                            formControlName="userNameForLogin" placeholder="User Name For login">
+                                        <div *ngIf="form.AdminName.invalid && form.AdminName.touched"
+                                            class="invalid-feedback d-block">
+                                            <div *ngIf="form.AdminName.errors.required"
+                                                class="invalid-feedback d-block">Admin Name is
+                                                required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" (click)="SaveUser()"
+                                (click)="modal.close()">Submit</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal-adjustment">
+    <ng-template #userDefineModalContent let-modal class="modal fade" id="exampleModal-2"
+        aria-labelledby="exampleModalLabel-2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
+                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="body my-4">
+
+                    <form class="register-form" [formGroup]="userDefineFormData" (ngSubmit)="SaveUser()">
+                    </form>
+
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close()">Ok</button>
+            </div>
+        </div>
+    </ng-template>
+</div> -->
