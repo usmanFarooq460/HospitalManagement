@@ -35,11 +35,12 @@ export class LoginComponent extends BaseActions implements OnInit {
     return this.loginForm.controls;
   }
 
-  async ngOnInit() {
-    await this.getAllUsers();
+  ngOnInit() {
+    this.getAllUsers();
   }
 
- async getAllUsers() {
+  getAllUsers() {
+    console.log("Going to call this service");
     this.service.getAllUsers().subscribe(
       (resp) => {
         this.allUserslist = resp;
@@ -58,16 +59,17 @@ export class LoginComponent extends BaseActions implements OnInit {
       return;
     }
     if (this.loginForm.valid) {
-      // temp
-      var encodedToken = btoa("User has logged in");
-      localStorage.setItem("isLoggedIn", encodedToken);
-      this.router.navigate(["/"]);
-      console.log("Temporary login");
-      // temp
-      // await this.getAllUsers()
+      // // temp
+      // var encodedToken = btoa("User has logged in");
+      // localStorage.setItem("isLoggedIn", encodedToken);
+      // this.router.navigate(["/"]);
+      // console.log("Temporary login");
+      // // temp
+      console.log("all users list : ",this.allUserslist);
       if (this.allUserslist?.length > 0 == false) {
-        this.WarningPopup("Data base is not Running on live");
+        this.WarningPopup("Data base is not Running on live or Register Admin");
         console.log("still runug");
+        this.getAllUsers();
         return;
       }
       for (let i = 0; i < this.allUserslist?.length; i++) {
@@ -85,6 +87,7 @@ export class LoginComponent extends BaseActions implements OnInit {
           );
           localStorage.setItem("UserId", this.allUserslist[i]._id);
           this.router.navigate(["/"]);
+          return;
         } else {
           this.isMatched = false;
         }

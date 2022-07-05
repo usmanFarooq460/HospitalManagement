@@ -29,7 +29,7 @@ export class RegisterComponent extends BaseActions implements OnInit {
       HospitalName: ["", Validators.required],
       userNameForLogin: ["", Validators.required],
       passwordForLogin: ["", Validators.required],
-      forgotPasswordEmail: ["", Validators.email],
+      CNIC_No: ["", Validators.required],
       createdAt: new Date().toLocaleString(),
     });
   }
@@ -64,7 +64,7 @@ export class RegisterComponent extends BaseActions implements OnInit {
     console.log("Form: ", this.registerAdminForm.value);
     this.service.RegisterAdmin(this.registerAdminForm.value).subscribe(
       (resp) => {
-        console.log("Submitted Succesfully");
+        this.SuccessPopup("Admin Successfully Created")
         this.initForm();
       },
       (err) => console.log("Error While Registering admin", err)

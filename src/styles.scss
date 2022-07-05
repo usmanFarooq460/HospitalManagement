@@ -74,3 +74,11 @@ $blue_color: rgb(13, 54, 158);
 .blue-color{
     background-color:$blue_color ;
 }
+
+.focused-button{
+    &:hover,&:focus{
+        background-color: white;
+        color: $red_color !important;
+        border: 1px solid $red_color;
+    }
+}

@@ -1,8 +1,19 @@
-<div class="container-fluid">
-    <page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
-    <div class="">
-        <button type="button" class="btn blue-color text-white btn-sm" (click)="openPopup(userDefineModalContent)">Add
-            New User<i class="mdi mdi-account-plus ml-1"></i></button>
+<!-- <div class="container-fluid"> -->
+<page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
+<div class="">
+    <button type="button" class="btn blue-color text-white btn-sm focused-button" (click)="openPopup(userDefineModalContent)">
+        Add New User<i class="mdi mdi-account-plus ml-1"></i>
+    </button>
+
+    <div class="row">
+        <div class="col-12">
+            <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+        </div>
     </div>
 </div>
 
@@ -14,30 +25,64 @@
                 <ng-template #userDefineModalContent let-modal class="modal fade" id="exampleModal-2"
                     aria-labelledby="userDefineModalContent">
                     <div class="modal-content">
+                        <div class="modal-header">
+                            Define User
+                        </div>
                         <div class="modal-body">
-                            <div class="body my-4">
+                            <div class="body my-4 mx-4">
                                 <form class="register-form" [formGroup]="userDefineFormData" (ngSubmit)="SaveUser()">
-                                    <div class="form-group">
-                                        <label for=""></label>
-                                        <input type="text" class="form-control form-control-lg"
-                                            formControlName="userName">
-                                        <div *ngIf="form.AdminName.invalid && form.AdminName.touched"
-                                            class="invalid-feedback d-block">
-                                            <div *ngIf="form.AdminName.errors.required"
-                                                class="invalid-feedback d-block">Admin Name is
-                                                required
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <!-- <label for=""></label> -->
+                                                <input type="text" class="form-control form-control-lg"
+                                                    formControlName="userName" placeholder="Name " />
+                                                <div *ngIf="form.userName.invalid && form.userName.touched"
+                                                    class="invalid-feedback d-block">
+                                                    <div *ngIf="form.userName.errors.required"
+                                                        class="invalid-feedback d-block">
+                                                        name is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    formControlName="userNameForLogin"
+                                                    placeholder="User Name For login" />
+                                                <div *ngIf="
+                            form.userNameForLogin.invalid &&
+                            form.userNameForLogin.touched
+                          " class="invalid-feedback d-block">
+                                                    <div *ngIf="form.userNameForLogin.errors.required"
+                                                        class="invalid-feedback d-block">
+                                                        user name for login is required
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""></label>
-                                        <input type="text" class="form-control form-control-lg"
-                                            formControlName="userNameForLogin" placeholder="User Name For login">
-                                        <div *ngIf="form.AdminName.invalid && form.AdminName.touched"
-                                            class="invalid-feedback d-block">
-                                            <div *ngIf="form.AdminName.errors.required"
-                                                class="invalid-feedback d-block">Admin Name is
-                                                required
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    formControlName="CNIC_No" placeholder="CNIC No" />
+                                                <div *ngIf="form.CNIC_No.invalid && form.CNIC_No.touched"
+                                                    class="invalid-feedback d-block">
+                                                    <div *ngIf="form.CNIC_No.errors.required"
+                                                        class="invalid-feedback d-block">
+                                                        CNIC_No is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control form-control-lg"
+                                                    formControlName="passwordForLogin"
+                                                    placeholder="Password For Login" />
+                                                <div *ngIf="form.passwordForLogin.invalid && form.passwordForLogin.touched"
+                                                    class="invalid-feedback d-block">
+                                                    <div *ngIf="form.passwordForLogin.errors.required"
+                                                        class="invalid-feedback d-block">
+                                                        passwordForLogin is required
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -45,8 +90,13 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-light" (click)="SaveUser()"
-                                (click)="modal.close()">Submit</button>
+                            <button type="button" class="btn blue-color focused-button text-white btn-sm" (click)="SaveUser()">
+                                Submit
+                            </button>
+                            <button type="button" class="btn custom-red-color focused-button text-white btn-sm"
+                                (click)="modal.close()">
+                                Close
+                            </button>
                         </div>
                     </div>
                 </ng-template>
@@ -54,31 +104,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="modal-adjustment">
-    <ng-template #userDefineModalContent let-modal class="modal fade" id="exampleModal-2"
-        aria-labelledby="exampleModalLabel-2">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
-                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="body my-4">
-
-                    <form class="register-form" [formGroup]="userDefineFormData" (ngSubmit)="SaveUser()">
-                    </form>
-
-
-
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" (click)="modal.close()">Ok</button>
-            </div>
-        </div>
-    </ng-template>
-</div> -->
