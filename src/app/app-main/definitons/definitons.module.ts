@@ -4,11 +4,13 @@ import { CommonUiModule } from "./../../common-ui/common-ui.module"
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { DefinitonsRoutingModule } from './definitons-routing.module';
 import { UserDefineComponent } from './user-define/user-define.component';
+import { DefineScreenRightsComponent } from './define-screen-rights/define-screen-rights.component';
 
 
 @NgModule({
   declarations: [
-    UserDefineComponent
+    UserDefineComponent,
+    DefineScreenRightsComponent
   ],
   imports: [
     CommonModule,

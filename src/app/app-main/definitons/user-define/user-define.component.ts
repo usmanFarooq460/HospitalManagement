@@ -10,6 +10,7 @@ import { DefinitionsService } from "../definitions.service";
   styleUrls: ["./user-define.component.scss"],
 })
 export class UserDefineComponent extends BaseActions implements OnInit {
+  allUserslist = [];
   userDefineFormData: any;
   constructor(
     private modalService: NgbModal,
@@ -35,7 +36,9 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
 
   openPopup(userDefineModalContent) {
     this.initForm();
@@ -44,6 +47,20 @@ export class UserDefineComponent extends BaseActions implements OnInit {
       keyboard: false,
       size: "lg",
     });
+  }
+
+  getAllUsers() {
+    this.service.getAllUsersExceptAdmin().subscribe(
+      (resp) => {
+        console.log("All Users List: ", resp);
+        resp.filter(({role})=>role=='')
+        this.allUserslist = resp;
+      },
+      (err) => {
+        this.errorPopup(err.message);
+        console.log("err in getting all users: ", err);
+      }
+    );
   }
 
   SaveUser() {

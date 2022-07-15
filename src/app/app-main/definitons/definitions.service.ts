@@ -15,4 +15,10 @@ export class DefinitionsService {
       headers: this.header,
     });
   }
+
+  getAllUsersExceptAdmin() {
+    return this.http.get<any>(this.ApiUrl + "allUsers/getAll", {
+      headers: this.header,
+    });
+  }
 }

@@ -2,7 +2,6 @@ import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { AccountsService } from "../accounts.service";
-import { extend } from "chartist";
 import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 
 @Component({
