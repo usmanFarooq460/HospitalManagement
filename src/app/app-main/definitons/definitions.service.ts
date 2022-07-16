@@ -17,7 +17,7 @@ export class DefinitionsService {
   }
 
   getAllUsersExceptAdmin() {
-    return this.http.get<any>(this.ApiUrl + "allUsers/getAll", {
+    return this.http.get<any>(this.ApiUrl + "user/getAll", {
       headers: this.header,
     });
   }

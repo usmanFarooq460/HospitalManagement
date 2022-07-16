@@ -12,6 +12,7 @@ import { DefinitionsService } from "../definitions.service";
 export class UserDefineComponent extends BaseActions implements OnInit {
   allUserslist = [];
   userDefineFormData: any;
+  modalReference: any;
   constructor(
     private modalService: NgbModal,
     private Formbuilder: FormBuilder,
@@ -42,7 +43,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
 
   openPopup(userDefineModalContent) {
     this.initForm();
-    this.modalService.open(userDefineModalContent, {
+    this.modalReference = this.modalService.open(userDefineModalContent, {
       backdrop: "static",
       keyboard: false,
       size: "lg",
@@ -53,7 +54,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     this.service.getAllUsersExceptAdmin().subscribe(
       (resp) => {
         console.log("All Users List: ", resp);
-        resp.filter(({role})=>role=='')
+        resp.filter(({ role }) => role == "");
         this.allUserslist = resp;
       },
       (err) => {
@@ -73,6 +74,9 @@ export class UserDefineComponent extends BaseActions implements OnInit {
       (resp) => {
         console.log("submitted : ", resp);
         this.SuccessPopup("User SuccessFully Created");
+        this.getAllUsers();
+        this.initForm();
+        this.modalReference.close();
       },
       (err) => {
         console.log("error : ", err);

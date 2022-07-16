@@ -1,13 +1,7 @@
-<page-title
-  [heading]="'User Definitions'"
-  [icon]="'mdi mdi-account-multiple'"
-></page-title>
+<page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
 <div class="">
-  <button
-    type="button"
-    class="btn blue-color text-white btn-sm focused-button"
-    (click)="openPopup(userDefineModalContent)"
-  >
+  <button type="button" class="btn blue-color text-white btn-sm focused-button"
+    (click)="openPopup(userDefineModalContent)">
     Add New User<i class="mdi mdi-account-plus ml-1"></i>
   </button>
 
@@ -20,20 +14,18 @@
         </div> -->
         <div class="card-body">
           <table class="table">
-            <thead class="text-primary">
-              <th>ID</th>
+            <thead class="text-danger">
               <th>Name</th>
-              <th>Country</th>
-              <th>City</th>
-              <th>Salary</th>
+              <th>CNIC</th>
+              <th>UserName</th>
+              <th>Password</th>
             </thead>
             <tbody>
               <tr *ngFor="let item of allUserslist; let index = index">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="text-primary"></td>
+                <td>{{item.userName}}</td>
+                <td>{{item.CNIC_No}}</td>
+                <td>{{item.userNameForLogin}}</td>
+                <td>{{item.passwordForLogin}}</td>
               </tr>
             </tbody>
           </table>
@@ -44,24 +36,12 @@
 
   <div class="row">
     <div class="col-12">
-      <app-warning-popups
-        *ngIf="isSucessPopupVisible"
-        [isSuccessPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
-      <app-warning-popups
-        *ngIf="isWarningPopupVisible"
-        [isWarningPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
-      <app-warning-popups
-        *ngIf="isErrorPopupVisible"
-        [isErrorPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
+      <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
     </div>
   </div>
 </div>
@@ -70,107 +50,48 @@
   <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
       <div class="custom-card-body">
-        <ng-template
-          #userDefineModalContent
-          let-modal
-          class="modal fade"
-          id="exampleModal-2"
-          aria-labelledby="userDefineModalContent"
-        >
+        <ng-template #userDefineModalContent let-modal class="modal fade" id="exampleModal-2"
+          aria-labelledby="userDefineModalContent">
           <div class="modal-content">
             <div class="modal-header">Define User</div>
             <div class="modal-body">
               <div class="body my-4 mx-4">
-                <form
-                  class="register-form"
-                  [formGroup]="userDefineFormData"
-                  (ngSubmit)="SaveUser()"
-                >
+                <form class="register-form" [formGroup]="userDefineFormData" (ngSubmit)="SaveUser()">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <!-- <label for=""></label> -->
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="userName"
-                          placeholder="Name "
-                        />
-                        <div
-                          *ngIf="form.userName.invalid && form.userName.touched"
-                          class="invalid-feedback d-block"
-                        >
-                          <div
-                            *ngIf="form.userName.errors.required"
-                            class="invalid-feedback d-block"
-                          >
-                            name is required
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="userNameForLogin"
-                          placeholder="User Name For login"
-                        />
-                        <div
-                          *ngIf="
-                            form.userNameForLogin.invalid &&
-                            form.userNameForLogin.touched
-                          "
-                          class="invalid-feedback d-block"
-                        >
-                          <div
-                            *ngIf="form.userNameForLogin.errors.required"
-                            class="invalid-feedback d-block"
-                          >
-                            user name for login is required
-                          </div>
+                      <input type="text" class="custom-form-control" formControlName="userName" placeholder="Name " />
+                      <div *ngIf="form.userName.invalid && form.userName.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.userName.errors.required" class="invalid-feedback d-block">
+                          name is required
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          formControlName="CNIC_No"
-                          placeholder="CNIC No"
-                        />
-                        <div
-                          *ngIf="form.CNIC_No.invalid && form.CNIC_No.touched"
-                          class="invalid-feedback d-block"
-                        >
-                          <div
-                            *ngIf="form.CNIC_No.errors.required"
-                            class="invalid-feedback d-block"
-                          >
-                            CNIC_No is required
-                          </div>
+                      <input type="text" class="custom-form-control" formControlName="CNIC_No" placeholder="CNIC No" />
+                      <div *ngIf="form.CNIC_No.invalid && form.CNIC_No.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.CNIC_No.errors.required" class="invalid-feedback d-block">
+                          CNIC_No is required
                         </div>
                       </div>
-                      <div class="form-group">
-                        <input
-                          type="password"
-                          class="form-control form-control-lg"
-                          formControlName="passwordForLogin"
-                          placeholder="Password For Login"
-                        />
-                        <div
-                          *ngIf="
-                            form.passwordForLogin.invalid &&
-                            form.passwordForLogin.touched
-                          "
-                          class="invalid-feedback d-block"
-                        >
-                          <div
-                            *ngIf="form.passwordForLogin.errors.required"
-                            class="invalid-feedback d-block"
-                          >
-                            passwordForLogin is required
-                          </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="custom-form-control" formControlName="userNameForLogin"
+                        placeholder="User Name For login" />
+                      <div *ngIf="form.userNameForLogin.invalid && form.userNameForLogin.touched"
+                        class="invalid-feedback d-block">
+                        <div *ngIf="form.userNameForLogin.errors.required" class="invalid-feedback d-block">
+                          user Name For Login is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <input type="text" class="custom-form-control" formControlName="passwordForLogin"
+                        placeholder="Password For Login" />
+                      <div *ngIf="form.passwordForLogin.invalid && form.passwordForLogin.touched"
+                        class="invalid-feedback d-block">
+                        <div *ngIf="form.passwordForLogin.errors.required" class="invalid-feedback d-block">
+                          Password For Login is required
                         </div>
                       </div>
                     </div>
@@ -179,18 +100,11 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn blue-color focused-button text-white btn-sm"
-                (click)="SaveUser()"
-              >
+              <button type="button" class="btn blue-color focused-button text-white btn-sm" (click)="SaveUser()">
                 Submit
               </button>
-              <button
-                type="button"
-                class="btn custom-red-color focused-button text-white btn-sm"
-                (click)="modal.close()"
-              >
+              <button type="button" class="btn custom-red-color focused-button text-white btn-sm"
+                (click)="modal.close()">
                 Close
               </button>
             </div>
