@@ -21,4 +21,10 @@ export class DefinitionsService {
       headers: this.header,
     });
   }
+
+  getById(id) {
+    return this.http.get<any>(this.ApiUrl + "user/getById/" + id, {
+      headers: this.header,
+    });
+  }
 }

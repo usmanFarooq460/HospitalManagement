@@ -19,6 +19,7 @@
               <th>CNIC</th>
               <th>UserName</th>
               <th>Password</th>
+              <th>Action</th>
             </thead>
             <tbody>
               <tr *ngFor="let item of allUserslist; let index = index">
@@ -26,6 +27,8 @@
                 <td>{{item.CNIC_No}}</td>
                 <td>{{item.userNameForLogin}}</td>
                 <td>{{item.passwordForLogin}}</td>
+                <td><i style="cursor: pointer;" (click)="getById(item._id,userDefineModalContent)"
+                    class="mdi mdi-grease-pencil"></i></td>
               </tr>
             </tbody>
           </table>
@@ -101,7 +104,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn blue-color focused-button text-white btn-sm" (click)="SaveUser()">
-                Submit
+                {{idforupdate!=undefined&&idforupdate!=null?'Update':'save'}}
               </button>
               <button type="button" class="btn custom-red-color focused-button text-white btn-sm"
                 (click)="modal.close()">

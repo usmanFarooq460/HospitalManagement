@@ -13,6 +13,8 @@ export class UserDefineComponent extends BaseActions implements OnInit {
   allUserslist = [];
   userDefineFormData: any;
   modalReference: any;
+  idforupdate: string = "null";
+  userModalContent: any;
   constructor(
     private modalService: NgbModal,
     private Formbuilder: FormBuilder,
@@ -41,8 +43,34 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     this.getAllUsers();
   }
 
+  getById(id, content) {
+    this.idforupdate = id;
+    this.service.getById(id).subscribe(
+      (resp) => {
+        console.log("get by id : ", resp);
+        this.openPopup(content);
+        this.userDefineFormData.patchValue({
+          CNIC_No: resp.CNIC_No,
+          createdAt: resp.createdAt,
+          createdBy: resp.createdBy,
+          passwordForLogin: resp.passwordForLogin,
+          userName: resp.userName,
+          userNameForLogin: resp.userNameForLogin,
+
+        });
+      },
+      (err) => {
+        console.log("error in get by id: ", err);
+        this.errorPopup(err);
+      }
+    );
+  }
+
   openPopup(userDefineModalContent) {
-    this.initForm();
+    this.userModalContent = userDefineModalContent;
+    if ((this.idforupdate = "null")) {
+      this.initForm();
+    }
     this.modalReference = this.modalService.open(userDefineModalContent, {
       backdrop: "static",
       keyboard: false,
