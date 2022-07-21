@@ -2,7 +2,7 @@
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import './assets/scss/variables';
+@import "./assets/scss/variables";
 @import "~compass-mixins/lib/compass";
 @import "~compass-mixins/lib/animate";
 @import "~bootstrap/scss/bootstrap";
@@ -11,7 +11,6 @@
 
 /* === Icon fonts === */
 @import "~@mdi/font/scss/materialdesignicons";
-
 
 /* === Template mixins === */
 @import "./assets/scss/mixins/animation";
@@ -51,8 +50,8 @@
 @import "./assets/scss/components/bootstrap-progress";
 @import "./assets/scss/components/bootstrap-alerts";
 @import "./assets/scss/components/tabs";
-@import "./assets/scss/components/dropdowns"; 
-@import "./assets/scss/components/date-picker"; 
+@import "./assets/scss/components/dropdowns";
+@import "./assets/scss/components/date-picker";
 @import "./assets/scss/components/pagination";
 @import "./assets/scss/components/portfolio";
 @import "./assets/scss/components/todo-list";
@@ -62,23 +61,34 @@
 /* === Layout === */
 @import "./assets/scss/layout";
 
-
 // Custom Variables
 $red_color: rgb(158, 13, 13);
 $blue_color: rgb(13, 54, 158);
 
-.custom-red-color{
-    background-color: $red_color;
+.custom-red-color {
+  background-color: $red_color;
 }
 
-.blue-color{
-    background-color:$blue_color ;
+.blue-color {
+  background-color: $blue_color;
 }
 
-.focused-button{
-    &:hover,&:focus{
-        background-color: white;
-        color: $red_color !important;
-        border: 1px solid $red_color;
-    }
+.focused-button {
+  &:hover,
+  &:focus {
+    background-color: white;
+    color: $red_color !important;
+    border: 1px solid $red_color;
+  }
+}
+
+.custom-form-control {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: white;
+  padding: 10px 16px;
+  font-size: 17px;
+  border-radius: 5px;
+  margin-top: 13px;
 }

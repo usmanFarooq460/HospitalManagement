@@ -137,7 +137,7 @@
     <li class="nav-item" [ngClass]="{
         active:
         DefineUser.isActive ||
-        userHistory.isActive
+        screenRights.isActive
       }">
       <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="Definitions"
         aria-controls="auth">
@@ -155,9 +155,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
-              #userHistory="routerLinkActive">
-              Define User
+            <a class="nav-link" routerLink="/definitions/screen-rights" routerLinkActive="active"
+              #screenRights="routerLinkActive">
+              Screen Rights
             </a>
           </li>
         </ul>

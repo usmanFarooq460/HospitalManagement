@@ -16,7 +16,7 @@ export class DefinitionsService {
     });
   }
 
-  getAllUsersExceptAdmin() {
+  getHistoryOfDefinedUsers() {
     return this.http.get<any>(this.ApiUrl + "user/getAll", {
       headers: this.header,
     });
@@ -27,4 +27,9 @@ export class DefinitionsService {
       headers: this.header,
     });
   }
+
+
+  //#region Screen Rights
+
+  //#endregion
 }

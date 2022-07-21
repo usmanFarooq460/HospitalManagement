@@ -1,10 +1,42 @@
 <div class="container-fluid">
-  <page-title
-    [heading]="'Module Rights'"
-    [icon]="'mdi mdi-account-multiple'"
-  ></page-title>
+  <div class="div" style="cursor: pointer;" (click)="testingLoader()">
+    <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
+  </div>
 
-  
+  <div class="form">
+    <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
+      <div class="row">
+        <div class="col-md-6">
+          <select name="" id="" class="custom-form-control">
+            <option value="_Id">Value34</option>
+            <option value="_Id">Value2</option>
+            <option value="_Id">Value4</option>
+            <option value="_Id">Value3</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <select name="" id="" class="custom-form-control">
+            <option value="_Id">Value34</option>
+            <option value="_Id">Value2</option>
+            <option value="_Id">Value4</option>
+            <option value="_Id">Value3</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+    </div>
+    <div class="col-12">
+      <app-loader [isLoading]="loader" [message]="loadingMessage"></app-loader>
+    </div>
+  </div>
 </div>
-
-

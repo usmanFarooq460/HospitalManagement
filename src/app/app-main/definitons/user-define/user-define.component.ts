@@ -56,7 +56,6 @@ export class UserDefineComponent extends BaseActions implements OnInit {
           passwordForLogin: resp.passwordForLogin,
           userName: resp.userName,
           userNameForLogin: resp.userNameForLogin,
-
         });
       },
       (err) => {
@@ -68,7 +67,8 @@ export class UserDefineComponent extends BaseActions implements OnInit {
 
   openPopup(userDefineModalContent) {
     this.userModalContent = userDefineModalContent;
-    if ((this.idforupdate = "null")) {
+    console.log("id for Updte: ", this.idforupdate);
+    if ((this.idforupdate = null)) {
       this.initForm();
     }
     this.modalReference = this.modalService.open(userDefineModalContent, {
@@ -78,8 +78,10 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     });
   }
 
+
+  
   getAllUsers() {
-    this.service.getAllUsersExceptAdmin().subscribe(
+    this.service.getHistoryOfDefinedUsers().subscribe(
       (resp) => {
         console.log("All Users List: ", resp);
         resp.filter(({ role }) => role == "");

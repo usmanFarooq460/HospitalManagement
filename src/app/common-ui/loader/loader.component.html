@@ -1,0 +1,21 @@
+<div class="">
+    <ng-template #LoaderModalContent let-modal class="modal fade" id="exampleModal-2"
+        aria-labelledby="exampleModalLabel-2">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="header">
+                    <img src="assets/images/my_images/loader-1.gif" alt="">
+                </div>
+                <div class="body my-4">
+                    {{ message }}
+                    <div class="" *ngIf="isLoading">
+                        Popup closed:
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="closePopup()" (click)="modal.close()">Ok</button>
+            </div>
+        </div>
+    </ng-template>
+</div>
