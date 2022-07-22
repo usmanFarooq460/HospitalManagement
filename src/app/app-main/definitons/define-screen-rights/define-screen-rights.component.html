@@ -35,8 +35,5 @@
       <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
         (closePopup)="closeNotification($event)"></app-warning-popups>
     </div>
-    <div class="col-12">
-      <app-loader [isLoading]="loader" [message]="loadingMessage"></app-loader>
-    </div>
   </div>
 </div>

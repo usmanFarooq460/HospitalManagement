@@ -4,6 +4,10 @@ import { Component, HostListener } from "@angular/core";
   template: "",
 })
 export abstract class BaseActions {
+  // Only variables used in components
+  isLoading: boolean = false;
+  // Only variables
+
   message: string;
   isSucessPopupVisible: boolean = false;
   isWarningPopupVisible: boolean = false;

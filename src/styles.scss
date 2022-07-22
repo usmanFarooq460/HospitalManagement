@@ -62,7 +62,8 @@
 @import "./assets/scss/layout";
 
 // Custom Variables
-$red_color: rgb(158, 13, 13);
+$red_color: #da1c23;
+// $red_color: rgb(158, 13, 13);
 $blue_color: rgb(13, 54, 158);
 
 .custom-red-color {
@@ -91,4 +92,8 @@ $blue_color: rgb(13, 54, 158);
   font-size: 17px;
   border-radius: 5px;
   margin-top: 13px;
+}
+
+.edit-icon{
+  color: #e50101;
 }

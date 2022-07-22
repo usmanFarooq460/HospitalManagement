@@ -9,9 +9,9 @@ import {
 } from "@angular/router";
 
 @Component({
-  selector: 'app-main-layoutdesign',
-  templateUrl: './main-layoutdesign.component.html',
-  styleUrls: ['./main-layoutdesign.component.scss']
+  selector: "app-main-layoutdesign",
+  templateUrl: "./main-layoutdesign.component.html",
+  styleUrls: ["./main-layoutdesign.component.scss"],
 })
 export class MainLayoutdesignComponent implements OnInit {
   showSidebar: boolean = true;
@@ -68,17 +68,15 @@ export class MainLayoutdesignComponent implements OnInit {
     // Spinner for lazyload modules
     router.events.forEach((event) => {
       if (event instanceof RouteConfigLoadStart) {
-        // this.checkingRouteChange()
         this.isLoading = true;
       } else if (event instanceof RouteConfigLoadEnd) {
-        // this.checkingRouteChange()
         this.isLoading = false;
       }
     });
   }
 
   ngOnInit() {
-    this.checkingIsLoggedIn()
+    this.checkingIsLoggedIn();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
@@ -87,13 +85,13 @@ export class MainLayoutdesignComponent implements OnInit {
     });
   }
 
-  checkingIsLoggedIn(){
+  checkingIsLoggedIn() {
     let logintoken = localStorage.getItem("isLoggedIn");
     var decodedToken = atob(logintoken);
-    if(decodedToken=="User has logged in"){
+    if (decodedToken == "User has logged in") {
       return true;
-    }else{
-      this.router.navigate(['/Accounts/login'])
+    } else {
+      this.router.navigate(["/Accounts/login"]);
     }
   }
 }

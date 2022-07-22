@@ -78,17 +78,18 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     });
   }
 
-
-  
   getAllUsers() {
+    this.isLoading = true;
     this.service.getHistoryOfDefinedUsers().subscribe(
       (resp) => {
         console.log("All Users List: ", resp);
         resp.filter(({ role }) => role == "");
         this.allUserslist = resp;
+        this.isLoading = false;
       },
       (err) => {
         this.errorPopup(err.message);
+        this.isLoading = false;
         console.log("err in getting all users: ", err);
       }
     );

@@ -14,6 +14,8 @@ export class LoginComponent extends BaseActions implements OnInit {
   loginForm: any;
   isMatched: boolean = true;
   allUserslist = [];
+  existingAdmin = [];
+  userlist = [];
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -35,22 +37,53 @@ export class LoginComponent extends BaseActions implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllUsers();
+    this.createACommonListForUsersAndAdmin();
   }
 
-  getAllUsers() {
-    console.log("Going to call this service");
-    this.service.getAllUsers().subscribe(
-      (resp) => {
-        this.allUserslist = resp;
-        console.log("all users list : ", resp);
-      },
-      (err) => {
-        this.errorPopup(err.message);
-        console.log("error in getting all users: ", err);
-      }
-    );
+  async getadmin() {
+    this.existingAdmin = await this.service.getAdmin().catch((err) => {
+      console.log("error in getting admin ", err);
+    });
+    console.log("admin ", this.existingAdmin);
   }
+
+  async getRegisteredUsers() {
+    this.userlist = await this.service
+      .getHistoryOfDefinedUsers()
+      .catch((err) => {
+        console.log("err in getting users", err);
+      });
+
+    console.log("user list :", this.userlist);
+  }
+
+  async createACommonListForUsersAndAdmin() {
+    await this.getadmin();
+    await this.getRegisteredUsers();
+    this.allUserslist = [];
+    this.userlist.map((item) => {
+      this.allUserslist.push(item);
+    });
+    this.existingAdmin.map((item) => {
+      this.allUserslist.push(item);
+    });
+
+    console.log("all users list:", this.allUserslist);
+  }
+
+  // getAllUsers() {
+  //   console.log("Going to call this service");
+  //   this.service.getAllUsers().subscribe(
+  //     (resp) => {
+  //       this.allUserslist = resp;
+  //       console.log("all users list : ", resp);
+  //     },
+  //     (err) => {
+  //       this.errorPopup(err.message);
+  //       console.log("error in getting all users: ", err);
+  //     }
+  //   );
+  // }
 
   async submit() {
     if (this.loginForm.valid == false) {
@@ -64,11 +97,11 @@ export class LoginComponent extends BaseActions implements OnInit {
       // this.router.navigate(["/"]);
       // console.log("Temporary login");
       // // temp
-      console.log("all users list : ",this.allUserslist);
+      console.log("all users list : ", this.allUserslist);
       if (this.allUserslist?.length > 0 == false) {
         this.WarningPopup("Data base is not Running on live or Register Admin");
         console.log("still runug");
-        this.getAllUsers();
+        this.createACommonListForUsersAndAdmin();
         return;
       }
       for (let i = 0; i < this.allUserslist?.length; i++) {

@@ -16,6 +16,22 @@ export class AccountsService {
     });
   }
 
+  getAdmin() {
+    return this.http
+      .get<any>(this.ApiUrl + "admin/getAll", {
+        headers: this.header,
+      })
+      .toPromise();
+  }
+
+  getHistoryOfDefinedUsers() {
+    return this.http
+      .get<any>(this.ApiUrl + "user/getAll", {
+        headers: this.header,
+      })
+      .toPromise();
+  }
+
   //*************************** Register Component **********************************/
   RegisterAdmin(data) {
     return this.http.post<any>(this.ApiUrl + "admin/AddNew", data, {

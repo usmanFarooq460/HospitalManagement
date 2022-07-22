@@ -22,12 +22,17 @@
               <th>Action</th>
             </thead>
             <tbody>
+              <tr *ngIf="isLoading">
+                <td colspan="4">
+                  <app-loader ></app-loader>
+                </td>
+              </tr>
               <tr *ngFor="let item of allUserslist; let index = index">
                 <td>{{item.userName}}</td>
                 <td>{{item.CNIC_No}}</td>
                 <td>{{item.userNameForLogin}}</td>
                 <td>{{item.passwordForLogin}}</td>
-                <td><i style="cursor: pointer;" (click)="getById(item._id,userDefineModalContent)"
+                <td class="edit-icon"><i style="cursor: pointer;" (click)="getById(item._id,userDefineModalContent)"
                     class="mdi mdi-grease-pencil"></i></td>
               </tr>
             </tbody>
@@ -46,7 +51,7 @@
       <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
         (closePopup)="closeNotification($event)"></app-warning-popups>
     </div>
-   
+
   </div>
 </div>
 
