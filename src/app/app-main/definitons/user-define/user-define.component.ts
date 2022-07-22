@@ -13,7 +13,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
   allUserslist = [];
   userDefineFormData: any;
   modalReference: any;
-  idforupdate: string = "null";
+  idforupdate = null;
   userModalContent: any;
   constructor(
     private modalService: NgbModal,
@@ -68,7 +68,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
   openPopup(userDefineModalContent) {
     this.userModalContent = userDefineModalContent;
     console.log("id for Updte: ", this.idforupdate);
-    if ((this.idforupdate = null)) {
+    if (this.idforupdate == null) {
       this.initForm();
     }
     this.modalReference = this.modalService.open(userDefineModalContent, {
@@ -95,23 +95,55 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     );
   }
 
+  resetForm() {
+    this.idforupdate = null;
+    this.initForm();
+  }
+
   SaveUser() {
     if (this.userDefineFormData.valid == false) {
       this.userDefineFormData.markAllAsTouched();
       return;
     }
+    console.log("Id For Update in save method: ", this.idforupdate);
+
     console.log("form data : ", this.userDefineFormData.value);
     this.service.Save(this.userDefineFormData.value).subscribe(
       (resp) => {
         console.log("submitted : ", resp);
         this.SuccessPopup("User SuccessFully Created");
         this.getAllUsers();
-        this.initForm();
         this.modalReference.close();
       },
       (err) => {
         console.log("error : ", err);
         this.errorPopup(err.message);
+      }
+    );
+  }
+
+  updateUser(id) {
+    if (this.userDefineFormData.valid == false) {
+      this.userDefineFormData.markAllAsTouched();
+      return;
+    }
+    console.log(
+      "form data For update ",
+      this.userDefineFormData.value,
+      "Id for update in update method: ",
+      this.idforupdate
+    );
+    this.loaderOn_Save_Update = true;
+    this.service.updateUser(id, this.userDefineFormData.value).subscribe(
+      (resp) => {
+        this.loaderOn_Save_Update = false;
+        this.SuccessPopup("user Has Updated Successfully");
+        this.getAllUsers();
+        this.modalReference.close();
+      },
+      (err) => {
+        this.errorPopup(err.message);
+        this.loaderOn_Save_Update = false;
       }
     );
   }

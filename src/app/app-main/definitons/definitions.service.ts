@@ -28,6 +28,11 @@ export class DefinitionsService {
     });
   }
 
+  updateUser(id, body) {
+    return this.http.put<any>(this.ApiUrl + "user/update/" + id, body, {
+      headers: this.header,
+    });
+  }
 
   //#region Screen Rights
 

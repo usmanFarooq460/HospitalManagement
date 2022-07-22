@@ -24,7 +24,7 @@
             <tbody>
               <tr *ngIf="isLoading">
                 <td colspan="4">
-                  <app-loader ></app-loader>
+                  <app-loader></app-loader>
                 </td>
               </tr>
               <tr *ngFor="let item of allUserslist; let index = index">
@@ -109,8 +109,13 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn blue-color focused-button text-white btn-sm" (click)="SaveUser()">
-                {{idforupdate!=undefined&&idforupdate!=null?'Update':'save'}}
+              <button *ngIf="idforupdate==null || idforupdate==undefined" type="button"
+                class="btn blue-color focused-button text-white btn-sm" (click)="SaveUser()">
+                Save
+              </button>
+              <button *ngIf="idforupdate!=null" type="button" class="btn blue-color focused-button text-white btn-sm"
+                (click)="updateUser(idforupdate)">
+                Update
               </button>
               <button type="button" class="btn custom-red-color focused-button text-white btn-sm"
                 (click)="modal.close()">

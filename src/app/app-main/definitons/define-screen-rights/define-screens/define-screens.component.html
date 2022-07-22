@@ -1,1 +1,30 @@
-<p>define-screens works!</p>
+<div class="container-fluid">
+    <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
+
+    <div class="form">
+        <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="custom-form-control" formControlName="ModuleName"
+                        placeholder="Module Name" />
+                    <div *ngIf="form.ModuleName.invalid && form.ModuleName.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.ModuleName.errors.required" class="invalid-feedback d-block">
+                            Module Name is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+        </div>
+    </div>
+</div>

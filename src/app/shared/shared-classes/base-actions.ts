@@ -6,6 +6,7 @@ import { Component, HostListener } from "@angular/core";
 export abstract class BaseActions {
   // Only variables used in components
   isLoading: boolean = false;
+  loaderOn_Save_Update: boolean = false;
   // Only variables
 
   message: string;
