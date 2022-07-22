@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
-
     <div class="form">
         <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
             <div class="row">
@@ -13,8 +12,50 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit" [disabled]="loaderOn_Save_Update"
+                        class="btn blue-color focused-button text-white btn-sm" (click)="Save()">
+                        Save
+                    </button>
+                    <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null" [disabled]="loaderOn_Save_Update"
+                        class="btn blue-color focused-button text-white btn-sm" (click)="updateScreen()">
+                        Update
+                    </button>
+                </div>
             </div>
         </form>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <!-- <div class="card-header custom-card-title">
+              <h4 class="card-title">Simple Table</h4>
+              <p class="card-category">Here is a subtitle for this table</p>
+            </div> -->
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="text-danger">
+                            <th>Module Name</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="2">
+                                    <app-loader></app-loader>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of allScreensList; let index = index">
+                                <td>{{item.ModuleName}}</td>
+                                <td class="edit-icon"><i (click)="getById(item)"
+                                        class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteScreen(item._id)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">

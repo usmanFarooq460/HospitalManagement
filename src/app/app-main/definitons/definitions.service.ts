@@ -1,5 +1,6 @@
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { post } from "jquery";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -34,7 +35,35 @@ export class DefinitionsService {
     });
   }
 
-  //#region Screen Rights
+  deleteUser(id) {
+    return this.http.delete<any>(this.ApiUrl + "user/delete/" + id, {
+      headers: this.header,
+    });
+  }
 
+  //#region Screen Rights
+  addNewScreen(data) {
+    return this.http.post<any>(this.ApiUrl + "screens/AddNew", data, {
+      headers: this.header,
+    });
+  }
+
+  getAllScreens() {
+    return this.http.get<any>(this.ApiUrl + "screens/getAll", {
+      headers: this.header,
+    });
+  }
+
+  updateScreen(id, data) {
+    return this.http.put<any>(this.ApiUrl + "screens/update/" + id, data, {
+      headers: this.header,
+    });
+  }
+
+  deleteScreen(id) {
+    return this.http.delete<any>(this.ApiUrl + "screens/delete/" + id, {
+      headers: this.header,
+    });
+  }
   //#endregion
 }

@@ -1,8 +1,8 @@
 <div class="container-fluid">
-  <div class="div" style="cursor: pointer;" (click)="testingLoader()">
     <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
-  </div>
-
+  <button type="button" class="btn blue-color focused-button text-white btn-sm" routerLink="/definitions/Define-Screen">
+    Save
+  </button>
   <div class="form">
     <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
       <div class="row">

@@ -32,8 +32,10 @@
                 <td>{{item.CNIC_No}}</td>
                 <td>{{item.userNameForLogin}}</td>
                 <td>{{item.passwordForLogin}}</td>
-                <td class="edit-icon"><i style="cursor: pointer;" (click)="getById(item._id,userDefineModalContent)"
-                    class="mdi mdi-grease-pencil"></i></td>
+                <td class="edit-icon"><i (click)="getById(item._id,userDefineModalContent)"
+                    class="mdi mdi-grease-pencil cursor_pointer"></i>
+                  <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteUser(item._id)"></i>
+                </td>
               </tr>
             </tbody>
           </table>
