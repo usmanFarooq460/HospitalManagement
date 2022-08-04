@@ -12,8 +12,8 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
   }
 
   ngOnInit(): void {
-    this.SuccessPopup("This is Success Popiup");
-    this.WarningPopup("This is warning popip");
-    this.errorPopup("this.is error popup");
+    // this.SuccessPopup("This is Success Popiup");
+    // this.WarningPopup("This is warning popip");
+    // this.errorPopup("this.is error popup");
   }
 }

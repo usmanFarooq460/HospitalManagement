@@ -4,16 +4,15 @@ import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 import { PharmacyService } from "../../pharmacy.service";
 
 @Component({
-  selector: 'app-def-drug-type',
-  templateUrl: './def-drug-type.component.html',
-  styleUrls: ['./def-drug-type.component.scss']
+  selector: "app-def-drug-type",
+  templateUrl: "./def-drug-type.component.html",
+  styleUrls: ["./def-drug-type.component.scss"],
 })
 export class DefDrugTypeComponent extends BaseActions implements OnInit {
-
   formdata: any;
   updateId: any;
+  alldrugTypesList = [];
 
-  allScreensList = [];
   constructor(
     private service: PharmacyService,
     private formBuilder: FormBuilder
@@ -24,7 +23,7 @@ export class DefDrugTypeComponent extends BaseActions implements OnInit {
 
   initForm() {
     this.formdata = this.formBuilder.group({
-      ModuleName: [null, [Validators.required]],
+      drugType: [null, [Validators.required]],
     });
   }
 
@@ -33,8 +32,53 @@ export class DefDrugTypeComponent extends BaseActions implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAllScreens();
+    this.getAllDrugType();
   }
+
+  getById(data) {
+    this.updateId = data._id;
+    this.formdata.patchValue({
+      drugType: data.drugType,
+    });
+  }
+
+  getAllDrugType() {
+    this.service.getallDrugTpyes().subscribe(
+      (resp) => {
+        console.log("all dtug type ", resp);
+        this.alldrugTypesList = resp;
+      },
+      (err) => {
+        this.errorPopup(err.message);
+      }
+    );
+  }
+
+  clear() {}
+
+  save() {
+    if (this.formdata.valid == false) {
+      this.formdata.markAllAsTouched();
+      return;
+    }
+    console.log("form data ", this.formdata.value);
+    this.loaderOn_Save_Update = true;
+    this.service.saveDrugType(this.formdata.value).subscribe(
+      (resp) => {
+        this.loaderOn_Save_Update = false;
+        console.log("saved: ", resp);
+        this.SuccessPopup("saved SuccesFully");
+      },
+      (err) => {
+        this.loaderOn_Save_Update = false;
+        this.errorPopup(err.message);
+      }
+    );
+  }
+
+  update() {}
+
+  deleteScreen(id) {}
 
   // getById(data) {
   //   this.updateId = data._id;

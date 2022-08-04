@@ -1,34 +1,33 @@
-<p>def-drug-type works!</p>
 <div class="container-fluid">
     <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
     <div class="form">
         <form class="register-form" [formGroup]="formdata" >
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="custom-form-control" formControlName="ModuleName"
+                    <input type="text" class="custom-form-control" formControlName="drugType"
                         placeholder="Module Name" />
-                    <div *ngIf="form.ModuleName.invalid && form.ModuleName.touched" class="invalid-feedback d-block">
-                        <div *ngIf="form.ModuleName.errors.required" class="invalid-feedback d-block">
-                            Module Name is required
+                    <div *ngIf="form.drugType.invalid && form.drugType.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.drugType.errors.required" class="invalid-feedback d-block">
+                            Drug Type is required
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-6">
+                <div class="col-md-6">
                     <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit"
                         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
-                        (click)="Save()">
+                        (click)="save()">
                         Save
                     </button>
                     <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null"
                         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
-                        (click)="updateScreen()">
+                        (click)="update()">
                         Update
                     </button>
                     <button type="button" style="margin-top: 18px;"
-                        class="btn blue-color focused-button text-white btn-sm" routerLink="/definitions/screen-rights">
+                        class="btn blue-color focused-button text-white btn-sm" routerLink="/pharmacy/Add-new-medicine">
                         Go Back
                     </button>
-                </div> -->
+                </div>
             </div>
         </form>
     </div>
@@ -47,15 +46,15 @@
                                     <app-loader></app-loader>
                                 </td>
                             </tr>
-                            <tr *ngFor="let item of allScreensList; let index = index">
-                                <td>{{item.ModuleName}}</td>
+                            <tr *ngFor="let item of alldrugTypesList; let index = index">
+                                <td>{{item.drugType}}</td>
                                 <td class="edit-delete-wrape">
                                     <div class="edit-icon">
-                                        <!-- <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i> -->
+                                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
                                     </div>
                                     <div class="delete-icon">
-                                        <!-- <i class="mdi mdi-delete-forever cursor_pointer"
-                                            (click)="deleteScreen(item._id)"></i> -->
+                                        <i class="mdi mdi-delete-forever cursor_pointer"
+                                            (click)="deleteScreen(item._id)"></i>
                                     </div>
                                 </td>
                             </tr>

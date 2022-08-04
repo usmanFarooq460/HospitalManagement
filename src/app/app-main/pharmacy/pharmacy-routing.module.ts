@@ -2,11 +2,25 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuardGuard } from "src/app/accounts/auth-guard.guard";
 import { AddingNewMedicineComponent } from "./adding-new-medicine/adding-new-medicine.component";
-import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component"
+import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component";
+import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-drug-type.component";
 
 const routes: Routes = [
-  { path: "Add-new-medicine", component: AddingNewMedicineComponent,canActivate:[AuthGuardGuard] },
-  { path: "Medicine-sale-invoice", component:MedicineSaleInvoiceComponent,canActivate:[AuthGuardGuard] },
+  {
+    path: "Add-new-medicine",
+    component: AddingNewMedicineComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "Medicine-sale-invoice",
+    component: MedicineSaleInvoiceComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "def-drug-type",
+    component: DefDrugTypeComponent,
+    canActivate: [AuthGuardGuard],
+  },
 ];
 
 @NgModule({
@@ -14,4 +28,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class PharmacyRoutingModule {}
- 
