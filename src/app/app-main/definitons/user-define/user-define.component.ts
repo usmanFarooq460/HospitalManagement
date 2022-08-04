@@ -152,6 +152,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     this.service.deleteUser(id).subscribe(
       (resp) => {
         this.SuccessPopup("user has delted successfully");
+        this.getAllUsers();
       },
       (err) => {
         this.errorPopup("err in deleting" + err.message);

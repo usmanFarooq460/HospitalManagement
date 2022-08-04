@@ -28,6 +28,7 @@ export class DefineScreensComponent extends BaseActions implements OnInit {
   }
 
   get form() {
+    console.log("asdfadsf");
     return this.formdata.controls;
   }
 
@@ -95,6 +96,7 @@ export class DefineScreensComponent extends BaseActions implements OnInit {
         console.log("Data has updated: ");
         this.SuccessPopup("Data has updated");
         this.clear();
+        this.loaderOn_Save_Update = false;
         this.getAllScreens();
       },
       (err) => {

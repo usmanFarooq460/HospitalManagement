@@ -41,7 +41,7 @@ export class DefinitionsService {
     });
   }
 
-  //#region Screen Rights
+  //#region Screen
   addNewScreen(data) {
     return this.http.post<any>(this.ApiUrl + "screens/AddNew", data, {
       headers: this.header,
@@ -65,5 +65,33 @@ export class DefinitionsService {
       headers: this.header,
     });
   }
+  //#endregion
+
+  //#region Screen Rights
+
+  saveScreenRights(data) {
+    return this.http.post<any>(this.ApiUrl + "screens-rights/addNew", data, {
+      headers: this.header,
+    });
+  }
+
+  getScreenRightsByUserId(userId) {
+    return this.http.get<any>(
+      this.ApiUrl + "screens-rights/getRightsByUserId/" + userId,
+      {
+        headers: this.header,
+      }
+    );
+  }
+  updateScreenRights(Id, body) {
+    return this.http.put<any>(
+      this.ApiUrl + "screens-rights/update/" + Id,
+      body,
+      {
+        headers: this.header,
+      }
+    );
+  }
+
   //#endregion
 }

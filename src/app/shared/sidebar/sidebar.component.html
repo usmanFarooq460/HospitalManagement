@@ -13,7 +13,7 @@
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
     </li> -->
-    <li class="nav-item" [ngClass]="{ active: dashboard.isActive }">
+    <li *ngIf="AllModules[2].right" class="nav-item" [ngClass]="{ active: dashboard.isActive }">
       <a class="nav-link" routerLink="/dashboards" routerLinkActive #dashboard="routerLinkActive">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
@@ -21,7 +21,7 @@
     </li>
 
     <!-- BAsic Ui Components -->
-    <li class="nav-item" [ngClass]="{
+    <li *ngIf="AllModules[4].right" class="nav-item" [ngClass]="{
         active:
           accordions.isActive ||
           buttons.isActive ||
@@ -96,15 +96,14 @@
     </li>
     <!-- Basic UI Components -->
 
-
-    <li class="nav-item" [ngClass]="{ 'active': icons.isActive }">
+    <li class="nav-item" *ngIf="AllModules[3].right" [ngClass]="{ 'active': icons.isActive }">
       <a class="nav-link" routerLink="/icons/mdi" routerLinkActive #icons="routerLinkActive">
         <span class="menu-title">Icons</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>
 
-    <li class="nav-item" [ngClass]="{
+    <li *ngIf="AllModules[0].right" class="nav-item" [ngClass]="{
         active:
         addingNewMedicine.isActive ||
         medicine_Invoice.isActive
@@ -134,7 +133,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{
+    <li *ngIf="AllModules[1].right" class="nav-item" [ngClass]="{
         active:
         DefineUser.isActive ||
         screenRights.isActive

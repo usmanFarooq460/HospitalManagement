@@ -94,10 +94,24 @@ $blue_color: rgb(13, 54, 158);
   margin-top: 13px;
 }
 
-.edit-icon{
-  color: #e50101;
+.edit-delete-wrape {
+  display: flex;
+  .edit-icon {
+    color:$blue_color;
+    font-size: 17px;
+  }
+
+  .delete-icon {
+    color: #e50101;
+    font-size: 17px;
+    padding-left: 16px;
+  }
 }
 
-.cursor_pointer{
+.cursor_pointer {
   cursor: pointer;
+}
+
+.margin_negative_10 {
+  margin-top: -28px;
 }

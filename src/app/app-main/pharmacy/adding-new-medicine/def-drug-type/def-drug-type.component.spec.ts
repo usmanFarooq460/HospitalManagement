@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefineScreenRightsComponent } from './define-screen-rights.component';
+import { DefDrugTypeComponent } from './def-drug-type.component';
 
-describe('DefineScreenRightsComponent', () => {
-  let component: DefineScreenRightsComponent;
-  let fixture: ComponentFixture<DefineScreenRightsComponent>;
+describe('DefDrugTypeComponent', () => {
+  let component: DefDrugTypeComponent;
+  let fixture: ComponentFixture<DefDrugTypeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DefineScreenRightsComponent ]
+      declarations: [ DefDrugTypeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefineScreenRightsComponent);
+    fixture = TestBed.createComponent(DefDrugTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

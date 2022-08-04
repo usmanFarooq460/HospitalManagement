@@ -1,29 +1,54 @@
 <div class="container-fluid">
-    <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
-  <button type="button" class="btn blue-color focused-button text-white btn-sm" routerLink="/definitions/Define-Screen">
-    Save
-  </button>
+  <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
+
   <div class="form">
-    <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
+    <form class="register-form" [formGroup]="formdata">
       <div class="row">
         <div class="col-md-6">
-          <select name="" id="" class="custom-form-control">
-            <option value="_Id">Value34</option>
-            <option value="_Id">Value2</option>
-            <option value="_Id">Value4</option>
-            <option value="_Id">Value3</option>
+          <label class="form-label" for="users">Select User To Give rights</label>
+          <select name="users" id="users" class="custom-form-control" formControlName="users"
+            (change)="getRightsByUserId($event)">
+            <option [value]="item._id" *ngFor="let item of UsersList">{{item.userName}}</option>
           </select>
         </div>
-        <div class="col-md-6">
-          <select name="" id="" class="custom-form-control">
-            <option value="_Id">Value34</option>
-            <option value="_Id">Value2</option>
-            <option value="_Id">Value4</option>
-            <option value="_Id">Value3</option>
-          </select>
+        <div class="col-md-6 text-right m-auto">
+          <button type="button" class=" btn blue-color focused-button text-white btn-sm"
+            routerLink="/definitions/Define-Screen">
+            add New Module
+          </button>
         </div>
       </div>
     </form>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="text-right p-3">
+        <div class="card_wrape">
+          <div *ngFor="let item of modulesList">
+            <div class="module-card cursor_pointer" (click)="getSelectedModule(item.Id)"
+              title="select this module to give right">
+              <div class="card_body">
+                <div class="" [ngClass]="item.isSelected?'tick-icon':'un-tick-icon'">
+                  <i *ngIf="item.isSelected==true" class="mdi mdi-check"></i>
+                </div>
+                <div class="module-title">{{item.name}}</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button *ngIf="rightsId == null||rightsId == undefined" type="button"
+          class=" btn blue-color focused-button text-white btn-sm" (click)="saveOrUpdte()">
+          Save Right
+        </button>
+        <button *ngIf="rightsId!=null&&rightsId!=undefined" type="button"
+          class="btn blue-color focused-button text-white btn-sm" (click)="saveOrUpdte(rightsId)">
+          Update
+        </button>
+      </div>
+
+    </div>
   </div>
 
   <div class="row">

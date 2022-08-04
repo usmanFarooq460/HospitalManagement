@@ -61,29 +61,14 @@ export class LoginComponent extends BaseActions implements OnInit {
     await this.getadmin();
     await this.getRegisteredUsers();
     this.allUserslist = [];
-    this.userlist.map((item) => {
+    this.userlist?.map((item) => {
       this.allUserslist.push(item);
     });
-    this.existingAdmin.map((item) => {
+    this.existingAdmin?.map((item) => {
       this.allUserslist.push(item);
     });
-
     console.log("all users list:", this.allUserslist);
   }
-
-  // getAllUsers() {
-  //   console.log("Going to call this service");
-  //   this.service.getAllUsers().subscribe(
-  //     (resp) => {
-  //       this.allUserslist = resp;
-  //       console.log("all users list : ", resp);
-  //     },
-  //     (err) => {
-  //       this.errorPopup(err.message);
-  //       console.log("error in getting all users: ", err);
-  //     }
-  //   );
-  // }
 
   async submit() {
     if (this.loginForm.valid == false) {
@@ -99,9 +84,8 @@ export class LoginComponent extends BaseActions implements OnInit {
       // // temp
       console.log("all users list : ", this.allUserslist);
       if (this.allUserslist?.length > 0 == false) {
-        this.WarningPopup("Data base is not Running on live or Register Admin");
-        console.log("still runug");
         this.createACommonListForUsersAndAdmin();
+        this.WarningPopup("Data base is not Running on live or Register Admin");
         return;
       }
       for (let i = 0; i < this.allUserslist?.length; i++) {
@@ -118,6 +102,7 @@ export class LoginComponent extends BaseActions implements OnInit {
             this.allUserslist[i].userNameForLogin
           );
           localStorage.setItem("UserId", this.allUserslist[i]._id);
+          localStorage.setItem("role", this.allUserslist[i].role);
           this.router.navigate(["/"]);
           return;
         } else {

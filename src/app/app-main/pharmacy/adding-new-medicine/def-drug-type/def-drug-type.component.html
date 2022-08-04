@@ -1,7 +1,8 @@
+<p>def-drug-type works!</p>
 <div class="container-fluid">
     <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
     <div class="form">
-        <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
+        <form class="register-form" [formGroup]="formdata" >
             <div class="row">
                 <div class="col-md-6">
                     <input type="text" class="custom-form-control" formControlName="ModuleName"
@@ -12,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit"
                         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
                         (click)="Save()">
@@ -27,7 +28,7 @@
                         class="btn blue-color focused-button text-white btn-sm" routerLink="/definitions/screen-rights">
                         Go Back
                     </button>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
@@ -50,11 +51,11 @@
                                 <td>{{item.ModuleName}}</td>
                                 <td class="edit-delete-wrape">
                                     <div class="edit-icon">
-                                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                        <!-- <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i> -->
                                     </div>
                                     <div class="delete-icon">
-                                        <i class="mdi mdi-delete-forever cursor_pointer"
-                                            (click)="deleteScreen(item._id)"></i>
+                                        <!-- <i class="mdi mdi-delete-forever cursor_pointer"
+                                            (click)="deleteScreen(item._id)"></i> -->
                                     </div>
                                 </td>
                             </tr>

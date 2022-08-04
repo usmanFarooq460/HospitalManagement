@@ -1,0 +1,68 @@
+@import "../../../../styles.scss";
+.rights-wrape {
+  border: 1px solid $red_color;
+  margin-top: 19px;
+}
+
+
+.card_wrape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.module-card {
+  border: 1px solid $red_color;
+  width: 154px;
+  margin: 15px 12px;
+  padding: 5px;
+  border: 1px solid;
+  background-color: white;
+  border-radius: 5px;
+  height: 128px;
+  box-shadow: 0 0 7px 2px #090b6f85;
+  -webkit-box-shadow: 0 0 7px 2px #090b6f85;
+  -moz-box-shadow: 0 0 7px 2px #090b6f85;
+  transition: all 0.2s linear;
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  .card_body {
+    .module-title {
+      margin: 5px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 500;
+      font-family: system-ui;
+    }
+    .tick-icon {
+      text-align: center;
+      font-size: 26px;
+      border-radius: 50%;
+      width: 32px;
+      margin: 14px auto 7px;
+      background-color: $red_color;
+      color: white;
+      height: 31px;
+    }
+    .un-tick-icon {
+      text-align: center;
+      font-size: 26px;
+      border-radius: 50%;
+      width: 32px;
+      margin: 14px auto 7px;
+      height: 31px;
+      background-color: #f2edf3;
+      color: $red_color;
+    }
+  }
+}
+
+.form-label {
+  margin-bottom: 0px;
+  color: $red_color;
+  font-size: 15px;
+  font-weight: 600;
+}
