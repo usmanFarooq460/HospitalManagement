@@ -24,7 +24,7 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
 
   initForm() {
     this.formdata = this.formbuilder.group({
-      users: [null, [Validators.required]],
+      users: ["null", [Validators.required]],
     });
   }
 
@@ -129,6 +129,9 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
 
   getRightsByUserId(event) {
     let userId = event.target.value;
+    if (userId == "null") {
+      return;
+    }
     console.log("user id:", userId);
     this.service.getScreenRightsByUserId(userId).subscribe(
       (resp) => {

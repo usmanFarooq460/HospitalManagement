@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <page-title [heading]="'Module Rights'" [icon]="'mdi mdi-account-multiple'"></page-title>
     <div class="form">
-        <form class="register-form" [formGroup]="formdata" >
+        <form class="register-form" [formGroup]="formdata">
             <div class="row">
                 <div class="col-md-6">
                     <input type="text" class="custom-form-control" formControlName="drugType"
-                        placeholder="Module Name" />
+                        placeholder="Drug/Medicine Type" />
                     <div *ngIf="form.drugType.invalid && form.drugType.touched" class="invalid-feedback d-block">
                         <div *ngIf="form.drugType.errors.required" class="invalid-feedback d-block">
                             Drug Type is required
@@ -20,7 +20,7 @@
                     </button>
                     <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null"
                         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
-                        (click)="update()">
+                        (click)="update(updateId)">
                         Update
                     </button>
                     <button type="button" style="margin-top: 18px;"
@@ -44,6 +44,12 @@
                             <tr *ngIf="isLoading">
                                 <td colspan="2">
                                     <app-loader></app-loader>
+                                </td>
+                            </tr>
+                            <!--  -->
+                            <tr *ngIf="alldrugTypesList?.length>0==false">
+                                <td colspan="2" class="dataNotFound" >
+                                    No Data Found
                                 </td>
                             </tr>
                             <tr *ngFor="let item of alldrugTypesList; let index = index">

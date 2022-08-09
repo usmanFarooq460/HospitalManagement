@@ -8,6 +8,7 @@
           <label class="form-label" for="users">Select User To Give rights</label>
           <select name="users" id="users" class="custom-form-control" formControlName="users"
             (change)="getRightsByUserId($event)">
+            <option value="null">Select User</option>
             <option [value]="item._id" *ngFor="let item of UsersList">{{item.userName}}</option>
           </select>
         </div>

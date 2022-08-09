@@ -1,6 +1,9 @@
 .loader {
+  display: flex;
   .loader-image {
     width: 100px;
+    display: block;
     height: 100px;
+    margin: auto;
   }
 }

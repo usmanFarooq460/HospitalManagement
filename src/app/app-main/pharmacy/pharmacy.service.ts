@@ -20,4 +20,23 @@ export class PharmacyService {
       headers: this.header,
     });
   }
+
+  updateDrugTypes(id, body) {
+    return this.http.put<any>(this.apiUrl + "def-drugType/update/" + id, body, {
+      headers: this.header,
+    });
+  }
+
+  deleteDrugTypes(id) {
+    return this.http.delete<any>(this.apiUrl + "def-drugType/delete/" + id, {
+      headers: this.header,
+    });
+  }
+
+  // def_drug/AddNew
+  saveNewDrugOrMedicine(data){
+    return this.http.post<any>(this.apiUrl+"def_drug/addNew",data,{
+      headers:this.header
+    })
+  }
 }

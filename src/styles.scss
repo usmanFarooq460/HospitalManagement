@@ -97,7 +97,7 @@ $blue_color: rgb(13, 54, 158);
 .edit-delete-wrape {
   display: flex;
   .edit-icon {
-    color:$blue_color;
+    color: $blue_color;
     font-size: 17px;
   }
 
@@ -106,6 +106,10 @@ $blue_color: rgb(13, 54, 158);
     font-size: 17px;
     padding-left: 16px;
   }
+}
+
+.dataNotFound {
+  color: red;
 }
 
 .cursor_pointer {
