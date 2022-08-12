@@ -32,8 +32,7 @@ export class SidebarComponent implements OnInit {
   getUserRightsAgainstUserId() {
     let userId = localStorage.getItem("UserId");
     console.log("getting rights:", userId);
-    this.service.getUserRights(userId)
-    .subscribe(
+    this.service.getUserRights(userId).subscribe(
       (resp) => {
         console.log("rights list:", resp);
         this.RightsList = resp?.screenNamesList;
@@ -46,7 +45,7 @@ export class SidebarComponent implements OnInit {
     );
   }
 
-  seperateRights(rightsList:any) {
+  seperateRights(rightsList: any) {
     console.log("rights list: ", rightsList);
     for (let i = 0; i < rightsList.length; i++) {
       const element = rightsList[i];
@@ -85,10 +84,7 @@ export class SidebarComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("UserName");
-    localStorage.removeItem("UserId");
-    localStorage.removeItem("role");
+    localStorage.clear();
     this.router.navigate(["/Accounts/login"]);
   }
 }

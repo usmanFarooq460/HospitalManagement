@@ -11,6 +11,7 @@ import { PharmacyService } from "../pharmacy.service";
 export class AddingNewMedicineComponent extends BaseActions implements OnInit {
   formData: any;
   drugTypeList = [];
+  allDrugsHistoryList = [];
   updateId: any;
   constructor(
     private formBuilder: FormBuilder,
@@ -22,15 +23,13 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
 
   ngOnInit(): void {
     this.getallDrugType();
-    // this.SuccessPopup("This is Success Popiup");
-    // this.WarningPopup("This is warning popip");
-    // this.errorPopup("this.is error popup");
+    this.getHistory();
   }
 
   initForm() {
     this.formData = this.formBuilder.group({
       drugName: [null, [Validators.required]],
-      drugType: [null, [Validators.required]], //Select box
+      drugTypeId: [null, [Validators.required]], //Select box
       drugCode: [null, [Validators.required]],
       drugFormulae: [null, [Validators.required]],
       manufacturingDate: [null, [Validators.required]],
@@ -39,17 +38,49 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
       retailPrice: [null, [Validators.required]],
       createdBy: [null],
       createdAt: [null],
+      drugTypeName: [null],
     });
   }
 
   get form() {
     return this.formData.controls;
   }
+  getById(data) {
+    this.updateId = data._id;
+    this.loaderOn_Save_Update = false;
+    this.formData.patchValue({
+      drugTypeId: data.drugType,
+      drugName: data.drugName,
+      drugCode: data.drugCode,
+      drugFormulae: data.drugFormulae,
+      manufacturingDate: data.manufacturingDate,
+      expiryDate: data.expiryDate,
+      batchNo: data.batchNo,
+      retailPrice: data.retailPrice,
+      createdBy: data.createdBy,
+      createdAt: data.createdAt,
+    });
+  }
+
+  getHistory() {
+    this.isLoading = true;
+    this.service.getAllDrugsHistory().subscribe(
+      (resp) => {
+        this.allDrugsHistoryList = resp;
+        console.log("history of al drug list : ", resp);
+        this.isLoading = false;
+      },
+      (err) => {
+        this.isLoading = false;
+        this.errorPopup("err in getting all medicine" + err.message);
+      }
+    );
+  }
 
   getallDrugType() {
     this.service.getallDrugTpyes().subscribe(
       (resp) => {
-        console.log("ll drug types:", resp);
+        console.log("All drug types:", resp);
         this.drugTypeList = resp;
       },
       (err) => {
@@ -58,27 +89,66 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
     );
   }
 
-  save() {
+  handleSave_Update() {
     if (this.formData.valid == false) {
       this.formData.markAllAsTouched();
       console.log("not valid :", this.formData.value);
       return;
     }
-    console.log("going to dave :", this.formData.value);
+
+    this.formData.value.drugTypeName = this.drugTypeList.find(
+      ({ _id }) => _id == this.formData.value.drugTypeId
+    )?.drugType;
+
+    this.formData.value.createdBy = localStorage.getItem("UserName");
+    this.formData.value.createdAt = new Date();
+    if (
+      this.formData.value.drugTypeName == null ||
+      this.formData.value.drugTypeName == undefined
+    ) {
+      this.WarningPopup("Drug Tpye Id is Not valid");
+      return;
+    }
+
+    if (this.updateId == null || this.updateId == undefined) {
+      this.save();
+    } else {
+      this.update(this.updateId);
+    }
+  }
+
+  save() {
+    console.log("going to save :", this.formData.value);
     this.service.saveNewDrugOrMedicine(this.formData.value).subscribe(
       (resp) => {
-        console.log("saved: ", resp);
-        console.log("saved: ", resp);
         this.SuccessPopup("Added Successfully");
+        this.getHistory();
         this.clearForm();
       },
       (err) => {
-        this.errorPopup(err.message);
+        this.errorPopup(err.error.message);
+        console.log("casual message: ", err.error.errors);
       }
     );
   }
 
-  update(updateId) {}
+  update(updateId) {
+    this.loaderOn_Save_Update = true;
+    this.service.updateDrug(updateId, this.formData.value).subscribe(
+      (resp) => {
+        console.log("Saved");
+        this.SuccessPopup("Record updated Successfully");
+        this.loaderOn_Save_Update = false;
+        this.clearForm();
+      },
+      (err) => {
+        this.errorPopup(err.error.message);
+        console.log("casual message: ", err.error.errors);
+      }
+    );
+  }
+
+  deleteFunc(Id) {}
 
   clearForm() {
     this.updateId = null;

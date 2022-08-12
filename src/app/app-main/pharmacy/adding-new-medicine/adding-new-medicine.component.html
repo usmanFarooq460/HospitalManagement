@@ -8,7 +8,7 @@
     <form [formGroup]="formData">
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
                 <input type="text" class="custom-form-control" formControlName="drugName" placeholder="Drug Name" />
                 <div *ngIf="form.drugName.invalid && form.drugName.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.drugName.errors.required" class="invalid-feedback d-block">
@@ -17,19 +17,19 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <select class="custom-form-control" name="drugType" id="drugType" formControlName="drugType">
+            <div class="col-md-4 col-6">
+                <select class="custom-form-control" name="drugTypeId" id="drugTypeId" formControlName="drugTypeId">
                     <option value="null">Select Drug Type</option>
                     <option value="{{item._id}}" *ngFor="let item of drugTypeList">{{item.drugType}}</option>
                 </select>
-                <div *ngIf="form.drugType.invalid && form.drugType.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.drugType.errors.required" class="invalid-feedback d-block">
+                <div *ngIf="form.drugTypeId.invalid && form.drugTypeId.touched" class="invalid-feedback d-block">
+                    <div *ngIf="form.drugTypeId.errors.required" class="invalid-feedback d-block">
                         Drug Type is Required
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
                 <input type="text" class="custom-form-control" formControlName="drugCode" placeholder="Drug code" />
                 <div *ngIf="form.drugCode.invalid && form.drugCode.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.drugCode.errors.required" class="invalid-feedback d-block">
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
                 <input type="text" class="custom-form-control" formControlName="drugFormulae"
                     placeholder="Drug Formulae" />
                 <div *ngIf="form.drugFormulae.invalid && form.drugFormulae.touched" class="invalid-feedback d-block">
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
                 <input type="text" class="custom-form-control" formControlName="manufacturingDate"
                     placeholder="Manufacturing date" />
                 <div *ngIf="form.manufacturingDate.invalid && form.manufacturingDate.touched"
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4  col-6">
                 <input type="text" class="custom-form-control" formControlName="expiryDate" placeholder="Expiry Date" />
                 <div *ngIf="form.expiryDate.invalid && form.expiryDate.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.expiryDate.errors.required" class="invalid-feedback d-block">
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-6">
                 <input type="text" class="custom-form-control" formControlName="batchNo" placeholder="Batch No" />
                 <div *ngIf="form.batchNo.invalid && form.batchNo.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.batchNo.errors.required" class="invalid-feedback d-block">
@@ -76,9 +76,10 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <input type="text" class="custom-form-control" formControlName="retailPrice" placeholder="Retail Price" />
+
+            <div class="col-md-4 col-6">
+                <input type="text" class="custom-form-control" formControlName="retailPrice"
+                    placeholder="Retail Price" />
                 <div *ngIf="form.retailPrice.invalid && form.retailPrice.touched" class="invalid-feedback d-block">
                     <div *ngIf="form.retailPrice.errors.required" class="invalid-feedback d-block">
                         Batch No is Required
@@ -89,17 +90,135 @@
         </div>
 
         <div class="text-right">
+            <button type="button" style="margin-top: 18px;" class="btn blue-color focused-button text-white btn-sm"
+                (click)="clearForm()">
+                Clear
+            </button>
             <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit" [disabled]="loaderOn_Save_Update"
-                class="btn blue-color focused-button text-white btn-sm" (click)="save()">
+                class="btn blue-color focused-button text-white btn-sm" (click)="handleSave_Update()">
                 Save
             </button>
             <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null" [disabled]="loaderOn_Save_Update"
-                class="btn blue-color focused-button text-white btn-sm" (click)="update(updateId)">
+                class="btn blue-color focused-button text-white btn-sm" (click)="handleSave_Update()">
                 Update
             </button>
         </div>
     </form>
 </div>
+
+<!-- History -->
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Recent Tickets</h4>
+                <div class="table-responsive">
+                    <table class="my_table">
+                        <thead>
+                            <tr>
+                                <th>Drug Name</th>
+                                <th>Drug Type</th>
+                                <th>drug Code</th>
+                                <th>Drug Formulae</th>
+                                <th>MunaFacturing Date</th>
+                                <th>Expiry Date</th>
+                                <th>Batch#</th>
+                                <th>retail Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let item of allDrugsHistoryList; let index = index">
+                                <td>{{item.drugName}}</td>
+                                <td>{{item.drugType}}</td>
+                                <td>{{item.drugCode}}</td>
+                                <td>{{item.drugFormulae}}</td>
+                                <td>{{item.manufacturingDate}}</td>
+                                <td>{{item.expiryDate}}</td>
+                                <td>{{item.batchNo}}</td>
+                                <td>{{item.retailPrice}}</td>
+                                <td class="edit-delete-wrape">
+                                    <div class="edit-icon">
+                                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                    </div>
+                                    <div class="delete-icon">
+                                        <i class="mdi mdi-delete-forever cursor_pointer"
+                                            (click)="deleteFunc(item._id)"></i>
+                                    </div>
+                            </tr>
+                            <tr *ngIf="isLoading">
+                                <td colspan="8">
+                                    <app-loader></app-loader>
+                                </td>
+                            </tr>
+                            <tr *ngIf="allDrugsHistoryList?.length>0==false && isLoading==false">
+                                <td colspan="9" class="dataNotFound">
+                                    No Data Found
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body border border-danger">
+                <table class="table margin_negative_10">
+                    <thead class="text-danger">
+                        <th>Drug Name</th>
+                        <th>Drug Type</th>
+                        <th>drug Code</th>
+                        <th>Drug Formulae</th>
+                        <th>MunaFacturing Date</th>
+                        <th>Expiry Date</th>
+                        <th>retail Price</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="isLoading">
+                            <td colspan="2">
+                                <app-loader></app-loader>
+                            </td>
+                        </tr>
+                        <tr *ngIf="allDrugsHistoryList?.length>0==false">
+                            <td colspan="2" class="dataNotFound">
+                                No Data Found
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of allDrugsHistoryList; let index = index">
+                            <td>{{item.drugName}}</td>
+                            <td>{{item.drugType}}</td>
+                            <td>{{item.drugCode}}</td>
+                            <td>{{item.drugFormulae}}</td>
+                            <td>{{item.manufacturingDate}}</td>
+                            <td>{{item.expiryDate}}</td>
+                            <td>{{item.batchNo}}</td>
+                            <td>{{item.retailPrice}}</td>
+                            <td class="edit-delete-wrape">
+                                <div class="edit-icon">
+                                    <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                </div>
+                                <div class="delete-icon">
+                                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteFunc(item._id)"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 <div class="row">
     <div class="col-12">

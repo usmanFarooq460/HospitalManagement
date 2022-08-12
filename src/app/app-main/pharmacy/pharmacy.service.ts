@@ -33,10 +33,22 @@ export class PharmacyService {
     });
   }
 
-  // def_drug/AddNew
-  saveNewDrugOrMedicine(data){
-    return this.http.post<any>(this.apiUrl+"def_drug/addNew",data,{
-      headers:this.header
-    })
+  // Defining Drug Tpye List
+  saveNewDrugOrMedicine(data) {
+    return this.http.post<any>(this.apiUrl + "def_drug/addNew", data, {
+      headers: this.header,
+    });
+  }
+
+  getAllDrugsHistory() {
+    return this.http.get<any>(this.apiUrl + "def_drug/getAll", {
+      headers: this.header,
+    });
+  }
+
+  updateDrug(id,data) {
+    return this.http.put<any>(this.apiUrl + "def_drug/update/"+id,data, {
+      headers: this.header,
+    });
   }
 }
