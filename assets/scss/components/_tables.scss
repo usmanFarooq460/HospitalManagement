@@ -1,5 +1,36 @@
 /* Tables */
 
+.my_table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  overflow-x: auto;
+  /* display: block; */
+  border-collapse: collapse;
+  word-break: keep-all;
+  word-wrap: normal;
+  thead {
+    background: bisque;
+    th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #ebedf2;
+      font-size: 12px;
+      padding: 4px;
+      word-break: keep-all;
+      font-weight: 600;
+    }
+  }
+
+  td {
+    word-break: keep-all;
+  }
+  th,
+  td,
+  tr {
+    border: 1px solid green;
+  }
+}
+
 .table {
   margin-bottom: 0;
   thead {
@@ -8,7 +39,7 @@
       border-bottom-width: 1px;
       font-family: $type1-medium;
       font-weight: initial;
-      i{
+      i {
         margin-left: 0.325rem;
       }
     }
@@ -27,9 +58,11 @@
       margin-bottom: 0;
     }
   }
-  &.table-borderless{
+  &.table-borderless {
     border: none;
-    tr,td,th{
+    tr,
+    td,
+    th {
       border: none;
     }
   }
