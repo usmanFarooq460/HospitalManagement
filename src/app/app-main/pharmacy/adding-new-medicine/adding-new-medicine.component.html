@@ -9,80 +9,117 @@
         <div class="row">
 
             <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="drugName" placeholder="Drug Name" />
-                <div *ngIf="form.drugName.invalid && form.drugName.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.drugName.errors.required" class="invalid-feedback d-block">
-                        Drug Name is Req uired
+                <div class="form_group">
+                    <label for="name">Drug Name</label>
+                    <input type="text" id="name" class="form_control" formControlName="drugName" placeholder="Drug Name"
+                        [ngClass]="form.drugName.invalid && form.drugName.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.drugName.invalid && form.drugName.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.drugName.errors.required" class="invalid-feedback d-block">
+                            Drug Name is Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 col-6">
+                <div class="form_group">
+                    <label for="drugTypeId">Drug Type</label>
+                    <select class="form_control" name="drugTypeId" id="drugTypeId" formControlName="drugTypeId"
+                        [ngClass]="form.drugTypeId.invalid && form.drugTypeId.touched ? 'invalid_field' : ''">
+                        <option value="null">Select Drug Type</option>
+                        <option value="{{item._id}}" *ngFor="let item of drugTypeList">{{item.drugType}}</option>
+                    </select>
+                    <div *ngIf="form.drugTypeId.invalid && form.drugTypeId.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.drugTypeId.errors.required" class="invalid-feedback d-block">
+                            Drug Type is Required
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 col-6">
-                <select class="custom-form-control" name="drugTypeId" id="drugTypeId" formControlName="drugTypeId">
-                    <option value="null">Select Drug Type</option>
-                    <option value="{{item._id}}" *ngFor="let item of drugTypeList">{{item.drugType}}</option>
-                </select>
-                <div *ngIf="form.drugTypeId.invalid && form.drugTypeId.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.drugTypeId.errors.required" class="invalid-feedback d-block">
-                        Drug Type is Required
+
+                <div class="form_group">
+                    <label for="drugCode"> Drug code</label>
+                    <input type="text" class="form_control" name="drugCode" formControlName="drugCode"
+                        placeholder="Drug code"
+                        [ngClass]="form.drugCode.invalid && form.drugCode.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.drugCode.invalid && form.drugCode.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.drugCode.errors.required" class="invalid-feedback d-block">
+                            Drug code is Required
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="form_group">
+                    <label for="drugFormulae"> Drug Formulae</label>
+                    <input type="text" class="form_control" name="drugFormulae" formControlName="drugFormulae"
+                        placeholder="Drug Formulae"
+                        [ngClass]="form.drugFormulae.invalid && form.drugFormulae.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.drugFormulae.invalid && form.drugFormulae.touched"
+                        class="invalid-feedback d-block">
+                        <div *ngIf="form.drugFormulae.errors.required" class="invalid-feedback d-block">
+                            Drug Formulae is Required
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="drugCode" placeholder="Drug code" />
-                <div *ngIf="form.drugCode.invalid && form.drugCode.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.drugCode.errors.required" class="invalid-feedback d-block">
-                        Drug code is Required
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="drugFormulae"
-                    placeholder="Drug Formulae" />
-                <div *ngIf="form.drugFormulae.invalid && form.drugFormulae.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.drugFormulae.errors.required" class="invalid-feedback d-block">
-                        Drug Formulae is Required
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="manufacturingDate"
-                    placeholder="Manufacturing date" />
-                <div *ngIf="form.manufacturingDate.invalid && form.manufacturingDate.touched"
-                    class="invalid-feedback d-block">
-                    <div *ngIf="form.manufacturingDate.errors.required" class="invalid-feedback d-block">
-                        Manufacturing date is Required
+                <div class="form_group">
+                    <label for="manufacturingDate"> Manufacturing Date</label>
+                    <input type="text" class="form_control" name="manufacturingDate" formControlName="manufacturingDate"
+                        placeholder="Manufacturing date"
+                        [ngClass]="form.manufacturingDate.invalid && form.manufacturingDate.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.manufacturingDate.invalid && form.manufacturingDate.touched"
+                        class="invalid-feedback d-block">
+                        <div *ngIf="form.manufacturingDate.errors.required" class="invalid-feedback d-block">
+                            Manufacturing date is Required
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4  col-6">
-                <input type="text" class="custom-form-control" formControlName="expiryDate" placeholder="Expiry Date" />
-                <div *ngIf="form.expiryDate.invalid && form.expiryDate.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.expiryDate.errors.required" class="invalid-feedback d-block">
-                        Expiry date is Required
+                <div class="form_group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" class="form_control" formControlName="expiryDate" placeholder="Expiry Date"
+                        [ngClass]="form.expiryDate.invalid && form.expiryDate.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.expiryDate.invalid && form.expiryDate.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.expiryDate.errors.required" class="invalid-feedback d-block">
+                            Expiry date is Required
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="batchNo" placeholder="Batch No" />
-                <div *ngIf="form.batchNo.invalid && form.batchNo.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.batchNo.errors.required" class="invalid-feedback d-block">
-                        Batch No is Required
+                <div class="form_group">
+                    <label for="batchNo">Batch no</label>
+                    <input type="text" name="batchNo" class="form_control" formControlName="batchNo"
+                        placeholder="Batch No"
+                        [ngClass]="form.batchNo.invalid && form.batchNo.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.batchNo.invalid && form.batchNo.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.batchNo.errors.required" class="invalid-feedback d-block">
+                            Batch No is Required
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 col-6">
-                <input type="text" class="custom-form-control" formControlName="retailPrice"
-                    placeholder="Retail Price" />
-                <div *ngIf="form.retailPrice.invalid && form.retailPrice.touched" class="invalid-feedback d-block">
-                    <div *ngIf="form.retailPrice.errors.required" class="invalid-feedback d-block">
-                        Batch No is Required
+                <div class="form_group">
+                    <label for="retailPrice">Retail Price</label>
+                    <input type="text" class="form_control" formControlName="retailPrice" placeholder="Retail Price"
+                        [ngClass]="form.retailPrice.invalid && form.retailPrice.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.retailPrice.invalid && form.retailPrice.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.retailPrice.errors.required" class="invalid-feedback d-block">
+                            Retail Price is Required
+                        </div>
                     </div>
                 </div>
             </div>

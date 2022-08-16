@@ -134,6 +134,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
 
   update(updateId) {
     this.loaderOn_Save_Update = true;
+    console.log("form data form: ", this.formData.value);
     this.service.updateDrug(updateId, this.formData.value).subscribe(
       (resp) => {
         console.log("Saved");
@@ -142,13 +143,26 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
         this.clearForm();
       },
       (err) => {
+        this.loaderOn_Save_Update = false;
         this.errorPopup(err.error.message);
+        console.log("err", err);
         console.log("casual message: ", err.error.errors);
       }
     );
   }
 
-  deleteFunc(Id) {}
+  deleteFunc(Id) {
+    console.log("Deleting!");
+    this.service.deleteDrug(Id).subscribe(
+      (resp) => {
+        this.SuccessPopup("Medicine has Deleted SuccessFully");
+        this.getHistory();
+      },
+      (err) => {
+        this.errorPopup("er in delting " + err.error.errors);
+      }
+    );
+  }
 
   clearForm() {
     this.updateId = null;

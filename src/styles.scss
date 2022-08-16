@@ -63,7 +63,6 @@
 
 // Custom Variables
 $red_color: #da1c23;
-// $red_color: rgb(158, 13, 13);
 $blue_color: rgb(13, 54, 158);
 
 .custom-red-color {
@@ -92,6 +91,41 @@ $blue_color: rgb(13, 54, 158);
   font-size: 17px;
   border-radius: 5px;
   margin-top: 13px;
+}
+
+.form_group {
+  label {
+    margin: 6px 0px 3px;
+    font-weight: 500;
+  }
+}
+
+.form_control {
+  display: block;
+  width: 100%;
+  background-color: white;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  border-left: 4px solid #0a6e6e;
+  transition: all 0.2s linear;
+  &:focus {
+    border: 1px solid #0a6e6e;
+    outline: #0a6e6e;
+    border-left: 7px solid #0a6e6e;
+  }
+}
+
+.invalid_field {
+  border: 1px solid red;
+  outline: red;
+  border-left: 7px solid red;
+  &:focus {
+    border: 1px solid red;
+    outline: red;
+    border-left: 7px solid red;
+  }
 }
 
 .edit-delete-wrape {
