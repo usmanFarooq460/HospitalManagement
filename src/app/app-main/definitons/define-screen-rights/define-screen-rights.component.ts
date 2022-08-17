@@ -123,6 +123,8 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
       },
       (err) => {
         this.errorPopup(err.message);
+        console.log("Why its not working for second users: ",err);
+        
       }
     );
   }
@@ -135,6 +137,11 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
     console.log("user id:", userId);
     this.service.getScreenRightsByUserId(userId).subscribe(
       (resp) => {
+        // if (resp?.length > 0 == false) {
+        //   for (let i = 0; i < this.modulesList.length; i++) {
+        //     this.modulesList[i].isSelected = false;
+        //   }
+        // }
         if (resp?.screenNamesList?.length > 0) {
           this.rightsId = resp._id;
           for (let i = 0; i < this.modulesList.length; i++) {
@@ -142,6 +149,7 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
           }
         } else {
           this.rightsId = undefined;
+          this;
         }
         let rightedScreens = resp?.screenNamesList;
         for (let i = 0; i < this.modulesList.length; i++) {

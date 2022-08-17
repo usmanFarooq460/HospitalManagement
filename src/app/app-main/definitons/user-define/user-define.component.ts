@@ -70,7 +70,7 @@ export class UserDefineComponent extends BaseActions implements OnInit {
     console.log("id for Updte: ", this.idforupdate);
     if (this.idforupdate == null) {
       this.initForm();
-    }
+    } 
     this.modalReference = this.modalService.open(userDefineModalContent, {
       backdrop: "static",
       keyboard: false,
