@@ -7,12 +7,14 @@ import { AddingNewMedicineComponent } from "./adding-new-medicine/adding-new-med
 import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component";
 import { CommonUiModule } from "./../../common-ui/common-ui.module";
 import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-drug-type.component";
+import { DefinePharmacyStoreComponent } from './define-pharmacy-store/define-pharmacy-store.component';
 
 @NgModule({
   declarations: [
     AddingNewMedicineComponent,
     MedicineSaleInvoiceComponent,
     DefDrugTypeComponent,
+    DefinePharmacyStoreComponent,
   ],
   imports: [
     CommonModule,

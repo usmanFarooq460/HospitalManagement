@@ -40,7 +40,6 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
   getAllModules() {
     this.service.getAllScreens().subscribe(
       (resp) => {
-        console.log("all screens or modules: ", resp);
         this.modulesList = [];
         for (let i = 0; i < resp?.length; i++) {
           this.modulesList.push({
@@ -97,8 +96,6 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
       this.WarningPopup("Please Select modules for right");
       return;
     }
-    console.log("SELECTED USER", this.formdata.value.users);
-    console.log("selected module name :", selectedModuleNames);
     let finalDataToSend = {
       screenNamesList: selectedModuleNames,
       userId: this.formdata.value.users,
@@ -123,8 +120,7 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
       },
       (err) => {
         this.errorPopup(err.message);
-        console.log("Why its not working for second users: ",err);
-        
+        console.log("Why its not working for second users: ", err);
       }
     );
   }
@@ -134,14 +130,8 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
     if (userId == "null") {
       return;
     }
-    console.log("user id:", userId);
     this.service.getScreenRightsByUserId(userId).subscribe(
       (resp) => {
-        // if (resp?.length > 0 == false) {
-        //   for (let i = 0; i < this.modulesList.length; i++) {
-        //     this.modulesList[i].isSelected = false;
-        //   }
-        // }
         if (resp?.screenNamesList?.length > 0) {
           this.rightsId = resp._id;
           for (let i = 0; i < this.modulesList.length; i++) {
@@ -149,7 +139,9 @@ export class DefineScreenRightsComponent extends BaseActions implements OnInit {
           }
         } else {
           this.rightsId = undefined;
-          this;
+          for (let i = 0; i < this.modulesList.length; i++) {
+            this.modulesList[i].isSelected = false;
+          }
         }
         let rightedScreens = resp?.screenNamesList;
         for (let i = 0; i < this.modulesList.length; i++) {
