@@ -116,21 +116,7 @@
   }
 }
 
-.custom-btn{
-    background-color: rgb(9, 9, 148);
-    border-radius: 5px;
-    outline: none;
-    color: white;
-    font-size: 15px;
-    padding:10px 25px;
-    border: 1px solid;
-    transition: all 0.5s;
-    &:hover,&:focus{
-        background-color: white;
-        border: 1px solid rgb(9, 9, 148);
-        color:rgb(9, 9, 148);
-    }
-}
+c
 .form{
   background: rgba(0, 0, 0, 0.1);
   padding: 40px;

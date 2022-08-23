@@ -1,17 +1,17 @@
 <div class="container-fluid">
-    <page-title [heading]="'Define Store'" [icon]="'mdi mdi-memory'"></page-title>
+    <page-title [heading]="'Define Rack'" [icon]="'mdi mdi-database'"></page-title>
     <div class="form">
-        <form class="register-form" [formGroup]="formdata" (ngSubmit)="save()">
+        <form class="register-form" [formGroup]="formData" (ngSubmit)="handleSave_Update()">
             <div class="row">
 
                 <div class="col-md-4 col-6">
                     <div class="form_group">
-                        <label for="storeName">Store Name</label>
-                        <input type="text" class="form_control" name="storeName" formControlName="storeName"
-                            placeholder="store Name"
-                            [ngClass]="form.storeName.invalid && form.storeName.touched ? 'invalid_field' : ''" />
-                        <div *ngIf="form.storeName.invalid && form.storeName.touched" class="invalid-feedback d-block">
-                            <div *ngIf="form.storeName.errors.required" class="invalid-feedback d-block">
+                        <label for="rackName">Rack Name</label>
+                        <input type="text" class="form_control" name="rackName" formControlName="rackName"
+                            placeholder="Rack Name"
+                            [ngClass]="form.rackName.invalid && form.rackName.touched ? 'invalid_field' : ''" />
+                        <div *ngIf="form.rackName.invalid && form.rackName.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.rackName.errors.required" class="invalid-feedback d-block">
                                 Required
                             </div>
                         </div>
@@ -20,13 +20,15 @@
 
                 <div class="col-md-4 col-6">
                     <div class="form_group">
-                        <label for="storeLocation">Store Location</label>
-                        <input type="text" class="form_control" name="storeLocation" formControlName="storeLocation"
-                            placeholder="Store Location"
-                            [ngClass]="form.storeLocation.invalid && form.storeLocation.touched ? 'invalid_field' : ''" />
-                        <div *ngIf="form.storeLocation.invalid && form.storeLocation.touched"
-                            class="invalid-feedback d-block">
-                            <div *ngIf="form.storeLocation.errors.required" class="invalid-feedback d-block">
+                        <label for="storeId">Store</label>
+                        <select class="form_control" name="storeId" id="storeId" formControlName="storeId"
+                            (change)="handleStoreChange($event.target.value)"
+                            [ngClass]="{invalid_field: form.storeId.invalid && form.storeId.touched}">
+                            <option value="null">Select Store</option>
+                            <option value="{{item._id}}" *ngFor="let item of allStoresList">{{item.storeName}}</option>
+                        </select>
+                        <div *ngIf="form.storeId.invalid && form.storeId.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.storeId.errors.required" class="invalid-feedback d-block">
                                 Required
                             </div>
                         </div>
@@ -35,24 +37,19 @@
 
                 <div class="col-md-4 col-6">
                     <div class="form_group">
-                        <label for="storeDescription">Decription</label>
-                        <input type="text" class="form_control" name="storeDescription"
-                            formControlName="storeDescription" placeholder="Decription"
-                            [ngClass]="form.storeDescription.invalid && form.storeDescription.touched ? 'invalid_field' : ''" />
+                        <label for="Description">Description</label>
+                        <input type="text" class="form_control" name="Description" formControlName="Description"
+                            placeholder="Description" />
                     </div>
                 </div>
-                <!-- 
-                <div class="col-md-6">
-                    
-                </div> -->
             </div>
             <div class="text-right">
                 <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit" [disabled]="loaderOn_Save_Update"
-                    class="btn blue-color focused-button text-white btn-sm" (click)="save()">
+                    class="btn blue-color focused-button text-white btn-sm" (click)="handleSave_Update()">
                     Save
                 </button>
                 <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null" [disabled]="loaderOn_Save_Update"
-                    class="btn blue-color focused-button text-white btn-sm" (click)="update(updateId)">
+                    class="btn blue-color focused-button text-white btn-sm" (click)="handleSave_Update()">
                     Update
                 </button>
                 <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null" [disabled]="loaderOn_Save_Update"
@@ -68,8 +65,8 @@
                 <div class="card-body border border-danger">
                     <table class="table margin_negative_10">
                         <thead class="text-danger">
-                            <th>Store Name </th>
-                            <th>Store Location</th>
+                            <th>Rack Name </th>
+                            <th>Store</th>
                             <th>Description</th>
                             <th>Action</th>
                         </thead>
@@ -79,15 +76,15 @@
                                     <app-loader></app-loader>
                                 </td>
                             </tr>
-                            <tr *ngIf="alldrugTypesList?.length>0==false && !isLoading">
+                            <tr *ngIf="historyList?.length>0==false && !isLoading">
                                 <td colspan="3" class="dataNotFound">
                                     No Data Found
                                 </td>
                             </tr>
-                            <tr *ngFor="let item of alldrugTypesList; let index = index">
-                                <td>{{item.storeName}}</td>
-                                <td>{{item.storeLocation}}</td>
-                                <td>{{item.storeDescription}}</td>
+                            <tr *ngFor="let item of historyList; let index = index">
+                                <td>{{item.rackName}}</td>
+                                <td>{{item.StoreName}}</td>
+                                <td>{{item.Description}}</td>
                                 <td class="edit-delete-wrape">
                                     <div class="edit-icon">
                                         <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <page-title [heading]="'Def New Drug'" [icon]="'mdi mdi-account-multiple'"></page-title>
+    <page-title [heading]="'Def New Medicine'" [icon]="'mdi mdi-account-multiple'"></page-title>
     <button class="btn blue-color focused-button text-white btn-sm" routerLink="/pharmacy/def-drug-type">def drug
         Type</button>
 </div>
@@ -72,7 +72,7 @@
             <div class="col-md-4 col-6">
                 <div class="form_group">
                     <label for="manufacturingDate"> Manufacturing Date</label>
-                    <input type="text" class="form_control" name="manufacturingDate" formControlName="manufacturingDate"
+                    <input type="date" class="form_control" name="manufacturingDate" formControlName="manufacturingDate"
                         placeholder="Manufacturing date"
                         [ngClass]="form.manufacturingDate.invalid && form.manufacturingDate.touched ? 'invalid_field' : ''" />
                     <div *ngIf="form.manufacturingDate.invalid && form.manufacturingDate.touched"
@@ -87,7 +87,7 @@
             <div class="col-md-4  col-6">
                 <div class="form_group">
                     <label for="expiryDate">Expiry Date</label>
-                    <input type="text" class="form_control" formControlName="expiryDate" placeholder="Expiry Date"
+                    <input type="date" class="form_control" formControlName="expiryDate" placeholder="Expiry Date"
                         [ngClass]="form.expiryDate.invalid && form.expiryDate.touched ? 'invalid_field' : ''" />
                     <div *ngIf="form.expiryDate.invalid && form.expiryDate.touched" class="invalid-feedback d-block">
                         <div *ngIf="form.expiryDate.errors.required" class="invalid-feedback d-block">
@@ -124,6 +124,15 @@
                 </div>
             </div>
 
+            <div class="col-md-4 col-6">
+                <div class="form_group">
+                    <label for="ManufacturingPrice">Manufacturing Price</label>
+                    <input type="text" id="ManufacturingPrice" class="form_control" formControlName="ManufacturingPrice"
+                        placeholder="Manufacturing Price" />
+
+                </div>
+            </div>
+
         </div>
 
         <div class="text-right">
@@ -143,9 +152,72 @@
     </form>
 </div>
 
-<!-- History -->
 
-<div class="row">
+
+<!-- History -->
+<div class="search_wrape">
+    <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
+</div>
+
+<div class="canvas_view" [ngStyle]="{ 'max-height':gridHeight + 'px'}">
+    <div class="no_data_found_in_canvas" *ngIf="allDrugsHistoryList?.length>0==false && isLoading==false">
+        No Data Found
+    </div>
+    <div class="no_data_found_in_canvas" *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
+    <div class="custom_card"
+        *ngFor="let item of allDrugsHistoryList | filterByAllProperties:searchValue; let index=index">
+        <div class="header_edit_delete">
+            <div class="Header">{{item.drugName}}</div>
+            <div class="delete_Edit_btns edit-delete-wrape">
+                <div class="edit-icon">
+                    <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                </div>
+                <div class="delete-icon">
+                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteFunc(item._id)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="Card_body">
+            <div class="caption_value_wrape">
+                <div class="caption">Type</div>
+                <div class="value">{{item.drugTypeName}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Code</div>
+                <div class="value">{{item.drugCode}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Formulae</div>
+                <div class="value">{{item.drugFormulae}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Batch No</div>
+                <div class="value">{{item.batchNo}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Mnfr.Date</div>
+                <div class="value">{{item.manufacturingDate | date:'mediumDate'}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Expr.Date</div>
+                <div class="value">{{item.expiryDate | date:'mediumDate'}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Mnfr Price</div>
+                <div class="value">{{item.ManufacturingPrice}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Retail Price</div>
+                <div class="value">{{item.retailPrice}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row">
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
@@ -184,6 +256,7 @@
                                         <i class="mdi mdi-delete-forever cursor_pointer"
                                             (click)="deleteFunc(item._id)"></i>
                                     </div>
+                                    <td>
                             </tr>
                             <tr *ngIf="isLoading">
                                 <td colspan="8">
@@ -202,60 +275,8 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- 
-
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body border border-danger">
-                <table class="table margin_negative_10">
-                    <thead class="text-danger">
-                        <th>Drug Name</th>
-                        <th>Drug Type</th>
-                        <th>drug Code</th>
-                        <th>Drug Formulae</th>
-                        <th>MunaFacturing Date</th>
-                        <th>Expiry Date</th>
-                        <th>retail Price</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngIf="isLoading">
-                            <td colspan="2">
-                                <app-loader></app-loader>
-                            </td>
-                        </tr>
-                        <tr *ngIf="allDrugsHistoryList?.length>0==false">
-                            <td colspan="2" class="dataNotFound">
-                                No Data Found
-                            </td>
-                        </tr>
-                        <tr *ngFor="let item of allDrugsHistoryList; let index = index">
-                            <td>{{item.drugName}}</td>
-                            <td>{{item.drugType}}</td>
-                            <td>{{item.drugCode}}</td>
-                            <td>{{item.drugFormulae}}</td>
-                            <td>{{item.manufacturingDate}}</td>
-                            <td>{{item.expiryDate}}</td>
-                            <td>{{item.batchNo}}</td>
-                            <td>{{item.retailPrice}}</td>
-                            <td class="edit-delete-wrape">
-                                <div class="edit-icon">
-                                    <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
-                                </div>
-                                <div class="delete-icon">
-                                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteFunc(item._id)"></i>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div> -->
+
 
 <div class="row">
     <div class="col-12">

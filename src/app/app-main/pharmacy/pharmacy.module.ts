@@ -7,7 +7,13 @@ import { AddingNewMedicineComponent } from "./adding-new-medicine/adding-new-med
 import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component";
 import { CommonUiModule } from "./../../common-ui/common-ui.module";
 import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-drug-type.component";
-import { DefinePharmacyStoreComponent } from './define-pharmacy-store/define-pharmacy-store.component';
+import { DefinePharmacyStoreComponent } from "./define-pharmacy-store/define-pharmacy-store.component";
+import { DefineRackComponent } from "./define-rack/define-rack.component";
+import { CustomPipeModule } from "./../custom-pipe/custom-pipe.module";
+import {
+  AddMedicinesInStoreFormComponent,
+  AddMedicinesInStoreHistoryComponent,
+} from "./adding-medicine-to-store";
 
 @NgModule({
   declarations: [
@@ -15,12 +21,16 @@ import { DefinePharmacyStoreComponent } from './define-pharmacy-store/define-pha
     MedicineSaleInvoiceComponent,
     DefDrugTypeComponent,
     DefinePharmacyStoreComponent,
+    DefineRackComponent,
+    AddMedicinesInStoreFormComponent,
+    AddMedicinesInStoreHistoryComponent,
   ],
   imports: [
     CommonModule,
     PharmacyRoutingModule,
     CommonUiModule,
     ReactiveFormsModule,
+    CustomPipeModule,
   ],
 })
 export class PharmacyModule {}

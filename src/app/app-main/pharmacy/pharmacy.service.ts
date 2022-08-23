@@ -57,4 +57,70 @@ export class PharmacyService {
       headers: this.header,
     });
   }
+
+  // ******************* Define Store **************************
+
+  SaveStoreName(data) {
+    return this.http.post<any>(this.apiUrl + "def_Store/addNew", data, {
+      headers: this.header,
+    });
+  }
+
+  UpdateStoreName(Id, data) {
+    return this.http.put<any>(this.apiUrl + "def_Store/update/" + Id, data, {
+      headers: this.header,
+    });
+  }
+
+  getHistoryStoreName() {
+    return this.http.get<any>(this.apiUrl + "def_Store/getAll", {
+      headers: this.header,
+    });
+  }
+
+  deleteStoreName(id) {
+    return this.http.delete<any>(this.apiUrl + "def_Store/delete/" + id, {
+      headers: this.header,
+    });
+  }
+
+  // ********************* Define Rack *******************************
+
+  getHistoryofRacks() {
+    return this.http.get<any>(this.apiUrl + "def_rack/getAll", {
+      headers: this.header,
+    });
+  }
+
+  saveRack(data) {
+    return this.http.post<any>(this.apiUrl + "def_rack/addNew", data, {
+      headers: this.header,
+    });
+  }
+
+  updateRack(id, data) {
+    return this.http.put<any>(this.apiUrl + "def_rack/update/" + id, data, {
+      headers: this.header,
+    });
+  }
+
+  deleteRack(id) {
+    return this.http.delete<any>(this.apiUrl + "def_rack/delete/" + id, {
+      headers: this.header,
+    });
+  }
+
+  // **************** Add medicine to store ******************
+
+  getHistoryOfStore() {
+    return this.http.get<any>(this.apiUrl + "add_Record_in_store/getAll", {
+      headers: this.header,
+    });
+  }
+
+  getRackByStore(storeId) {
+    return this.http.get<any>(this.apiUrl + "def_rack/getRackByStoreId/"+storeId, {
+      headers: this.header,
+    });
+  }
 }

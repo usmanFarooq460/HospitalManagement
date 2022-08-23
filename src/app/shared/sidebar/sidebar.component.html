@@ -106,7 +106,10 @@
     <li *ngIf="AllModules[0].right" class="nav-item" [ngClass]="{
         active:
         addingNewMedicine.isActive ||
-        medicine_Invoice.isActive
+        medicine_Invoice.isActive||
+        defineStore.isActive||
+        defineRack.isActive ||
+        addToStore.isActive
       }">
       <a class="nav-link" (click)="PharmacyCollapsed = !PharmacyCollapsed" [attr.aria-expanded]="PharmacyCollapsed"
         aria-controls="auth">
@@ -120,7 +123,25 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/pharmacy/Add-new-medicine" routerLinkActive="active"
               #addingNewMedicine="routerLinkActive">
-              Adding New Medicine
+              define Medicine
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/pharmacy/def-store" routerLinkActive="active"
+              #defineStore="routerLinkActive">
+              Define Store
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/pharmacy/def-rack" routerLinkActive="active"
+              #defineRack="routerLinkActive">
+              Define Rack
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/pharmacy/add-item-in-store-history" routerLinkActive="active"
+              #addToStore="routerLinkActive">
+              Add To Store
             </a>
           </li>
 
@@ -152,7 +173,7 @@
               Define User
             </a>
           </li>
-          
+
           <li class="nav-item">
             <a class="nav-link" routerLink="/definitions/screen-rights" routerLinkActive="active"
               #screenRights="routerLinkActive">

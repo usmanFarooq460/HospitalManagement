@@ -1,0 +1,148 @@
+<div class="container-fluid">
+    <page-title [heading]="'Define Medicine Type'" [icon]="'mdi mdi-account-multiple'"></page-title>
+    <div class="form">
+        <form class="register-form" [formGroup]="formData">
+            <div class="row">
+
+                <div class="col-md-4 col-6 ">
+                    <div class="form_group">
+                        <label for="recordNo">Record #</label>
+                        <input type="text" class="form_control" name="recordNo" formControlName="recordNo"
+                            placeholder="Record #" />
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-6">
+                    <div class="form_group">
+                        <label for="storeId">Store</label>
+                        <select class="form_control" name="rackId" id="rackId" formControlName="storeId"
+                            (change)="getRacksByStore($event.target.value)"
+                            [ngClass]="{invalid_field:form.storeId.invalid && form.storeId.touched}">
+                            <option value="null">Select Store</option>
+                            <option value="{{item._id}}" *ngFor="let item of storesList">{{item.storeName}}</option>
+                        </select>
+                        <div *ngIf="form.storeId.invalid && form.storeId.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.storeId.errors.required" class="invalid-feedback d-block">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-6">
+                    <div class="form_group">
+                        <label for="rackId">Rack</label>
+                        <select class="form_control" name="rackId" id="rackId" formControlName="rackId"
+                            [ngClass]="{invalid_field:form.rackId.invalid && form.rackId.touched}">
+                            <option value="null">Select Rack</option>
+                            <option value="{{item._id}}" *ngFor="let item of RackList">{{item.rackName}}</option>
+                        </select>
+                        <div *ngIf="form.rackId.invalid && form.rackId.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.rackId.errors.required" class="invalid-feedback d-block">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-6">
+                    <div class="form_group">
+                        <label for="medicineType">Meficine Type</label>
+                        <select class="form_control" name="medicineType" id="medicineType"
+                            formControlName="medicineType"
+                            [ngClass]="{invalid_field:form.medicineType.invalid && form.medicineType.touched}">
+                            <option value="null">Select Meficine Type</option>
+                            <option value="{{item._id}}" *ngFor="let item of categoryList">{{item.drugType}}</option>
+                        </select>
+                        <div *ngIf="form.drugType.invalid && form.drugType.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.drugType.errors.required" class="invalid-feedback d-block">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-6">
+                    <div class="form_group">
+                        <label for="drugType">Meficine Type</label>
+                        <select class="form_control" name="medicineType" id="medicineType"
+                            formControlName="medicineType"
+                            [ngClass]="{invalid_field:form.medicineType.invalid && form.medicineType.touched}">
+                            <option value="null">Select Meficine Type</option>
+                            <option value="{{item._id}}" *ngFor="let item of categoryList">{{item.drugType}}</option>
+                        </select>
+                        <div *ngIf="form.rackId.invalid && form.rackId.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.rackId.errors.required" class="invalid-feedback d-block">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn text-right">
+                <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit" [disabled]="loaderOn_Save_Update"
+                    class="btn blue-color focused-button text-white btn-sm" (click)="save()">
+                    Save
+                </button>
+                <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null" [disabled]="loaderOn_Save_Update"
+                    class="btn blue-color focused-button text-white btn-sm" (click)="update(updateId)">
+                    Update
+                </button>
+                <button type="button" style="margin-top: 18px;" class="btn blue-color focused-button text-white btn-sm">
+                    clear
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body border border-danger">
+                    <table class="table margin_negative_10">
+                        <thead class="text-danger">
+                            <th>Drug Type</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="2">
+                                    <app-loader></app-loader>
+                                </td>
+                            </tr>
+                            <tr *ngIf="alldrugTypesList?.length>0==false">
+                                <td colspan="2" class="dataNotFound">
+                                    No Data Found
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of alldrugTypesList; let index = index">
+                                <td>{{item.drugType}}</td>
+                                <td class="edit-delete-wrape">
+                                    <div class="edit-icon">
+                                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                    </div>
+                                    <div class="delete-icon">
+                                        <i class="mdi mdi-delete-forever cursor_pointer"
+                                            (click)="deleteScreen(item._id)"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+        </div>
+    </div>
+</div>

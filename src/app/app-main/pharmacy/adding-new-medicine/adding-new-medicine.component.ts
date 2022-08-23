@@ -13,6 +13,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
   drugTypeList = [];
   allDrugsHistoryList = [];
   updateId: any;
+  searchValue: string;
   constructor(
     private formBuilder: FormBuilder,
     private service: PharmacyService
@@ -36,6 +37,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
       expiryDate: [null, [Validators.required]],
       batchNo: [null, [Validators.required]],
       retailPrice: [null, [Validators.required]],
+      ManufacturingPrice: [null],
       createdBy: [null],
       createdAt: [null],
       drugTypeName: [null],
@@ -49,7 +51,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
     this.updateId = data._id;
     this.loaderOn_Save_Update = false;
     this.formData.patchValue({
-      drugTypeId: data.drugType,
+      drugTypeId: data.drugTypeId,
       drugName: data.drugName,
       drugCode: data.drugCode,
       drugFormulae: data.drugFormulae,
@@ -57,9 +59,13 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
       expiryDate: data.expiryDate,
       batchNo: data.batchNo,
       retailPrice: data.retailPrice,
+      ManufacturingPrice: data.ManufacturingPrice,
+      drugTypeName: data.drugTypeName,
       createdBy: data.createdBy,
       createdAt: data.createdAt,
     });
+
+    window.scroll(0, 0);
   }
 
   getHistory() {
@@ -87,6 +93,11 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
         this.errorPopup(err.message);
       }
     );
+  }
+
+  HandleSearchChange(value) {
+    this.searchValue = value;
+    console.log("search value: ", value);
   }
 
   handleSave_Update() {

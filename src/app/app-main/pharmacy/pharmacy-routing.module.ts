@@ -4,7 +4,9 @@ import { AuthGuardGuard } from "src/app/accounts/auth-guard.guard";
 import { AddingNewMedicineComponent } from "./adding-new-medicine/adding-new-medicine.component";
 import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component";
 import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-drug-type.component";
-import { DefinePharmacyStoreComponent } from "./define-pharmacy-store/define-pharmacy-store.component"
+import { DefinePharmacyStoreComponent } from "./define-pharmacy-store/define-pharmacy-store.component";
+import { DefineRackComponent } from "./define-rack/define-rack.component";
+import { AddMedicinesInStoreHistoryComponent,AddMedicinesInStoreFormComponent } from "./adding-medicine-to-store"
 
 const routes: Routes = [
   {
@@ -25,6 +27,21 @@ const routes: Routes = [
   {
     path: "def-store",
     component: DefinePharmacyStoreComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "def-rack",
+    component: DefineRackComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "add-item-in-store-history",
+    component: AddMedicinesInStoreHistoryComponent,
+    canActivate: [AuthGuardGuard],
+  }, 
+  {
+    path: "add-item-in-store-form",
+    component: AddMedicinesInStoreFormComponent,
     canActivate: [AuthGuardGuard],
   },
 ];
