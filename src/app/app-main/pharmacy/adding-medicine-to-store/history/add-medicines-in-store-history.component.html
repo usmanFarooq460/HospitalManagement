@@ -1,3 +1,66 @@
 <div class="container-fluid py-2">
     <button class="custom_btn" routerLink="/pharmacy/add-item-in-store-form">Add New</button>
+
+    <!-- History -->
+    <div class="search_wrape mt-3">
+        <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
+    </div>
+
+    <div class="canvas_view" [ngClass]="{for_no_data:allDrugsHistoryList?.length>0==false}"
+        [ngStyle]="{ 'max-height':gridHeight + 'px'}">
+        <div class="no_data_found_in_canvas" *ngIf="allDrugsHistoryList?.length>0==false && isLoading==false">
+            No Data Found
+        </div>
+        <div class="no_data_found_in_canvas" *ngIf="isLoading">
+            <app-loader></app-loader>
+        </div>
+        <div class="custom_card"
+            *ngFor="let item of allDrugsHistoryList | filterByAllProperties:searchValue; let index=index">
+            <div class="header_edit_delete">
+                <div class="Header">{{item.drugName}}</div>
+                <div class="delete_Edit_btns edit-delete-wrape">
+                    <div class="edit-icon">
+                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                    </div>
+                    <div class="delete-icon">
+                        <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteStore(item._id)"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="Card_body">
+                <div class="caption_value_wrape">
+                    <div class="caption">Type</div>
+                    <div class="value">{{item.drugTypeName}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Code</div>
+                    <div class="value">{{item.drugCode}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Formulae</div>
+                    <div class="value">{{item.drugFormulae}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Batch No</div>
+                    <div class="value">{{item.batchNo}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Mnfr.Date</div>
+                    <div class="value">{{item.manufacturingDate | date:'mediumDate'}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Expr.Date</div>
+                    <div class="value">{{item.expiryDate | date:'mediumDate'}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Mnfr Price</div>
+                    <div class="value">{{item.ManufacturingPrice}}</div>
+                </div>
+                <div class="caption_value_wrape">
+                    <div class="caption">Retail Price</div>
+                    <div class="value">{{item.retailPrice}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

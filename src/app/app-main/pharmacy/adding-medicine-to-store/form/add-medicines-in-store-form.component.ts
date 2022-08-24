@@ -14,10 +14,10 @@ export class AddMedicinesInStoreFormComponent
 {
   formData: any;
   updateId: any;
-  alldrugTypesList = [];
   storesList = [];
   RackList = [];
   categoryList = [];
+  medicinesList = [];
 
   constructor(
     private service: PharmacyService,
@@ -44,38 +44,17 @@ export class AddMedicinesInStoreFormComponent
   }
 
   ngOnInit() {
-    this.generateNumber();
     this.getAllStores();
-    // this.getAllRacks();
     this.getallMedicineTypes();
+    this.getAllMedicines();
   }
 
-  generateNumber() {
-    this.service.getHistoryOfStore().subscribe(
+  getRacksByStore(storeId) {
+    console.log("id ", storeId);
+    this.service.getRackByStore(storeId).subscribe(
       (resp) => {
-        console.log("what is going on : ", resp);
-        this.formData.value.recordNo = resp?.length + 1;
-        console.log("record Number: ", this.formData.value.recordNo);
-      },
-      (err) => {
-        this.errorPopup(err.error.errors);
-        console.log("err", err);
-      }
-    );
-    // let allStoredItems = [];
-    // allStoredItems = await this.service.getHistoryOfStore().catch((err) => {
-    //   console.log("err: ", err);
-    //   this.errorPopup(err.error.errors);
-    // });
-    // console.log("all stored items : ", allStoredItems);
-    // this.formData.value.recordNo = allStoredItems?.length + 1;
-  }
-
-  getRacksByStore(Id) {
-    console.log("id ", Id);
-    this.service.getRackByStore(Id).subscribe(
-      (resp) => {
-        console.log("resp: ", resp);
+        this.RackList = resp;
+        console.log("rack list : ", resp);
       },
       (err) => {
         console.log("err", err);
@@ -123,27 +102,33 @@ export class AddMedicinesInStoreFormComponent
     );
   }
 
+  getAllMedicines() {
+    this.service.getAllDrugsHistory().subscribe(
+      (resp) => {
+        console.log("all medicines: ", resp);
+        this.medicinesList = resp;
+      },
+      (err) => {
+        this.errorPopup(err.message);
+        console.log("err in getting medicines: ", err);
+      }
+    );
+  }
+
+  handleSelectedUsers(itemId) {
+    let selectedMedicine = this.medicinesList?.find(({ _id }) => itemId == _id);
+    console.log("selected medicine: ", selectedMedicine);
+    this.formData.patchValue({
+      medicineType: selectedMedicine?.drugTypeId,
+    });
+  }
+
   getById(data) {
     this.updateId = data._id;
     this.loaderOn_Save_Update = false;
     this.formData.patchValue({
       drugType: data.drugType,
     });
-  }
-
-  getAllDrugType() {
-    this.isLoading = true;
-    this.service.getallDrugTpyes().subscribe(
-      (resp) => {
-        this.isLoading = false;
-        console.log("all dtug type ", resp);
-        this.alldrugTypesList = resp;
-      },
-      (err) => {
-        this.isLoading = false;
-        this.errorPopup(err.message);
-      }
-    );
   }
 
   clear() {
@@ -158,16 +143,16 @@ export class AddMedicinesInStoreFormComponent
     }
     console.log("form data ", this.formData.value);
     this.loaderOn_Save_Update = true;
-    this.service.saveDrugType(this.formData.value).subscribe(
+    this.service.SaveAddingDataToStore(this.formData.value).subscribe(
       (resp) => {
-        this.getAllDrugType();
         this.loaderOn_Save_Update = false;
         this.SuccessPopup("saved SuccesFully");
         this.clear();
       },
       (err) => {
         this.loaderOn_Save_Update = false;
-        this.errorPopup(err.message);
+        console.log("err, save : ", err);
+        this.errorPopup(err.error.errors);
       }
     );
   }
@@ -178,24 +163,25 @@ export class AddMedicinesInStoreFormComponent
       return;
     }
     this.loaderOn_Save_Update = true;
-    this.service.updateDrugTypes(this.updateId, this.formData.value).subscribe(
-      (resp) => {
-        this.loaderOn_Save_Update = false;
-        this.getAllDrugType();
-        this.SuccessPopup("Updated SuccesFully");
-        this.clear();
-      },
-      (err) => {
-        this.loaderOn_Save_Update = false;
-        this.errorPopup(err.messaged);
-      }
-    );
+    this.service
+      .updateAddingDataToStore(this.updateId, this.formData.value)
+      .subscribe(
+        (resp) => {
+          this.loaderOn_Save_Update = false;
+          this.SuccessPopup("Updated SuccesFully");
+          this.clear();
+        },
+        (err) => {
+          this.loaderOn_Save_Update = false;
+          console.log("err, save : ", err);
+          this.errorPopup(err.error.errors);
+        }
+      );
   }
 
   deleteScreen(id) {
-    this.service.deleteDrugTypes(id).subscribe(
+    this.service.deleteAddedDataInStore(id).subscribe(
       (resp) => {
-        this.getAllDrugType();
         this.SuccessPopup("Deleted SuccesFully");
         this.clear();
       },

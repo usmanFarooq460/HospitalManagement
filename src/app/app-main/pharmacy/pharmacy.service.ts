@@ -119,8 +119,40 @@ export class PharmacyService {
   }
 
   getRackByStore(storeId) {
-    return this.http.get<any>(this.apiUrl + "def_rack/getRackByStoreId/"+storeId, {
-      headers: this.header,
-    });
+    return this.http.get<any>(
+      this.apiUrl + "def_rack/getRackByStoreId/" + storeId,
+      {
+        headers: this.header,
+      }
+    );
+  }
+
+  SaveAddingDataToStore(data) {
+    return this.http.post<any>(
+      this.apiUrl + "add_Record_in_store/addNew",
+      data,
+      {
+        headers: this.header,
+      }
+    );
+  }
+
+  updateAddingDataToStore(id, data) {
+    return this.http.put<any>(
+      this.apiUrl + "add_Record_in_store/update/" + id,
+      data,
+      {
+        headers: this.header,
+      }
+    );
+  }
+
+  deleteAddedDataInStore(id) {
+    return this.http.delete<any>(
+      this.apiUrl + "add_Record_in_store/delete/" + id,
+      {
+        headers: this.header,
+      }
+    );
   }
 }

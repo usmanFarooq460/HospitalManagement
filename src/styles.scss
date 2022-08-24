@@ -166,9 +166,16 @@ $blue_color: rgb(13, 54, 158);
   margin-top: -28px;
 }
 
+// **************************************** canvas view*****************************//
+
+.for_no_data{
+  background-color: white;
+  padding:45px;
+}
+
 .canvas_view {
   padding: 12px;
-  margin: 16px 21px;
+  margin: 16px 6px;
   overflow: auto;
   .custom_card {
     background-color: white;
