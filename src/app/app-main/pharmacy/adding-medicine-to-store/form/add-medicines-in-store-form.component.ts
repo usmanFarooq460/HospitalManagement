@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 import { PharmacyService } from "../../pharmacy.service";
 
@@ -21,7 +22,8 @@ export class AddMedicinesInStoreFormComponent
 
   constructor(
     private service: PharmacyService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {
     super();
     this.initForm();
@@ -44,6 +46,8 @@ export class AddMedicinesInStoreFormComponent
   }
 
   ngOnInit() {
+    this.updateId = this.activatedRoute.snapshot.queryParams;
+    console.log("updated Id from Route: ", this.updateId.Id);
     this.getAllStores();
     this.getallMedicineTypes();
     this.getAllMedicines();
@@ -124,11 +128,7 @@ export class AddMedicinesInStoreFormComponent
   }
 
   getById(data) {
-    this.updateId = data._id;
-    this.loaderOn_Save_Update = false;
-    this.formData.patchValue({
-      drugType: data.drugType,
-    });
+    this.service
   }
 
   clear() {
@@ -145,6 +145,7 @@ export class AddMedicinesInStoreFormComponent
     this.loaderOn_Save_Update = true;
     this.service.SaveAddingDataToStore(this.formData.value).subscribe(
       (resp) => {
+        console.log("resp: ", resp);
         this.loaderOn_Save_Update = false;
         this.SuccessPopup("saved SuccesFully");
         this.clear();

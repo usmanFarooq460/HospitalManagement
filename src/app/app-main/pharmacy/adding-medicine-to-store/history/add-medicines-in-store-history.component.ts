@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 import { PharmacyService } from "../../pharmacy.service";
 
@@ -12,20 +13,25 @@ export class AddMedicinesInStoreHistoryComponent
   implements OnInit
 {
   storeRecordList = [];
-  allDrugsHistoryList = [];
   updateId: any;
   searchValue: string;
-  constructor(private service: PharmacyService) {
+  constructor(private service: PharmacyService, private router: Router) {
     super();
   }
 
   ngOnInit(): void {
+    console.log("ng on it is working or not");
     this.getAllRecordsOfStore();
   }
 
-  getById(data) {}
+  getById(data) {
+    this.router.navigate(["/pharmacy/add-item-in-store-form"], {
+      queryParams: { Id: data._id },
+    });
+  }
 
   getAllRecordsOfStore() {
+    console.log("is it working : ");
     this.service.getHistoryOfStore().subscribe(
       (resp) => {
         console.log("all stores record: ", resp);

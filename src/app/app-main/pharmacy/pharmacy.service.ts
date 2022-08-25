@@ -112,12 +112,6 @@ export class PharmacyService {
 
   // **************** Add medicine to store ******************
 
-  getHistoryOfStore() {
-    return this.http.get<any>(this.apiUrl + "add_Record_in_store/getAll", {
-      headers: this.header,
-    });
-  }
-
   getRackByStore(storeId) {
     return this.http.get<any>(
       this.apiUrl + "def_rack/getRackByStoreId/" + storeId,
@@ -135,6 +129,12 @@ export class PharmacyService {
         headers: this.header,
       }
     );
+  }
+
+  getHistoryOfStore() {
+    return this.http.get<any>(this.apiUrl + "add_Record_in_store/getAll", {
+      headers: this.header,
+    });
   }
 
   updateAddingDataToStore(id, data) {

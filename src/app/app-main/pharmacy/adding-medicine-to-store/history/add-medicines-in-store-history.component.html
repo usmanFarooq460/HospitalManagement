@@ -5,19 +5,19 @@
     <div class="search_wrape mt-3">
         <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
     </div>
-
-    <div class="canvas_view" [ngClass]="{for_no_data:allDrugsHistoryList?.length>0==false}"
+    <div class="canvas_view" [ngClass]="{for_no_data:storeRecordList?.length>0==false}"
         [ngStyle]="{ 'max-height':gridHeight + 'px'}">
-        <div class="no_data_found_in_canvas" *ngIf="allDrugsHistoryList?.length>0==false && isLoading==false">
+        <div class="no_data_found_in_canvas" *ngIf="storeRecordList?.length>0==false && isLoading==false">
             No Data Found
         </div>
-        <div class="no_data_found_in_canvas" *ngIf="isLoading">
+        <div class="no_data_found_in_canvas" *ngIf="isLoading&&storeRecordList?.length>0==false">
             <app-loader></app-loader>
         </div>
         <div class="custom_card"
-            *ngFor="let item of allDrugsHistoryList | filterByAllProperties:searchValue; let index=index">
+            *ngFor="let item of  storeRecordList| filterByAllProperties:searchValue; let index=index">
             <div class="header_edit_delete">
-                <div class="Header">{{item.drugName}}</div>
+                <div class="Header">{{item?.medicineId?.drugName}}</div>
+                <div class="Header">{{item?.storeId?.storeName}}</div>
                 <div class="delete_Edit_btns edit-delete-wrape">
                     <div class="edit-icon">
                         <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
@@ -29,37 +29,22 @@
             </div>
             <div class="Card_body">
                 <div class="caption_value_wrape">
-                    <div class="caption">Type</div>
-                    <div class="value">{{item.drugTypeName}}</div>
+                    <div class="caption">Rack</div>
+                    <div class="value">{{item.rackId.rackName}}</div>
                 </div>
                 <div class="caption_value_wrape">
-                    <div class="caption">Code</div>
-                    <div class="value">{{item.drugCode}}</div>
+                    <div class="caption">Category</div>
+                    <div class="value">{{item.medicineType.drugType}}</div>
                 </div>
                 <div class="caption_value_wrape">
-                    <div class="caption">Formulae</div>
-                    <div class="value">{{item.drugFormulae}}</div>
+                    <div class="caption">Qty</div>
+                    <div class="value">{{item.qty}}</div>
                 </div>
                 <div class="caption_value_wrape">
-                    <div class="caption">Batch No</div>
-                    <div class="value">{{item.batchNo}}</div>
+                    <div class="caption">size</div>
+                    <div class="value">{{item.size}}</div>
                 </div>
-                <div class="caption_value_wrape">
-                    <div class="caption">Mnfr.Date</div>
-                    <div class="value">{{item.manufacturingDate | date:'mediumDate'}}</div>
-                </div>
-                <div class="caption_value_wrape">
-                    <div class="caption">Expr.Date</div>
-                    <div class="value">{{item.expiryDate | date:'mediumDate'}}</div>
-                </div>
-                <div class="caption_value_wrape">
-                    <div class="caption">Mnfr Price</div>
-                    <div class="value">{{item.ManufacturingPrice}}</div>
-                </div>
-                <div class="caption_value_wrape">
-                    <div class="caption">Retail Price</div>
-                    <div class="value">{{item.retailPrice}}</div>
-                </div>
+
             </div>
         </div>
     </div>
