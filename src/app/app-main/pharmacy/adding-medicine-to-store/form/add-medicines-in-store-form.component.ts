@@ -46,8 +46,8 @@ export class AddMedicinesInStoreFormComponent
   }
 
   ngOnInit() {
-    this.updateId = this.activatedRoute.snapshot.queryParams;
-    console.log("updated Id from Route: ", this.updateId.Id);
+    let paramId = this.activatedRoute.snapshot.queryParams;
+    this.updateId = paramId?.Id;
     this.getAllStores();
     this.getallMedicineTypes();
     this.getAllMedicines();
@@ -128,7 +128,7 @@ export class AddMedicinesInStoreFormComponent
   }
 
   getById(data) {
-    this.service
+    this.service;
   }
 
   clear() {
