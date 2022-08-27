@@ -48,4 +48,11 @@ export abstract class BaseActions {
     this.browserHeight = height;
     this.browserHeight = height - 100;
   }
+
+  // =========== Search Value ==================
+  searchValue: string;
+  HandleSearchChange(value) {
+    this.searchValue = value;
+    console.log("search value: ", value);
+  }
 }

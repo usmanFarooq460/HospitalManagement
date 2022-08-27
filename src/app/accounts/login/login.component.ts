@@ -16,6 +16,8 @@ export class LoginComponent extends BaseActions implements OnInit {
   allUserslist = [];
   existingAdmin = [];
   userlist = [];
+
+  innerHeight: number = 600;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -23,6 +25,7 @@ export class LoginComponent extends BaseActions implements OnInit {
   ) {
     super();
     this.initForm();
+    this.innerHeight = window.innerHeight -50;
   }
 
   initForm() {
@@ -70,7 +73,7 @@ export class LoginComponent extends BaseActions implements OnInit {
     console.log("all users list:", this.allUserslist);
   }
 
-  async submit() {
+  submit() {
     if (this.loginForm.valid == false) {
       this.loginForm.markAllAsTouched();
       return;

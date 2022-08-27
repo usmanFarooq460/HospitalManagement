@@ -73,9 +73,10 @@ export class PharmacyService {
   }
 
   getHistoryStoreName() {
-    return this.http.get<any>(this.apiUrl + "def_Store/getAll", {
-      headers: this.header,
-    });
+    return this.http
+      .get<any>(this.apiUrl + "def_Store/getAll", {
+        headers: this.header,
+      })
   }
 
   deleteStoreName(id) {
@@ -150,6 +151,14 @@ export class PharmacyService {
   deleteAddedDataInStore(id) {
     return this.http.delete<any>(
       this.apiUrl + "add_Record_in_store/delete/" + id,
+      {
+        headers: this.header,
+      }
+    );
+  }
+  getStoreRecordById(id) {
+    return this.http.get<any>(
+      this.apiUrl + "add_Record_in_store/getById/" + id,
       {
         headers: this.header,
       }

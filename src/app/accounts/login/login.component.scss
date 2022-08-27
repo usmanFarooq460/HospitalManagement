@@ -1,3 +1,18 @@
+@import "./../../../styles.scss";
+
+.login_page {
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_wrape {
+  margin-top: -45px;
+  border: 1px solid $blue_color;
+}
+
+// ***********************************************
 .main-page {
   display: flex;
   width: 100%;
@@ -130,12 +145,13 @@
   border: 0;
   outline: 0;
   box-shadow: 0px 4px 20px 0px #0f3a99a6;
-  background-color: rgb(63, 63, 143);;
+  background-color: rgb(63, 63, 143);
   transition-duration: 0.3s;
-  &:hover,&:focus{
+  &:hover,
+  &:focus {
     background-color: White;
-    border: 1px solid rgb(63, 63, 143);;
-    color: rgb(63, 63, 143);;
+    border: 1px solid rgb(63, 63, 143);
+    color: rgb(63, 63, 143);
     font-weight: 600;
   }
 }
@@ -186,31 +202,31 @@ label input[type="checkbox"] {
   padding-bottom: 50px;
 }
 
-.Login-description{
+.Login-description {
   @media (max-width: 800px) {
     display: none;
-  } 
+  }
 }
 
-.main-page{
+.main-page {
   @media (max-width: 800px) {
-    .side-heading{
+    .side-heading {
       font-size: 18px;
       padding: 0;
       margin: 0;
     }
-    .Login-description{
+    .Login-description {
       display: none;
     }
 
-    .right{
-      padding-top:50px;
-      .Login-text{
+    .right {
+      padding-top: 50px;
+      .Login-text {
         font-size: 30px;
         font-weight: 600;
       }
     }
-    .login-form{
+    .login-form {
       padding: 0px;
       margin-top: -20px;
       // border: 2px solid;
@@ -218,7 +234,7 @@ label input[type="checkbox"] {
   }
 }
 
-.error-message{
+.error-message {
   color: rgb(140, 5, 5);
   padding: 0;
   margin: 0;

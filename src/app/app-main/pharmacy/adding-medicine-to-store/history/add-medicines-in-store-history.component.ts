@@ -14,13 +14,11 @@ export class AddMedicinesInStoreHistoryComponent
 {
   storeRecordList = [];
   updateId: any;
-  searchValue: string;
   constructor(private service: PharmacyService, private router: Router) {
     super();
   }
 
   ngOnInit(): void {
-    console.log("ng on it is working or not");
     this.getAllRecordsOfStore();
   }
 
@@ -31,7 +29,6 @@ export class AddMedicinesInStoreHistoryComponent
   }
 
   getAllRecordsOfStore() {
-    console.log("is it working : ");
     this.service.getHistoryOfStore().subscribe(
       (resp) => {
         console.log("all stores record: ", resp);
@@ -45,9 +42,4 @@ export class AddMedicinesInStoreHistoryComponent
   }
 
   deleteStore(Id) {}
-
-  HandleSearchChange(value) {
-    this.searchValue = value;
-    console.log("search value: ", value);
-  }
 }

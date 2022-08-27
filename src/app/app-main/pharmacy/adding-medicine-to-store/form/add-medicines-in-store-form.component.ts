@@ -51,6 +51,9 @@ export class AddMedicinesInStoreFormComponent
     this.getAllStores();
     this.getallMedicineTypes();
     this.getAllMedicines();
+    if (this.updateId != undefined && this.updateId != null) {
+      console.log("this.updateId: ", this.updateId);
+    } else console.log("its not going to update", this.updateId);
   }
 
   getRacksByStore(storeId) {
@@ -58,7 +61,6 @@ export class AddMedicinesInStoreFormComponent
     this.service.getRackByStore(storeId).subscribe(
       (resp) => {
         this.RackList = resp;
-        console.log("rack list : ", resp);
       },
       (err) => {
         console.log("err", err);
@@ -70,7 +72,6 @@ export class AddMedicinesInStoreFormComponent
   getAllRacks() {
     this.service.getHistoryofRacks().subscribe(
       (resp) => {
-        console.log("all racks: ", resp);
         this.RackList = resp;
       },
       (err) => {
@@ -83,7 +84,6 @@ export class AddMedicinesInStoreFormComponent
   getAllStores() {
     this.service.getHistoryStoreName().subscribe(
       (resp) => {
-        console.log("all stores: ", resp);
         this.storesList = resp;
       },
       (err) => {
@@ -96,11 +96,10 @@ export class AddMedicinesInStoreFormComponent
   getallMedicineTypes() {
     this.service.getallDrugTpyes().subscribe(
       (resp) => {
-        console.log("all types: ", resp);
         this.categoryList = resp;
       },
       (err) => {
-        console.log("err");
+        console.log("err in medicine type: ", err);
         this.errorPopup(err.message);
       }
     );

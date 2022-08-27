@@ -1,18 +1,11 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
     <div>
-      <page-title
-        [heading]="'Define Medicine Type'"
-        [icon]="'mdi mdi-account-multiple'"
-      ></page-title>
+      <page-title [heading]="'Define Medicine Type'" [icon]="'mdi mdi-account-multiple'"></page-title>
     </div>
     <div>
-      <button
-        type="button"
-        style="margin-top: 18px"
-        class="btn blue-color focused-button text-white btn-sm"
-        routerLink="/pharmacy/add-item-in-store-history"
-      >
+      <button type="button" style="margin-top: 18px" class="btn blue-color focused-button text-white btn-sm"
+        routerLink="/pharmacy/add-item-in-store-history">
         Back
       </button>
     </div>
@@ -23,29 +16,17 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="storeId">Store</label>
-            <select
-              class="form_control"
-              name="rackId"
-              id="rackId"
-              formControlName="storeId"
-              (change)="getRacksByStore($event.target.value)"
-              [ngClass]="{
+            <select class="form_control" name="rackId" id="rackId" formControlName="storeId"
+              (change)="getRacksByStore($event.target.value)" [ngClass]="{
                 invalid_field: form.storeId.invalid && form.storeId.touched
-              }"
-            >
+              }">
               <option value="null">Select Store</option>
               <option value="{{ item._id }}" *ngFor="let item of storesList">
                 {{ item.storeName }}
               </option>
             </select>
-            <div
-              *ngIf="form.storeId.invalid && form.storeId.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.storeId.errors.required"
-                class="invalid-feedback d-block"
-              >
+            <div *ngIf="form.storeId.invalid && form.storeId.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.storeId.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -55,28 +36,16 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="rackId">Rack</label>
-            <select
-              class="form_control"
-              name="rackId"
-              id="rackId"
-              formControlName="rackId"
-              [ngClass]="{
+            <select class="form_control" name="rackId" id="rackId" formControlName="rackId" [ngClass]="{
                 invalid_field: form.rackId.invalid && form.rackId.touched
-              }"
-            >
+              }">
               <option value="null">Select Rack</option>
               <option value="{{ item._id }}" *ngFor="let item of RackList">
                 {{ item.rackName }}
               </option>
             </select>
-            <div
-              *ngIf="form.rackId.invalid && form.rackId.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.rackId.errors.required"
-                class="invalid-feedback d-block"
-              >
+            <div *ngIf="form.rackId.invalid && form.rackId.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.rackId.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -86,30 +55,18 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="medicineId">Medicines</label>
-            <select
-              class="form_control"
-              (change)="handleSelectedUsers($event.target.value)"
-              name="medicineId"
-              id="medicineId"
-              formControlName="medicineId"
-              [ngClass]="{
+            <select class="form_control" (change)="handleSelectedUsers($event.target.value)" name="medicineId"
+              id="medicineId" formControlName="medicineId" [ngClass]="{
                 invalid_field:
                   form.medicineId.invalid && form.medicineId.touched
-              }"
-            >
+              }">
               <option value="null">Select Meficines</option>
               <option value="{{ item._id }}" *ngFor="let item of medicinesList">
                 {{ item.drugName }}
               </option>
             </select>
-            <div
-              *ngIf="form.medicineId.invalid && form.medicineId.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.medicineId.errors.required"
-                class="invalid-feedback d-block"
-              >
+            <div *ngIf="form.medicineId.invalid && form.medicineId.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.medicineId.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -119,29 +76,17 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="medicineType">Meficine Type</label>
-            <select
-              class="form_control"
-              name="medicineType"
-              id="medicineType"
-              formControlName="medicineType"
-              [ngClass]="{
+            <select class="form_control" name="medicineType" id="medicineType" formControlName="medicineType" [ngClass]="{
                 invalid_field:
                   form.medicineType.invalid && form.medicineType.touched
-              }"
-            >
+              }">
               <option value="null">Select Meficine Type</option>
               <option value="{{ item._id }}" *ngFor="let item of categoryList">
                 {{ item.drugType }}
               </option>
             </select>
-            <div
-              *ngIf="form.medicineType.invalid && form.medicineType.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.medicineType.errors.required"
-                class="invalid-feedback d-block"
-              >
+            <div *ngIf="form.medicineType.invalid && form.medicineType.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.medicineType.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -151,25 +96,12 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="qty">Qty</label>
-            <input
-              type="number"
-              min="0"
-              id="name"
-              class="form_control"
-              formControlName="qty"
-              placeholder="Qty"
+            <input type="number" min="0" id="name" class="form_control" formControlName="qty" placeholder="Qty"
               [ngClass]="{
                 invalid_field: form.qty.invalid && form.qty.touched
-              }"
-            />
-            <div
-              *ngIf="form.qty.invalid && form.qty.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.qty.errors.required"
-                class="invalid-feedback d-block"
-              >
+              }" />
+            <div *ngIf="form.qty.invalid && form.qty.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.qty.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -179,24 +111,11 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="size">size</label>
-            <input
-              type="text"
-              id="size"
-              class="form_control"
-              formControlName="size"
-              placeholder="size"
-              [ngClass]="{
+            <input type="text" id="size" class="form_control" formControlName="size" placeholder="size" [ngClass]="{
                 invalid_field: form.size.invalid && form.size.touched
-              }"
-            />
-            <div
-              *ngIf="form.size.invalid && form.size.touched"
-              class="invalid-feedback d-block"
-            >
-              <div
-                *ngIf="form.size.errors.required"
-                class="invalid-feedback d-block"
-              >
+              }" />
+            <div *ngIf="form.size.invalid && form.size.touched" class="invalid-feedback d-block">
+              <div *ngIf="form.size.errors.required" class="invalid-feedback d-block">
                 Required
               </div>
             </div>
@@ -205,32 +124,17 @@
       </div>
 
       <div class="text-right">
-        <button
-          style="margin-top: 18px"
-          *ngIf="updateId == null || updateId == undefined"
-          type="submit"
-          [disabled]="loaderOn_Save_Update"
-          class="btn blue-color focused-button text-white btn-sm"
-          (click)="save()"
-        >
+        <button style="margin-top: 18px" *ngIf="updateId == null || updateId == undefined" type="submit"
+          [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm" (click)="save()">
           Save
         </button>
-        <button
-          type="submit"
-          style="margin-top: 18px"
-          *ngIf="updateId != null || updateId != undefined"
-          [disabled]="loaderOn_Save_Update"
-          class="btn blue-color focused-button text-white btn-sm"
-          (click)="update(updateId)"
-        >
+        <button type="submit" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+          [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+          (click)="update(updateId)">
           Update
         </button>
-        <button
-          type="button"
-          style="margin-top: 18px"
-          *ngIf="updateId != null || updateId != undefined"
-          class="btn blue-color focused-button text-white btn-sm"
-        >
+        <button type="button" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+          class="btn blue-color focused-button text-white btn-sm">
           clear
         </button>
       </div>
@@ -239,24 +143,12 @@
 
   <div class="row">
     <div class="col-12">
-      <app-warning-popups
-        *ngIf="isSucessPopupVisible"
-        [isSuccessPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
-      <app-warning-popups
-        *ngIf="isWarningPopupVisible"
-        [isWarningPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
-      <app-warning-popups
-        *ngIf="isErrorPopupVisible"
-        [isErrorPopup]="true"
-        [Message]="message"
-        (closePopup)="closeNotification($event)"
-      ></app-warning-popups>
+      <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
+      <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+        (closePopup)="closeNotification($event)"></app-warning-popups>
     </div>
   </div>
 </div>
