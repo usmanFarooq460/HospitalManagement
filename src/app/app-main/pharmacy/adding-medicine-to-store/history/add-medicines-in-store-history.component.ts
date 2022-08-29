@@ -23,6 +23,7 @@ export class AddMedicinesInStoreHistoryComponent
   }
 
   getById(data) {
+    console.log("Id From History : ",data);    
     this.router.navigate(["/pharmacy/add-item-in-store-form"], {
       queryParams: { Id: data._id },
     });

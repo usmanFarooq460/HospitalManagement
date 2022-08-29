@@ -157,11 +157,8 @@ export class PharmacyService {
     );
   }
   getStoreRecordById(id) {
-    return this.http.get<any>(
-      this.apiUrl + "add_Record_in_store/getById/" + id,
-      {
+    return this.http.get<any>(this.apiUrl + "add_Record_in_store/getById/" + id,{
         headers: this.header,
-      }
-    );
+      });
   }
 }

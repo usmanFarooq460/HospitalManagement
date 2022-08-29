@@ -52,8 +52,20 @@ export class AddMedicinesInStoreFormComponent
     this.getallMedicineTypes();
     this.getAllMedicines();
     if (this.updateId != undefined && this.updateId != null) {
-      console.log("this.updateId: ", this.updateId);
+      this.getDataById(this.updateId);
     } else console.log("its not going to update", this.updateId);
+  }
+
+  getDataById(updateId) {
+    this.service.getStoreRecordById(updateId).subscribe(
+      (resp) => {
+        console.log("get by id data : ", resp);
+      },
+      (err) => {
+        console.log("er in get by id : ", err);
+        this.errorPopup(err);
+      }
+    );
   }
 
   getRacksByStore(storeId) {
@@ -124,10 +136,6 @@ export class AddMedicinesInStoreFormComponent
     this.formData.patchValue({
       medicineType: selectedMedicine?.drugTypeId,
     });
-  }
-
-  getById(data) {
-    this.service;
   }
 
   clear() {

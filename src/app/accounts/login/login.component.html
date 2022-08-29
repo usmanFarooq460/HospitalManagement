@@ -57,26 +57,49 @@
 </div> -->
 
 <div class="login_page" [ngStyle]="{height:innerHeight+'px' }">
-  <div class="login_wrape">
+  <div class="login_wrape bg-white">
     <div class="login_header">
       <h5>Login</h5>
     </div>
     <div class="login_body">
-      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="submit()">
-        <div class="inputs">
-          <input type="text" formControlName="userName" placeholder="username" />
+      <form class="login_form" [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="form_group">
+          <label for="rackName">User Name</label>
+          <input type="text" class="form_control" name="userName" formControlName="userName" placeholder="User Name"
+            [ngClass]="{invalid_field:form.userName.invalid && form.userName.touched}" />
           <div *ngIf="form.userName.invalid && form.userName.touched" class="invalid-feedback d-block">
-            <div *ngIf="form.userName.errors.required" class="invalid-feedback d-block">User Name is required
-            </div>
-          </div>
-          <input type="password" formControlName="pasword" placeholder="password" />
-          <div *ngIf="form.pasword.invalid && form.pasword.touched" class="invalid-feedback d-block">
-            <div *ngIf="form.pasword.errors.required" class="invalid-feedback d-block">Password is required
+            <div *ngIf="form.userName.errors.required" class="invalid-feedback d-block">
+              Required
             </div>
           </div>
         </div>
+        <div class="form_group">
+          <label for="pasword">Password</label>
+          <input type="text" class="form_control" name="pasword" formControlName="pasword" placeholder="Password"
+            [ngClass]="{invalid_field:form.pasword.invalid && form.pasword.touched}" />
+          <div *ngIf="form.pasword.invalid && form.pasword.touched" class="invalid-feedback d-block">
+            <div *ngIf="form.pasword.errors.required" class="invalid-feedback d-block">
+              Required
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <button type="submit" class="custom_btn Login_buttons" >Login</button>
+        </div>
       </form>
     </div>
-    <div class="login_footer">Register</div>
+    <div class="login_footer"><a routerLink="/Accounts/register">Register Hospital</a></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+      (closePopup)="closeNotification($event)"></app-warning-popups>
+    <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+      (closePopup)="closeNotification($event)"></app-warning-popups>
+    <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+      (closePopup)="closeNotification($event)"></app-warning-popups>
   </div>
 </div>
