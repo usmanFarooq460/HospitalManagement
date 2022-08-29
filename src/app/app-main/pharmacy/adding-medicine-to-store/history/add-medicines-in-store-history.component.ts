@@ -23,7 +23,7 @@ export class AddMedicinesInStoreHistoryComponent
   }
 
   getById(data) {
-    console.log("Id From History : ",data);    
+    console.log("Id From History : ", data);
     this.router.navigate(["/pharmacy/add-item-in-store-form"], {
       queryParams: { Id: data._id },
     });
@@ -42,5 +42,19 @@ export class AddMedicinesInStoreHistoryComponent
     );
   }
 
-  deleteStore(Id) {}
+  deleteStore(Id) {
+    console.log("going to delete: ", Id);
+    if (
+      !confirm("This Action cannot be undone Are you sure you want to delete: ")
+    )
+      return;
+    this.service.deleteAddedDataInStore(Id).subscribe(
+      (resp) => {
+        this.SuccessPopup("Record Deleted");
+        console.log("Data has deleted");
+        this.getAllRecordsOfStore();
+      },
+      (Err) => this.errorPopup(Err)
+    );
+  }
 }

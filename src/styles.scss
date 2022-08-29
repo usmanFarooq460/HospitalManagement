@@ -175,7 +175,7 @@ $blue_color: rgb(13, 54, 158);
 
 .canvas_view {
   padding: 12px;
-  margin: 16px 6px;
+  margin: 10px 6px;
   overflow: auto;
   .custom_card {
     background-color: white;
@@ -253,7 +253,7 @@ $blue_color: rgb(13, 54, 158);
 // ********************* Buttons CSS *************//
 
 .custom_btn {
-  background-color: #090994;
+  background-color: $blue_color;
   border-radius: 5px;
   outline: none;
   color: white;
@@ -263,7 +263,11 @@ $blue_color: rgb(13, 54, 158);
   transition: all 0.5s;
   &:hover {
     background-color: white;
-    border: 1px solid rgb(9, 9, 148);
-    color: rgb(9, 9, 148);
+    border: 1px solid $blue_color;
+    color: $blue_color;
+  }
+  &:focus{
+    background-color: rgb(44, 81, 174);
+    color: white;
   }
 }

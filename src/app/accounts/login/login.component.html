@@ -62,9 +62,10 @@
       <h5>Login</h5>
     </div>
     <div class="login_body">
+      <div class="wrongPass" *ngIf="isMatched==false">User Name or Passowrd Is Wrong</div>
       <form class="login_form" [formGroup]="loginForm" (ngSubmit)="submit()">
         <div class="form_group">
-          <label for="rackName">User Name</label>
+          <label for="userName">User Name</label>
           <input type="text" class="form_control" name="userName" formControlName="userName" placeholder="User Name"
             [ngClass]="{invalid_field:form.userName.invalid && form.userName.touched}" />
           <div *ngIf="form.userName.invalid && form.userName.touched" class="invalid-feedback d-block">
@@ -85,7 +86,7 @@
         </div>
 
         <div class="text-center mt-3">
-          <button type="submit" class="custom_btn Login_buttons" >Login</button>
+          <button type="submit" class="custom_btn Login_buttons">Login</button>
         </div>
       </form>
     </div>

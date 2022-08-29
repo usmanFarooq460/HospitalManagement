@@ -24,25 +24,26 @@ export class SidebarComponent implements OnInit {
 
   constructor(private router: Router, private service: SharedService) {}
 
-  ngOnInit() {
-    this.addHoverOpen_Close();
-    this.getUserRightsAgainstUserId();
+  rightsListByUser = [];
+  async ngOnInit() {
+    await this.getUserRightsAgainstUserId();
+    // this.seperateRights(this.rightsListByUser);
   }
 
-  getUserRightsAgainstUserId() {
+  async getUserRightsAgainstUserId() {
     let userId = localStorage.getItem("UserId");
     console.log("getting rights:", userId);
-    this.service.getUserRights(userId).subscribe(
-      (resp) => {
-        console.log("rights list:", resp);
-        this.RightsList = resp?.screenNamesList;
-        this.seperateRights(this.RightsList);
-      },
-      (err) => {
-        this.seperateRights(this.RightsList);
-        console.log("error in rights list:", err.message);
-      }
-    );
+    this.service
+      .getUserRights(userId)
+      .then((resp) => {
+        console.log("Got User Rights : ", resp);
+        this.rightsListByUser = resp?.screenNamesList;
+        this.seperateRights(this.rightsListByUser);
+      })
+      .catch((err) => {
+        this.seperateRights(this.rightsListByUser);
+        console.log("err in getting rights by user: ", err);
+      });
   }
 
   seperateRights(rightsList: any) {
@@ -64,6 +65,7 @@ export class SidebarComponent implements OnInit {
         this.AllModules[i].right = true;
       }
     }
+    this.addHoverOpen_Close();
   }
 
   addHoverOpen_Close() {

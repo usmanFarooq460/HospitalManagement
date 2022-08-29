@@ -1,8 +1,15 @@
 <div class="container-fluid py-2">
-    <button class="custom_btn" routerLink="/pharmacy/add-item-in-store-form">Add New</button>
+
+    <div class="d-flex justify-content-between">
+        <page-title [heading]="'Add Medicine In Store'" [icon]="'mdi mdi-store'"></page-title>
+        <div>
+            <button class="custom_btn" routerLink="/pharmacy/add-item-in-store-form">Add New</button>
+        </div>
+    </div>
+
 
     <!-- History -->
-    <div class="search_wrape mt-3">
+    <div class="search_wrape ">
         <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
     </div>
     <div class="canvas_view" [ngClass]="{for_no_data:storeRecordList?.length>0==false}"
@@ -52,7 +59,10 @@
                     <div class="caption">size</div>
                     <div class="value">{{item.size}}</div>
                 </div>
-
+                <div class="caption_value_wrape">
+                    <div class="caption">Remarks</div>
+                    <div class="value">{{item.remarks}}</div>
+                </div>
             </div>
         </div>
     </div>

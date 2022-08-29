@@ -1,7 +1,7 @@
 @import "./../../../styles.scss";
 
 .login_page {
-  border: 1px solid blue;
+  // border: 1px solid blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,4 +37,12 @@
     margin-top: -14px;
     cursor: pointer;
   }
+}
+
+.wrongPass {
+  text-align: center;
+  background: $red_color;
+  padding: 11px;
+  color: white;
+  border-radius: 6px;
 }

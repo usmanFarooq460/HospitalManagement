@@ -38,6 +38,7 @@ export class AddMedicinesInStoreFormComponent
       medicineId: [null, [Validators.required]],
       qty: [null, [Validators.required]],
       size: [null, [Validators.required]],
+      remarks: [null],
     });
   }
 
@@ -59,38 +60,37 @@ export class AddMedicinesInStoreFormComponent
   getDataById(updateId) {
     this.service.getStoreRecordById(updateId).subscribe(
       (resp) => {
-        console.log("get by id data : ", resp);
+        this.PatchValueToTheForm(resp);
       },
       (err) => {
-        console.log("er in get by id : ", err);
+        console.log("err in get by id : ", err);
         this.errorPopup(err);
       }
     );
   }
 
-  getRacksByStore(storeId) {
-    console.log("id ", storeId);
-    this.service.getRackByStore(storeId).subscribe(
-      (resp) => {
-        this.RackList = resp;
-      },
-      (err) => {
-        console.log("err", err);
-        this.errorPopup(err.message);
-      }
-    );
+  PatchValueToTheForm(data) {
+    console.log("get by id data : ", data);
+    this.getRacksByStore(data?.storeId);
+    this.formData.patchValue({
+      recordNo: data?.recordNo,
+      storeId: data?.storeId,
+      rackId: data?.rackId,
+      medicineType: data?.medicineType,
+      medicineId: data?.medicineId,
+      qty: data?.qty,
+      size: data?.size,
+      remarks: data?.remarks,
+    });
   }
 
-  getAllRacks() {
-    this.service.getHistoryofRacks().subscribe(
-      (resp) => {
+  getRacksByStore(storeId) {
+    this.service
+      .getRackByStore(storeId)
+      .then((resp) => {
         this.RackList = resp;
-      },
-      (err) => {
-        console.log("err");
-        this.errorPopup(err.message);
-      }
-    );
+      })
+      .catch((err) => this.errorPopup(err.message));
   }
 
   getAllStores() {

@@ -1,10 +1,8 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
+    <page-title [heading]="'Add Medicine In Store'" [icon]="'mdi mdi-store'"></page-title>
     <div>
-      <page-title [heading]="'Define Medicine Type'" [icon]="'mdi mdi-account-multiple'"></page-title>
-    </div>
-    <div>
-      <button type="button" style="margin-top: 18px" class="btn blue-color focused-button text-white btn-sm"
+      <button type="button" class="btn blue-color focused-button text-white btn-sm"
         routerLink="/pharmacy/add-item-in-store-history">
         Back
       </button>
@@ -123,6 +121,12 @@
         </div>
       </div>
 
+      <div class="form_group w-100">
+        <label for="remarks">Remarks</label>
+        <textarea class="form_control" name="remarks" id="remarks" placeholder="Remarks" formControlName="remarks"
+          cols="30" rows="4"></textarea>
+      </div>
+
       <div class="text-right">
         <button style="margin-top: 18px" *ngIf="updateId == null || updateId == undefined" type="submit"
           [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm" (click)="save()">
@@ -134,7 +138,7 @@
           Update
         </button>
         <button type="button" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
-          class="btn blue-color focused-button text-white btn-sm">
+          class="btn blue-color focused-button text-white btn-sm" (click)="clear()">
           clear
         </button>
       </div>

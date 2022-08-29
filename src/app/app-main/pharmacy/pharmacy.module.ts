@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 
 import { PharmacyRoutingModule } from "./pharmacy-routing.module";
 import { AddingNewMedicineComponent } from "./adding-new-medicine/adding-new-medicine.component";
-import { MedicineSaleInvoiceComponent } from "./medicine-sale-invoice/medicine-sale-invoice.component";
 import { CommonUiModule } from "./../../common-ui/common-ui.module";
 import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-drug-type.component";
 import { DefinePharmacyStoreComponent } from "./define-pharmacy-store/define-pharmacy-store.component";
@@ -18,7 +17,6 @@ import {
 @NgModule({
   declarations: [
     AddingNewMedicineComponent,
-    MedicineSaleInvoiceComponent,
     DefDrugTypeComponent,
     DefinePharmacyStoreComponent,
     DefineRackComponent,

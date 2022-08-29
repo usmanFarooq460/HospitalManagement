@@ -119,7 +119,7 @@ export class PharmacyService {
       {
         headers: this.header,
       }
-    );
+    ).toPromise();
   }
 
   SaveAddingDataToStore(data) {
