@@ -27,16 +27,13 @@ export class SidebarComponent implements OnInit {
   rightsListByUser = [];
   async ngOnInit() {
     await this.getUserRightsAgainstUserId();
-    // this.seperateRights(this.rightsListByUser);
   }
 
   async getUserRightsAgainstUserId() {
     let userId = localStorage.getItem("UserId");
-    console.log("getting rights:", userId);
     this.service
       .getUserRights(userId)
       .then((resp) => {
-        console.log("Got User Rights : ", resp);
         this.rightsListByUser = resp?.screenNamesList;
         this.seperateRights(this.rightsListByUser);
       })
@@ -47,7 +44,6 @@ export class SidebarComponent implements OnInit {
   }
 
   seperateRights(rightsList: any) {
-    console.log("rights list: ", rightsList);
     for (let i = 0; i < rightsList.length; i++) {
       const element = rightsList[i];
       for (let j = 0; j < this.AllModules.length; j++) {
@@ -56,16 +52,15 @@ export class SidebarComponent implements OnInit {
         }
       }
     }
-    console.log("rights list:", this.AllModules);
     let role = localStorage.getItem("role");
-    console.log("role : ", role);
     if (role == "Admin") {
-      console.log("inside the condition");
       for (let i = 0; i < this.AllModules.length; i++) {
         this.AllModules[i].right = true;
       }
     }
-    this.addHoverOpen_Close();
+    setTimeout(() => {
+      this.addHoverOpen_Close();
+    }, 3000);
   }
 
   addHoverOpen_Close() {

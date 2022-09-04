@@ -13,6 +13,7 @@ import {
   AddMedicinesInStoreFormComponent,
   AddMedicinesInStoreHistoryComponent,
 } from "./adding-medicine-to-store";
+import { SaleInvoiceFormComponent,SaleInvoiceHistoryComponent } from "./sale-invoice"
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import {
     DefineRackComponent,
     AddMedicinesInStoreFormComponent,
     AddMedicinesInStoreHistoryComponent,
+    SaleInvoiceFormComponent,
+    SaleInvoiceHistoryComponent,
   ],
   imports: [
     CommonModule,

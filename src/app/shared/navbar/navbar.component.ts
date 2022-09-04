@@ -11,6 +11,7 @@ import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
+  loggedUserName = localStorage.getItem("UserName");
 
   constructor(config: NgbDropdownConfig, private router: Router) {
     config.placement = "bottom-right";

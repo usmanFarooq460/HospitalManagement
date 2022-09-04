@@ -25,7 +25,7 @@ export class LoginComponent extends BaseActions implements OnInit {
   ) {
     super();
     this.initForm();
-    this.innerHeight = window.innerHeight -50;
+    this.innerHeight = window.innerHeight - 50;
   }
 
   initForm() {
@@ -101,9 +101,10 @@ export class LoginComponent extends BaseActions implements OnInit {
           var encodedToken = btoa("User has logged in");
           localStorage.setItem("isLoggedIn", encodedToken);
           localStorage.setItem(
-            "UserName",
+            "UserNameForLogin",
             this.allUserslist[i].userNameForLogin
           );
+          localStorage.setItem("UserName", this.allUserslist[i].userName);
           localStorage.setItem("UserId", this.allUserslist[i]._id);
           localStorage.setItem("role", this.allUserslist[i].role);
           this.router.navigate(["/"]);

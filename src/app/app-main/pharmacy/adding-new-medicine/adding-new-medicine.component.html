@@ -136,7 +136,7 @@
         </div>
 
         <div class="text-right">
-            <button type="button" style="margin-top: 18px;" class="btn blue-color focused-button text-white btn-sm"
+            <button type="button" style="margin-top: 18px;" *ngIf="updateId!=null" class="btn blue-color focused-button text-white btn-sm"
                 (click)="clearForm()">
                 Clear
             </button>

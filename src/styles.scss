@@ -82,6 +82,7 @@ $blue_color: rgb(13, 54, 158);
   }
 }
 
+// *************************** formFields Styling ************************
 .custom-form-control {
   display: block;
   width: 100%;
@@ -130,21 +131,33 @@ $blue_color: rgb(13, 54, 158);
   }
 }
 
-.edit-delete-wrape {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .edit-icon {
-    color: $blue_color;
-    font-size: 17px;
-  }
-
-  .delete-icon {
-    color: #e50101;
-    font-size: 17px;
-    padding-left: 16px;
+.search_wrape {
+  color: $red_color;
+  .search {
+    display: block;
+    width: 33%;
+    background-color: white;
+    padding: 7px 8px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: 1px solid grey;
+    /* border-left: 4px solid #0d369e; */
+    transition: all 0.2s linear;
+    &:focus {
+      border: 1px solid $blue_color;
+      outline: $blue_color;
+      border-left: 7px solid $blue_color;
+    }
   }
 }
+
+.read_Only {
+  border-style: dashed;
+  background-color: #8080803b !important;
+  border-left: 2px solid;
+  color: black;
+}
+//  **************************** Form Fields Styling Ends ************************
 
 .dataNotFound {
   color: red;
@@ -168,9 +181,9 @@ $blue_color: rgb(13, 54, 158);
 
 // **************************************** canvas view*****************************//
 
-.for_no_data{
+.for_no_data {
   background-color: white;
-  padding:45px;
+  padding: 45px;
 }
 
 .canvas_view {
@@ -230,26 +243,6 @@ $blue_color: rgb(13, 54, 158);
   }
 }
 
-.search_wrape {
-  color: $red_color;
-  .search {
-    display: block;
-    width: 33%;
-    background-color: white;
-    padding: 7px 8px;
-    font-size: 16px;
-    border-radius: 7px;
-    border: 1px solid grey;
-    /* border-left: 4px solid #0d369e; */
-    transition: all 0.2s linear;
-    &:focus {
-      border: 1px solid $blue_color;
-      outline: $blue_color;
-      border-left: 7px solid $blue_color;
-    }
-  }
-}
-
 // ********************* Buttons CSS *************//
 
 .custom_btn {
@@ -266,8 +259,20 @@ $blue_color: rgb(13, 54, 158);
     border: 1px solid $blue_color;
     color: $blue_color;
   }
-  &:focus{
-    background-color: rgb(44, 81, 174);
-    color: white;
+}
+
+.edit-delete-wrape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .edit-icon {
+    color: $blue_color;
+    font-size: 17px;
+  }
+
+  .delete-icon {
+    color: #e50101;
+    font-size: 17px;
+    padding-left: 16px;
   }
 }

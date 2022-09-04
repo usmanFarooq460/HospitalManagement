@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { BaseActions } from "src/app/shared/shared-classes/base-actions";
@@ -73,7 +74,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
     this.service.getAllDrugsHistory().subscribe(
       (resp) => {
         this.allDrugsHistoryList = resp;
-        console.log("history of al drug list : ", resp);
+        console.log("history of al drug list : ", resp, "new Date", new Date());
         this.isLoading = false;
       },
       (err) => {
@@ -86,7 +87,6 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
   getallDrugType() {
     this.service.getallDrugTpyes().subscribe(
       (resp) => {
-        console.log("All drug types:", resp);
         this.drugTypeList = resp;
       },
       (err) => {
@@ -97,27 +97,23 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
 
   HandleSearchChange(value) {
     this.searchValue = value;
-    console.log("search value: ", value);
   }
 
   handleSave_Update() {
     if (this.formData.valid == false) {
       this.formData.markAllAsTouched();
-      console.log("not valid :", this.formData.value);
       return;
     }
-
     this.formData.value.drugTypeName = this.drugTypeList.find(
       ({ _id }) => _id == this.formData.value.drugTypeId
     )?.drugType;
-
     this.formData.value.createdBy = localStorage.getItem("UserName");
     this.formData.value.createdAt = new Date();
     if (
       this.formData.value.drugTypeName == null ||
       this.formData.value.drugTypeName == undefined
     ) {
-      this.WarningPopup("Drug Tpye Id is Not valid");
+      this.WarningPopup("Drug Type Id is Not valid");
       return;
     }
 
@@ -129,7 +125,6 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
   }
 
   save() {
-    console.log("going to save :", this.formData.value);
     this.service.saveNewDrugOrMedicine(this.formData.value).subscribe(
       (resp) => {
         this.SuccessPopup("Added Successfully");
@@ -138,14 +133,18 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
       },
       (err) => {
         this.errorPopup(err.error.message);
-        console.log("casual message: ", err.error.errors);
       }
     );
   }
 
   update(updateId) {
     this.loaderOn_Save_Update = true;
-    console.log("form data form: ", this.formData.value);
+    console.log(
+      "form data form for Update: ",
+      this.formData.value,
+      "update Id: ",
+      updateId
+    );
     this.service.updateDrug(updateId, this.formData.value).subscribe(
       (resp) => {
         console.log("Saved");
@@ -170,7 +169,7 @@ export class AddingNewMedicineComponent extends BaseActions implements OnInit {
         this.getHistory();
       },
       (err) => {
-        this.errorPopup("er in delting " + err.error.errors);
+        this.errorPopup("err in deleting " + err);
       }
     );
   }

@@ -6,7 +6,7 @@ import { DefDrugTypeComponent } from "./adding-new-medicine/def-drug-type/def-dr
 import { DefinePharmacyStoreComponent } from "./define-pharmacy-store/define-pharmacy-store.component";
 import { DefineRackComponent } from "./define-rack/define-rack.component";
 import { AddMedicinesInStoreHistoryComponent,AddMedicinesInStoreFormComponent } from "./adding-medicine-to-store"
-
+import { SaleInvoiceHistoryComponent,SaleInvoiceFormComponent } from "./sale-invoice"
 const routes: Routes = [
   {
     path: "Add-new-medicine",
@@ -41,6 +41,16 @@ const routes: Routes = [
   {
     path: "add-item-in-store-form",
     component: AddMedicinesInStoreFormComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "sale-invoice-history",
+    component: SaleInvoiceHistoryComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "sale-invoice-form",
+    component: SaleInvoiceFormComponent,
     canActivate: [AuthGuardGuard],
   },
 ];

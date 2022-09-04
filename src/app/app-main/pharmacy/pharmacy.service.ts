@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
@@ -47,6 +47,8 @@ export class PharmacyService {
   }
 
   updateDrug(id, data) {
+    console.log("id for update in service:", id);
+
     return this.http.put<any>(this.apiUrl + "def_drug/update/" + id, data, {
       headers: this.header,
     });
@@ -73,10 +75,9 @@ export class PharmacyService {
   }
 
   getHistoryStoreName() {
-    return this.http
-      .get<any>(this.apiUrl + "def_Store/getAll", {
-        headers: this.header,
-      })
+    return this.http.get<any>(this.apiUrl + "def_Store/getAll", {
+      headers: this.header,
+    });
   }
 
   deleteStoreName(id) {
@@ -114,12 +115,11 @@ export class PharmacyService {
   // **************** Add medicine to store ******************
 
   getRackByStore(storeId) {
-    return this.http.get<any>(
-      this.apiUrl + "def_rack/getRackByStoreId/" + storeId,
-      {
+    return this.http
+      .get<any>(this.apiUrl + "def_rack/getRackByStoreId/" + storeId, {
         headers: this.header,
-      }
-    ).toPromise();
+      })
+      .toPromise();
   }
 
   SaveAddingDataToStore(data) {
@@ -157,8 +157,28 @@ export class PharmacyService {
     );
   }
   getStoreRecordById(id) {
-    return this.http.get<any>(this.apiUrl + "add_Record_in_store/getById/" + id,{
+    return this.http.get<any>(
+      this.apiUrl + "add_Record_in_store/getById/" + id,
+      {
         headers: this.header,
-      });
+      }
+    );
+  }
+
+  // *********************** Pharmacy Service *******************************
+
+  getStoreMedicineByStoreId(storeId) {
+    return this.http.get<any>(
+      this.apiUrl + "saleInvoice/getStoreMedicinesByStoreId/" + storeId,
+      {
+        headers: this.header,
+      }
+    );
+  }
+
+  saveSAleInvoice(data) {
+    return this.http.post<any>(this.apiUrl + "saleInvoice/addNew", data, {
+      headers: this.header,
+    });
   }
 }
