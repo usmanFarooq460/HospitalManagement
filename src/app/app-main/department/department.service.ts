@@ -15,4 +15,28 @@ export class DepartmentService {
       headers: this.header,
     });
   }
+
+  getHistoryOfDepartment() {
+    return this.http.get<any>(this.apiUrl + "department/getAll", {
+      headers: this.header,
+    });
+  }
+
+  deleteDepartment(id) {
+    return this.http.delete<any>(this.apiUrl + "department/delete/" + id, {
+      headers: this.header,
+    });
+  }
+
+  updateDepartment(id, data) {
+    return this.http.put<any>(this.apiUrl + "department/update/" + id, data, {
+      headers: this.header,
+    });
+  }
+
+  getyDepartmentById(id) {
+    return this.http.get<any>(this.apiUrl + "department/getById/" + id, {
+      headers: this.header,
+    });
+  }
 }

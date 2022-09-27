@@ -1,5 +1,10 @@
-<page-title [heading]="'Department'" [icon]="'mdi mdi-account-multiple'"></page-title>
-
+<div class="d-flex justify-content-between align-items-center">
+    <page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
+    <button type="button" routerLink="/department/Department-history"
+        class="btn blue-color text-white btn-sm focused-button">
+        Back<i class="mdi mdi-keyboard-backspace ml-1"></i>
+    </button>
+</div>
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6 m-0 p-0">
@@ -42,7 +47,8 @@
                         <th>action</th>
                     </thead>
                     <tbody>
-                        <tr *ngIf="wardNameList.length>0==false" colspan="2" class="noWardFound">No Ward List Found</tr>
+                        <tr *ngIf="wardNameList.length>0==false" colspan="2" class="noWardFound mt-4">No Ward List Found
+                        </tr>
                         <tr *ngFor="let item of wardNameList; let index = index">
                             <td>{{item.wardName}}</td>
                             <td class="edit-icon"><i (click)="editDetailRecordRow(item.wardName,index)"
@@ -63,11 +69,11 @@
         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm" (click)="Save()">
         Save
     </button>
-    <!-- <button type="submit" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+    <button type="submit" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
         [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
         (click)="update(updateId)">
         Update
-    </button> -->
+    </button>
     <button type="button" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
         class="btn blue-color focused-button text-white btn-sm" (click)="clear()">
         clear

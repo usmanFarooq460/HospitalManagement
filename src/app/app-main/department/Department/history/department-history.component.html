@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between align-items-center">
+    <page-title [heading]="'User Definitions'" [icon]="'mdi mdi-account-multiple'"></page-title>
+    <button type="button" routerLink="/department/Department-form"
+        class="btn blue-color text-white btn-sm focused-button">
+        add New<i class="mdi mdi-account-plus ml-1"></i>
+    </button>
+</div>
+
+<div class="search_wrape ">
+    <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
+</div>
+<div class="canvas_view" [ngClass]="{for_no_data:departmentList?.length>0==false}"
+    [ngStyle]="{ 'max-height':gridHeight + 'px'}">
+    <div class="" *ngIf="departmentList?.length>0==false && isLoading==false">
+        No Data Found
+    </div>
+    <div class="no_data_found_in_canvas" *ngIf="isLoading&&departmentList?.length>0==false">
+        <app-loader></app-loader>
+    </div>
+    <div class="custom_card" *ngFor="let item of  departmentList | filterByAllProperties:searchValue; let index=index">
+        <div class="header_edit_delete">
+            <div class="Header">{{item.DepartmentName}}</div>
+            <div class="delete_Edit_btns edit-delete-wrape">
+                <div class="edit-icon">
+                    <i (click)="editDerpartment(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                </div>
+                <div class="delete-icon">
+                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteDepartment(item._id)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="Card_body">
+            <div class="caption_value_wrape" *ngFor="let wardName of item.wardList">
+                <div class="caption">Ward Name</div>
+                <div class="value">{{wardName.wardName}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+    </div>
+</div>

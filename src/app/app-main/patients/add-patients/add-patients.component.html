@@ -1,11 +1,9 @@
-<div class="d-flex justify-content-between align-items-center">
-    <page-title [heading]="'Staff'" [icon]="'mdi mdi-account-multiple'"></page-title>
-</div>
+<page-title [heading]="'Patients'" [icon]="'mdi mdi-account-multiple'"></page-title>
 
 <div class="form">
     <form [formGroup]="formdata">
         <div class="row ml-1">
-            <div class="col-md-3 col-6 m-0 p-1">
+            <div class="col-md-4 col-6 m-0 p-1">
                 <div class="form_group">
                     <label for="Name">Name</label>
                     <input type="text" id="Name" class="form_control" formControlName="Name" placeholder="Name"

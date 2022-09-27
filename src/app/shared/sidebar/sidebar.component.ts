@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit {
     { id: 5, name: "Staff", right: false },
     { id: 6, name: "Patients", right: false },
     { id: 7, name: "Departments", right: false },
+    { id: 8, name: "Appointment", right: false },
   ];
 
   constructor(private router: Router, private service: SharedService) {}

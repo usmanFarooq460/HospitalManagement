@@ -1,7 +1,14 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { DefineDepartmentComponent } from "./define-department/define-department.component";
-const routes: Routes = [{ path: "", component: DefineDepartmentComponent }];
+import {
+  DefineDepartmentComponent,
+  DepartmentHistoryComponent,
+} from "./Department";
+const routes: Routes = [
+  { path: "Department-form", component: DefineDepartmentComponent },
+  { path: "Department-form/:id", component: DefineDepartmentComponent },
+  { path: "Department-history", component: DepartmentHistoryComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

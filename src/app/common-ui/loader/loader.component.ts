@@ -36,7 +36,6 @@ export class LoaderComponent implements OnInit {
         ngbModalOptions
       );
     }
-    console.log("is loading checking in loader component: ", this.isLoading);
   }
 
   closePopup() {

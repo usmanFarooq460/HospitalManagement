@@ -13,7 +13,7 @@ export class AddPatientsComponent extends BaseActions implements OnInit {
   formdata: any;
   updateId: any;
   allPatientsHistoryList = [];
-  maritalStatusList = [{ status: "Married" }, { status: "Un Married" }];
+  maritalStatusList = [{ status: "Married" }, { status: "Single" }];
   GenderList = [{ gender: "Male" }, { gender: "Female" }];
   constructor(
     private service: PatientsService,

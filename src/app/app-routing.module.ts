@@ -59,7 +59,22 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardGuard],
   },
-  { path: 'department', loadChildren: () => import('./app-main/department/department.module').then(m => m.DepartmentModule) },
+  {
+    path: "department",
+    loadChildren: () =>
+      import("./app-main/department/department.module").then(
+        (m) => m.DepartmentModule
+      ),
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "appointment",
+    loadChildren: () =>
+      import("./app-main/appointments/appointments.module").then(
+        (m) => m.AppointmentsModule
+      ),
+    canActivate: [AuthGuardGuard],
+  },
 ];
 
 @NgModule({

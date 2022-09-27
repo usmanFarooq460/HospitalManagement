@@ -1,0 +1,155 @@
+<page-title [heading]="'Appointment'" [icon]="'mdi mdi-account-multiple'"></page-title>
+
+<div class="form ml-1">
+    <form [formGroup]="formdata">
+        <div class="row">
+            <div class="col-md-4 col-6 m-0 p-1">
+                <div class="form_group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" class="form_control" name="appointmentDate" formControlName="appointmentDate"
+                        placeholder="Appointment Date"
+                        [ngClass]="form.appointmentDate.invalid && form.appointmentDate.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.appointmentDate.invalid && form.appointmentDate.touched"
+                        class="invalid-feedback d-block">
+                        <div *ngIf="form.appointmentDate.errors.required" class="invalid-feedback d-block">
+                            Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6 m-0 p-1">
+                <div class="form_group">
+                    <label for="patient">patient</label>
+                    <select class="form_control" name="patient" id="patient" formControlName="patient">
+                        <option class="" value="null">Select patient</option>
+                        <option value="{{item._id}}" *ngFor="let item of patientslist">{{item?.Name}}</option>
+                    </select>
+                    <div *ngIf="form.patient.invalid && form.patient.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.patient.errors.required" class="invalid-feedback d-block">
+                            Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6 m-0 p-1">
+                <div class="form_group">
+                    <label for="doctor">Doctor</label>
+                    <input type="text" id="doctor" class="form_control" formControlName="doctor"
+                        placeholder="Doctor Name" [ngClass]="{
+                        invalid_field: form.doctor.invalid && form.doctor.touched
+                      }" />
+                    <div *ngIf="form.doctor.invalid && form.doctor.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.doctor.errors.required" class="invalid-feedback d-block">
+                            Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6 m-0 p-1">
+                <div class="form_group">
+                    <label for="department">Department</label>
+                    <select class="form_control" name="department" id="department" formControlName="department">
+                        <option class="" value="null">Select department</option>
+                        <option value="{{item._id}}" *ngFor="let item of departmentList">{{item?.DepartmentName}}
+                        </option>
+                    </select>
+                    <div *ngIf="form.department.invalid && form.department.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.department.errors.required" class="invalid-feedback d-block">
+                            Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-6 m-0 p-1">
+                <div class="form_group">
+                    <label for="reason">Reason</label>
+                    <input type="text" class="form_control" name="reason" formControlName="reason" placeholder="Reason"
+                        [ngClass]="form.reason.invalid && form.reason.touched ? 'invalid_field' : ''" />
+                    <div *ngIf="form.reason.invalid && form.reason.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.reason.errors.required" class="invalid-feedback d-block">
+                            Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-right">
+            <button style="margin-top: 18px" *ngIf="updateId == null || updateId == undefined" type="submit"
+                [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+                (click)="Save()">
+                Save
+            </button>
+            <button type="submit" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+                [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+                (click)="update(updateId)">
+                Update
+            </button>
+            <button type="button" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+                class="btn blue-color focused-button text-white btn-sm" (click)="clear()">
+                clear
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div class="search_wrape ">
+    <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
+</div>
+<div class="canvas_view" [ngClass]="{for_no_data:allAppointmentsList?.length>0==false}"
+    [ngStyle]="{ 'max-height':gridHeight + 'px'}">
+    <div class="" *ngIf="allAppointmentsList?.length>0==false && isLoading==false">
+        No Data Found
+    </div>
+    <div class="no_data_found_in_canvas" *ngIf="isLoading&&allAppointmentsList?.length>0==false">
+        <app-loader></app-loader>
+    </div>
+    <div class="custom_card"
+        *ngFor="let item of  allAppointmentsList | filterByAllProperties:searchValue; let index=index">
+        <div class="header_edit_delete">
+            <div class="Header"></div>
+            <div class="delete_Edit_btns edit-delete-wrape">
+                <div class="edit-icon">
+                    <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                </div>
+                <div class="delete-icon">
+                    <i class="mdi mdi-delete-forever cursor_pointer" (click)="deleteStaff(item._id)"></i>
+                </div>
+            </div>
+        </div>
+        <div class="Card_body">
+            <div class="caption_value_wrape">
+                <div class="caption">Appointment Date</div>
+                <div class="value">{{item.appointmentDate|date:'mediumDate'}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Department</div>
+                <div class="value">{{item.department.DepartmentName}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">Patient Name</div>
+                <div class="value">{{item.patient.Name}}</div>
+            </div>
+            <div class="caption_value_wrape">
+                <div class="caption">reason</div>
+                <div class="value">{{item.reason}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+    </div>
+</div>
