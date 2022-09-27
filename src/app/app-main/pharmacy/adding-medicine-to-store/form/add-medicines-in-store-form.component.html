@@ -53,7 +53,7 @@
         <div class="col-md-4 col-6">
           <div class="form_group">
             <label for="medicineId">Medicines</label>
-            <select class="form_control" (change)="handleSelectedUsers($event.target.value)" name="medicineId"
+            <select class="form_control" (change)="handleSelectedMedicine($event.target.value)" name="medicineId"
               id="medicineId" formControlName="medicineId" [ngClass]="{
                 invalid_field:
                   form.medicineId.invalid && form.medicineId.touched

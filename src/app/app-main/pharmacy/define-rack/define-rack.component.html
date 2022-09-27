@@ -6,20 +6,6 @@
 
                 <div class="col-md-4 col-6">
                     <div class="form_group">
-                        <label for="rackName">Rack Name</label>
-                        <input type="text" class="form_control" name="rackName" formControlName="rackName"
-                            placeholder="Rack Name"
-                            [ngClass]="form.rackName.invalid && form.rackName.touched ? 'invalid_field' : ''" />
-                        <div *ngIf="form.rackName.invalid && form.rackName.touched" class="invalid-feedback d-block">
-                            <div *ngIf="form.rackName.errors.required" class="invalid-feedback d-block">
-                                Required
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-6">
-                    <div class="form_group">
                         <label for="storeId">Store</label>
                         <select class="form_control" name="storeId" id="storeId" formControlName="storeId"
                             (change)="handleStoreChange($event.target.value)"
@@ -29,6 +15,20 @@
                         </select>
                         <div *ngIf="form.storeId.invalid && form.storeId.touched" class="invalid-feedback d-block">
                             <div *ngIf="form.storeId.errors.required" class="invalid-feedback d-block">
+                                Required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-6">
+                    <div class="form_group">
+                        <label for="rackName">Rack Name</label>
+                        <input type="text" class="form_control" name="rackName" formControlName="rackName"
+                            placeholder="Rack Name"
+                            [ngClass]="form.rackName.invalid && form.rackName.touched ? 'invalid_field' : ''" />
+                        <div *ngIf="form.rackName.invalid && form.rackName.touched" class="invalid-feedback d-block">
+                            <div *ngIf="form.rackName.errors.required" class="invalid-feedback d-block">
                                 Required
                             </div>
                         </div>

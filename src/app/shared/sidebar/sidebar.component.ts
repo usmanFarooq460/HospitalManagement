@@ -20,6 +20,9 @@ export class SidebarComponent implements OnInit {
     { id: 2, name: "Dashboard", right: false },
     { id: 3, name: "Icons", right: false },
     { id: 4, name: "Basic Ui Elements", right: false },
+    { id: 5, name: "Staff", right: false },
+    { id: 6, name: "Patients", right: false },
+    { id: 7, name: "Departments", right: false },
   ];
 
   constructor(private router: Router, private service: SharedService) {}
@@ -35,6 +38,7 @@ export class SidebarComponent implements OnInit {
       .getUserRights(userId)
       .then((resp) => {
         this.rightsListByUser = resp?.screenNamesList;
+        console.log("user rights list :L ", this.rightsListByUser);
         this.seperateRights(this.rightsListByUser);
       })
       .catch((err) => {
@@ -64,7 +68,6 @@ export class SidebarComponent implements OnInit {
   }
 
   addHoverOpen_Close() {
-    // add class 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
     const body = document.querySelector("body");
     document.querySelectorAll(".sidebar .nav-item").forEach(function (el) {
       el.addEventListener("mouseover", function () {

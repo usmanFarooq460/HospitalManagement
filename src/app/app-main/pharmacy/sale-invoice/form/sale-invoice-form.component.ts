@@ -1,6 +1,7 @@
 import { formatDate } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 import { BaseActions } from "src/app/shared/shared-classes/base-actions";
 import { PharmacyService } from "./../../pharmacy.service";
 
@@ -23,8 +24,12 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
   maxValueForInvoiceQty: number = 1;
   detailEditMode: boolean = false;
   updateRowIndex: number = -1;
-
-  constructor(private fb: FormBuilder, private service: PharmacyService) {
+  qtyInGetById: number;
+  constructor(
+    private fb: FormBuilder,
+    private service: PharmacyService,
+    private activatedRoute: ActivatedRoute
+  ) {
     super();
     this.headerInitForm();
     this.detailInitForm();
@@ -64,12 +69,9 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
       storeName: [null],
       MedicineName: [null],
       MedicineTypeName: [null],
+      storeRecordId: [null],
+      previousQtyInUpdateCase: [null],
     });
-  }
-
-  ngOnInit(): void {
-    this.getAllStores();
-    this.getAllMedicinesTypes();
   }
 
   get form() {
@@ -79,6 +81,35 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
   get detF() {
     return this.detailFormData.controls;
   }
+
+  ngOnInit(): void {
+    let paramId = this.activatedRoute.snapshot.params;
+    console.log("updated id : ", paramId?.id);
+    this.updateId = paramId?.id;
+    this.getAllStores();
+    this.getAllMedicinesTypes();
+    if (this.updateId) this.getById(this.updateId);
+  }
+
+  getById(updateId) {
+    this.service.getSaleInvoiceById(updateId).subscribe(
+      (resp) => {
+        console.log("get by id resp: ", resp);
+        this.formData.patchValue(resp);
+        this.detailList = resp?.InvoiceDetailList;
+        if (this.detailList?.length > 0) {
+          this.getMedicinesOnStoreChange(this.detailList[0].store);
+          // this.getMedicineDetailOnMedicineChange(this.detailList[0].Medicine);
+          this.editDetailRecordRow(this.detailList[0], 0);
+        }
+      },
+      (err) => {
+        console.log("err in get by id : ", err);
+        this.errorPopup(err.message);
+      }
+    );
+  }
+
   getAllStores() {
     this.service.getHistoryStoreName().subscribe(
       (resp) => {
@@ -156,8 +187,10 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
         rate: selectedMedicineDetail.retailPrice,
         MedicineName: selectedMedicineDetail.drugName,
         MedicineTypeName: selectedMedicineDetail.drugTypeName,
+        storeRecordId: selectedMedicineDetail.Id,
       });
       this.maxValueForInvoiceQty = selectedMedicineDetail.Qty;
+      console.log("selcted medicine detail ", this.detailFormData.value);
     }
     this.handleCalculation();
   }
@@ -196,7 +229,13 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
   addDetailRecord2Grid() {
     if (this.detailFormData.valid == false) {
       this.detailFormData.markAllAsTouched();
+      console.log("its not valid");
       return;
+    }
+    if (this.updateId == undefined || this.updateId == null) {
+      this.detailFormData.patchValue({
+        previousQtyInUpdateCase: this.detailFormData.value.Qty,
+      });
     }
     if (this.detailEditMode == true) {
       this.detailList[this.updateRowIndex] = this.detailFormData.value;
@@ -206,7 +245,6 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
       this.detailList.push(this.detailFormData.value);
     }
     this.detailInitForm();
-    console.log("detail list : ", this.detailList);
   }
 
   deleteDetailRecordRow(index) {
@@ -227,13 +265,13 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
   }
 
   clear() {
+    this.headerInitForm();
+    this.detailInitForm();
     this.updateId = null;
     this.detailList = [];
     this.medicinesList = [];
     this.detailEditMode = false;
     this.updateRowIndex = -1;
-    this.headerInitForm();
-    this.detailInitForm();
   }
 
   isThereAnyError() {
@@ -251,7 +289,6 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
     }
     console.log("form data : ", this.formData.value);
     if (this.isThereAnyError()) return;
-
     let finalObject = {
       InvoiceNo: this.formData.value.InvoiceNo,
       invoiceDate: this.formData.value.invoiceDate,
@@ -263,17 +300,18 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
       InvoiceDetailList: this.detailList,
     };
 
-    console.log("going to save : ", finalObject);
-
+    console.log("going to save Update: ", finalObject);
     this.updateId == null || this.updateId == undefined
       ? this.save(finalObject)
-      : this.update(this.updateId);
+      : this.update(this.updateId, finalObject);
   }
   save(data) {
+    this.detailFormData.value;
     this.service.saveSAleInvoice(data).subscribe(
       (resp) => {
         console.log("saved successfuly");
-        this.clear;
+        this.SuccessPopup("Saved Successfully");
+        this.clear();
       },
       (err) => {
         console.log("err in saving sale Invoice: ", err);
@@ -281,5 +319,18 @@ export class SaleInvoiceFormComponent extends BaseActions implements OnInit {
       }
     );
   }
-  update(Id) {}
+  update(Id, data) {
+    console.log("going to update", data);
+    this.service.updateSaleInvoice(Id, data).subscribe(
+      (resp) => {
+        console.log("updated ");
+        this.SuccessPopup("Updated Successfully");
+        this.clear();
+      },
+      (err) => {
+        this.errorPopup(err.message);
+        console.log("error in updating sale invoice: ", err);
+      }
+    );
+  }
 }

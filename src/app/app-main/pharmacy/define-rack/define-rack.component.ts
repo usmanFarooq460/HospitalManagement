@@ -42,9 +42,11 @@ export class DefineRackComponent extends BaseActions implements OnInit {
   getById(data) {
     this.updateId = data._id;
     this.loaderOn_Save_Update = false;
+    console.log("data for rack edit : ",data);
+  
     this.formData.patchValue({
       rackName: data.rackName,
-      storeId: data.storeId,
+      storeId: data.storeId._id,
       Description: data.Description,
     });
   }

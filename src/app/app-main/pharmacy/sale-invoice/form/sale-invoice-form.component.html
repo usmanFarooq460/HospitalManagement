@@ -174,8 +174,8 @@
             <div class="col-md-4 col-6 m-0 p-1">
                 <div class="form_group">
                     <label for="Qty">Qty</label>
-                    <input type="number" min="0" (keyup)="handleCalculation()" [max]="maxValueForInvoiceQty"
-                        class="form_control" name="Qty" formControlName="Qty" placeholder="Qty"
+                    <input type="number" min="0" (keyup)="handleCalculation()" class="form_control" name="Qty"
+                        formControlName="Qty" placeholder="Qty"
                         [ngClass]="{invalid_field:detF.Qty.invalid && detF.Qty.touched}" />
                     <div *ngIf="detF.Qty.invalid && detF.Qty.touched" class="invalid-feedback d-block">
                         <div *ngIf="detF.Qty.errors.required" class="invalid-feedback d-block">
@@ -258,19 +258,20 @@
 </form>
 
 <div class="text-right fixed-bottom m-3 ">
-    <button class="custom_btn" (click)="handleSave_Update()">save</button>
-    <button class="custom_btn custom-red-color" routerLink="/pharmacy/sale-invoice-history">Cancel</button>
+    <button class="custom_btn"
+        (click)="handleSave_Update()">{{updateId==undefined||updateId==null?'Save':'Update'}}</button>
+    <!-- <button class="custom_btn custom-red-color" routerLink="/pharmacy/sale-invoice-history">Cancel</button> -->
 </div>
 
 <div class="row">
     <div class="col-12">
-        <div class="search_wrape">
+        <!-- <div class="search_wrape">
             <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
-        </div>
-
+        </div> -->
         <div class="canvas_view" [ngStyle]="{ 'max-height':gridHeight + 'px'}">
-            <div class="no_data_found_in_canvas" *ngIf="detailList?.length>0==false && isLoading==false">
-                No Data Found
+            <div class="no_data_found_in_canvas bg
+            -white" *ngIf="detailList?.length>0==false && isLoading==false">
+                No Data added
             </div>
             <div class="no_data_found_in_canvas" *ngIf="isLoading">
                 <app-loader></app-loader>

@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <page-title [heading]="'Staff Tpye'" [icon]="'mdi mdi-account-multiple'"></page-title>
+    <div class="form">
+        <form class="register-form" [formGroup]="formdata" (ngSubmit)="Save()">
+            <div class="row">
+                <div class="col-3 ml-0 p-1">
+                    <input type="text" class="custom-form-control" formControlName="staffType"
+                        placeholder="Staff Type" />
+                    <div *ngIf="form.staffType.invalid && form.staffType.touched" class="invalid-feedback d-block">
+                        <div *ngIf="form.staffType.errors.required" class="invalid-feedback d-block">
+                            staff Type is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 ml-0 p-1">
+                    <input type="text" class="custom-form-control" formControlName="descp" placeholder="Descp" />
+                </div>
+
+                <div class="col-5">
+                    <button style="margin-top: 18px;" *ngIf="updateId==null" type="submit"
+                        [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+                        (click)="Save()">
+                        Save
+                    </button>
+                    <button type="submit" style="margin-top: 18px;" *ngIf="updateId!=null"
+                        [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+                        (click)="updateScreen()">
+                        Update
+                    </button>
+                    <button type="button" style="margin-top: 18px;"
+                        class="btn blue-color focused-button text-white btn-sm" routerLink="/staff/add-staff">
+                        Back
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body border border-danger">
+                    <table class="table margin_negative_10">
+                        <thead class="text-danger">
+                            <th>staff Type</th>
+                            <th>Descp</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="2">
+                                    <app-loader></app-loader>
+                                </td>
+                            </tr>
+                            <tr *ngFor="let item of allScreensList; let index = index">
+                                <td>{{item.staffType}}</td>
+                                <td>{{item.descp}}</td>
+                                <td class="edit-delete-wrape">
+                                    <div class="edit-icon">
+                                        <i (click)="getById(item)" class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+            <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+                (closePopup)="closeNotification($event)"></app-warning-popups>
+        </div>
+    </div>
+</div>

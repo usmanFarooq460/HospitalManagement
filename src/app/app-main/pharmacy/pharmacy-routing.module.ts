@@ -53,6 +53,11 @@ const routes: Routes = [
     component: SaleInvoiceFormComponent,
     canActivate: [AuthGuardGuard],
   },
+  {
+    path: "sale-invoice-form/:id",
+    component: SaleInvoiceFormComponent,
+    canActivate: [AuthGuardGuard],
+  },
 ];
 
 @NgModule({

@@ -49,6 +49,7 @@ export class AddMedicinesInStoreFormComponent
   ngOnInit() {
     let paramId = this.activatedRoute.snapshot.queryParams;
     this.updateId = paramId?.Id;
+    console.log("update Id:", this.updateId);
     this.getAllStores();
     this.getallMedicineTypes();
     this.getAllMedicines();
@@ -130,7 +131,7 @@ export class AddMedicinesInStoreFormComponent
     );
   }
 
-  handleSelectedUsers(itemId) {
+  handleSelectedMedicine(itemId) {
     let selectedMedicine = this.medicinesList?.find(({ _id }) => itemId == _id);
     console.log("selected medicine: ", selectedMedicine);
     this.formData.patchValue({
@@ -185,17 +186,5 @@ export class AddMedicinesInStoreFormComponent
           this.errorPopup(err.error.errors);
         }
       );
-  }
-
-  deleteScreen(id) {
-    this.service.deleteAddedDataInStore(id).subscribe(
-      (resp) => {
-        this.SuccessPopup("Deleted SuccesFully");
-        this.clear();
-      },
-      (err) => {
-        this.errorPopup(err.message);
-      }
-    );
   }
 }

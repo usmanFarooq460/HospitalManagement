@@ -1,0 +1,86 @@
+<page-title [heading]="'Department'" [icon]="'mdi mdi-account-multiple'"></page-title>
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 m-0 p-0">
+        <div class="form_group">
+            <label for="Address">Department Name</label>
+            <input type="text" [(ngModel)]="departmentName" id="Address" class="form_control"
+                placeholder="Department Name" />
+        </div>
+    </div>
+    <div class="col-3"></div>
+
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="row align-items-end">
+            <div class="col-10 m-0 p-0">
+                <div class="form_group">
+                    <label for="Address">Ward Name</label>
+                    <input type="text" [(ngModel)]="wardName" id="Address" class="form_control"
+                        placeholder="Ward Name" />
+                </div>
+            </div>
+            <div class="col-2 m-0 p-0">
+                <button type="button" style="margin-left: 24px;" class="custom_btn Login_buttons"
+                    (click)="addWardNo(wardName)">add</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+                <table class="table">
+                    <thead class="text-danger">
+                        <th>Ward Name</th>
+                        <th>action</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="wardNameList.length>0==false" colspan="2" class="noWardFound">No Ward List Found</tr>
+                        <tr *ngFor="let item of wardNameList; let index = index">
+                            <td>{{item.wardName}}</td>
+                            <td class="edit-icon"><i (click)="editDetailRecordRow(item.wardName,index)"
+                                    class="mdi mdi-grease-pencil cursor_pointer"></i>
+                                <i class="mdi mdi-delete-forever cursor_pointer"
+                                    (click)="deleteDetailRecordRow(index)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-right mt-4">
+    <button style="margin-top: 18px" *ngIf="updateId == null || updateId == undefined" type="submit"
+        [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm" (click)="Save()">
+        Save
+    </button>
+    <!-- <button type="submit" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+        [disabled]="loaderOn_Save_Update" class="btn blue-color focused-button text-white btn-sm"
+        (click)="update(updateId)">
+        Update
+    </button> -->
+    <button type="button" style="margin-top: 18px" *ngIf="updateId != null || updateId != undefined"
+        class="btn blue-color focused-button text-white btn-sm" (click)="clear()">
+        clear
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-warning-popups *ngIf="isSucessPopupVisible" [isSuccessPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isWarningPopupVisible" [isWarningPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+        <app-warning-popups *ngIf="isErrorPopupVisible" [isErrorPopup]="true" [Message]="message"
+            (closePopup)="closeNotification($event)"></app-warning-popups>
+    </div>
+</div>

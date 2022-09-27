@@ -91,7 +91,7 @@ export class DefineScreensComponent extends BaseActions implements OnInit {
     this.loaderOn_Save_Update = true;
     console.log("updated id", this.updateId);
 
-    this.service.updateScreen(this.updateId, this.formdata.vlue).subscribe(
+    this.service.updateScreen(this.updateId, this.formdata.value).subscribe(
       (resp) => {
         console.log("Data has updated: ");
         this.SuccessPopup("Data has updated");

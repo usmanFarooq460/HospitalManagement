@@ -4,3 +4,147 @@
         <button class="custom_btn" routerLink="/pharmacy/sale-invoice-form">Add New</button>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-3 m-0 p-0">
+        <div class="left_section" [ngStyle]="{height:gridHeight+'px'}">
+            <div class="Small_card cursor_pointer"
+                *ngFor="let item of invoiceHistoryList.reverse();let isFirstRow=first"
+                [ngClass]="{'mt-0' : isFirstRow,'selected':item.isSelected}" (click)="selectedInvoice(item)">
+                <div class="caption_value_wrape mx-auto bg-white">
+                    <div class="caption">Invoice No</div>
+                    <div class="value bg-light">{{item.InvoiceNo}}</div>
+                </div>
+                <div class="caption_value_wrape mx-auto bg-white">
+                    <div class="caption">Invoice Date</div>
+                    <div class="value bg-light">{{item.invoiceDate|date:'mediumDate'}}</div>
+                </div>
+                <div class="caption_value_wrape mx-auto bg-white" *ngIf="item.prescribedBy">
+                    <div class="caption ">Doctor</div>
+                    <div class="value bg-light">{{item.prescribedBy}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 border border-danger">
+        <div class="row " style="overflow-y: auto;" [ngStyle]="{height:gridHeight+'px'}">
+            <div class="col-12">
+                <div class="invoice_wrape">
+                    <div class="edit_btn text-right" *ngIf="selectedInvoiceData?._id">
+                        <button class="custom-red-color btn btn-danger btn-sm mt-2"
+                            (click)="editInvoice(selectedInvoiceData)">Edit</button>
+                    </div>
+                    <div class="row justify-content-center align-items-center" *ngIf="selectedInvoiceData?._id">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="invoice_detail">
+                                <div class="caption_value_wrape mt-3 mx-auto">
+                                    <div class="caption">Invoice Date</div>
+                                    <div class="value">{{selectedInvoiceData?.invoiceDate|date:'mediumDate'}}</div>
+                                </div>
+                                <div class="caption_value_wrape mt-1 mx-auto">
+                                    <div class="caption">Invoice No</div>
+                                    <div class="value">{{selectedInvoiceData?.InvoiceNo}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="invoice_detail" *ngIf="selectedInvoiceData?.prescribedBy">
+                                <p class="card_label">Prescribed By</p>
+                                <h5 class="doctor_name">{{selectedInvoiceData?.prescribedBy}}</h5>
+                                <div class="caption_value_wrape">
+                                    <div class="caption">Phone#</div>
+                                    <div class="value">{{selectedInvoiceData?.prescribedBy?.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="invoice_detail" *ngIf="selectedInvoiceData?.prescribedBy">
+                                <p class="card_label">Patient</p>
+                                <h5 class="doctor_name"> {{selectedInvoiceData?.prescribedBy}}</h5>
+                                <div class="caption_value_wrape">
+                                    <div class="caption">Phone#</div>
+                                    <div class="value">0307-4324285</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail_wrape">
+                <div class="canvas_view" [ngStyle]="{ 'max-height':gridHeight + 'px'}">
+                    <div class="no_data_found_in_canvas bg-white"
+                        *ngIf="invoiceDetailDataList?.length>0==false && isLoading==false">
+                        No Data Found
+                    </div>
+                    <div class="no_data_found_in_canvas" *ngIf="isLoading">
+                        <app-loader></app-loader>
+                    </div>
+                    <div class="custom_card"
+                        *ngFor="let item of invoiceDetailDataList | filterByAllProperties:searchValue; let index=index">
+                        <div class="header_edit_delete">
+                            <div class="Header">{{item.MedicineName}}</div>
+                        </div>
+                        <div class="Card_body">
+                            <div class="caption_value_wrape">
+                                <div class="caption">Store</div>
+                                <div class="value">{{item.storeName}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Mfg Date</div>
+                                <div class="value">{{item.MfgDate | date:'mediumDate'}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">exp Date</div>
+                                <div class="value">{{item.expDate | date:'mediumDate'}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Type</div>
+                                <div class="value">{{item.MedicineTypeName}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Pack Size</div>
+                                <div class="value">{{item.packSize}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Batch#</div>
+                                <div class="value">{{item.batchNo}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Qty</div>
+                                <div class="value">{{item.Qty}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Rate</div>
+                                <div class="value">{{item.rate}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Disc Type</div>
+                                <div class="value">{{item.discountType}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Discount</div>
+                                <div class="value">{{item. discount}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption custom-red-color">Amount</div>
+                                <div class="value">{{item.finalAmount}}</div>
+                            </div>
+                            <div class="caption_value_wrape">
+                                <div class="caption">Remarks</div>
+                                <div class="value">{{item.remarks}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="totals" *ngIf="selectedInvoiceData?._id">
+                    <div class="caption_value_wrape bg-white mt-3 mx-auto">
+                        <div class="caption font_size">Total Amount</div>
+                        <div class="value font_size bg-white">{{TotalAmount}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

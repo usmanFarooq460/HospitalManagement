@@ -53,6 +53,5 @@ export abstract class BaseActions {
   searchValue: string;
   HandleSearchChange(value) {
     this.searchValue = value;
-    console.log("search value: ", value);
   }
 }

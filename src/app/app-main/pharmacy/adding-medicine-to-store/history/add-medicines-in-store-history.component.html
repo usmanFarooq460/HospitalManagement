@@ -7,14 +7,14 @@
         </div>
     </div>
 
-
     <!-- History -->
+    
     <div class="search_wrape ">
         <input type="text" placeholder="search" (keyup)="HandleSearchChange($event.target.value)" class="search">
     </div>
     <div class="canvas_view" [ngClass]="{for_no_data:storeRecordList?.length>0==false}"
         [ngStyle]="{ 'max-height':gridHeight + 'px'}">
-        <div class="no_data_found_in_canvas" *ngIf="storeRecordList?.length>0==false && isLoading==false">
+        <div class="" *ngIf="storeRecordList?.length>0==false && isLoading==false">
             No Data Found
         </div>
         <div class="no_data_found_in_canvas" *ngIf="isLoading&&storeRecordList?.length>0==false">

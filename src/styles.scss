@@ -182,13 +182,15 @@ $blue_color: rgb(13, 54, 158);
 // **************************************** canvas view*****************************//
 
 .for_no_data {
-  background-color: white;
-  padding: 45px;
+  background-color: white !important;
+  padding: 45px !important;
+  text-align: center;
+  color: $red_color;
 }
 
 .canvas_view {
-  padding: 12px;
-  margin: 10px 6px;
+  padding: 0px;
+  margin: 6px 6px;
   overflow: auto;
   .custom_card {
     background-color: white;
@@ -274,5 +276,24 @@ $blue_color: rgb(13, 54, 158);
     color: #e50101;
     font-size: 17px;
     padding-left: 16px;
+  }
+}
+
+.caption_value_wrape {
+  display: flex;
+  margin: 3px 12px;
+  border: 1px solid $red_color;
+  border-radius: 5px;
+  .caption {
+    color: $blue_color;
+    border-right: 1px solid;
+    padding: 5px 7px;
+    font-size: 13px;
+    background: #8080802e;
+  }
+  .value {
+    color: $blue_color;
+    padding: 5px 7px;
+    font-size: 13px;
   }
 }

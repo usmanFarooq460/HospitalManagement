@@ -181,4 +181,22 @@ export class PharmacyService {
       headers: this.header,
     });
   }
+
+  updateSaleInvoice(id, data) {
+    return this.http.put<any>(this.apiUrl + "saleInvoice//update/" + id, data, {
+      headers: this.header,
+    });
+  }
+
+  getSAleInvoiceHistory() {
+    return this.http.get<any>(this.apiUrl + "saleInvoice/getAll", {
+      headers: this.header,
+    });
+  }
+
+  getSaleInvoiceById(id) {
+    return this.http.get<any>(this.apiUrl + "saleInvoice/getById/" + id, {
+      headers: this.header,
+    });
+  }
 }

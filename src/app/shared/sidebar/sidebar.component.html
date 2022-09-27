@@ -1,24 +1,53 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <!-- <li class="nav-item nav-profile">
-      <a href="javascript:;" class="nav-link">
-        <div class="nav-profile-image">
-          <img src="assets/images/faces/face1.jpg" alt="profile">
-          <span class="login-status online"> Online </span> 
-        </div>
-        <div class="nav-profile-text">
-          <span class="font-weight-bold mb-2">David Grey. H</span>
-          <span class="text-secondary text-small">Project Manager</span>
-        </div>
-        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-      </a>
-    </li> -->
+
     <li *ngIf="AllModules[2].right" class="nav-item" [ngClass]="{ active: dashboard.isActive }">
       <a class="nav-link" routerLink="/dashboards" routerLinkActive #dashboard="routerLinkActive">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
+
+    <li class="nav-item" *ngIf="AllModules[7].right" [ngClass]="{ 'active': icons.isActive }">
+      <a class="nav-link" routerLink="/department" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">Department</span>
+        <i class="mdi mdi-seat-flat-angled menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item" *ngIf="AllModules[5].right" [ngClass]="{ 'active': icons.isActive }">
+      <a class="nav-link" routerLink="/staff/add-staff" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">Staff</span>
+        <i class="mdi mdi-human-male-female menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item" *ngIf="AllModules[6].right" [ngClass]="{ 'active': icons.isActive }">
+      <a class="nav-link" routerLink="/patient" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">Patients</span>
+        <i class="mdi mdi-xing menu-icon"></i>
+      </a>
+    </li>
+
+    <!-- <li *ngIf="AllModules[1].right" class="nav-item" [ngClass]="{
+      active:
+      DefineUser.isActive
+    }">
+      <a class="nav-link" (click)="Staff = !Staff" [attr.aria-expanded]="Staff" aria-controls="auth">
+        <span class="menu-title">Staff</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-book-plus menu-icon"></i>
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!Staff">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/staff/add-staff" routerLinkActive="active" #DefineUser="routerLinkActive">
+              Add Staff
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li> -->
 
     <!-- BAsic Ui Components -->
     <li *ngIf="AllModules[4].right" class="nav-item" [ngClass]="{

@@ -1,0 +1,50 @@
+@import "./../../../../../styles.scss";
+
+.invoice_detail {
+  border: 1px solid $red_color;
+  border-radius: 5px;
+  padding: 10px 5px;
+  background-color: white;
+  margin-top: 12px;
+}
+
+.doctor_name {
+  margin: 0;
+  padding-bottom: 8px;
+  color: red;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.card_label {
+  font-size: 12px;
+  margin: 0;
+  margin-top: -9px;
+}
+.totals {
+  width: 338px;
+  margin: auto;
+  margin-right: 21px;
+  margin-top: -28px;
+  .caption_value_wrape {
+    .font_size {
+      font-size: 21px;
+    }
+  }
+}
+
+.left_section {
+  border-left: 1px solid $red_color;
+  border-top: 1px solid $red_color;
+  border-bottom: 1px solid $red_color;
+  overflow-y: auto;
+  .Small_card {
+    background-color: white;
+    margin: 23px 0px;
+    padding: 19px 15px;
+  }
+}
+
+.selected {
+  background-color: aqua !important;
+}

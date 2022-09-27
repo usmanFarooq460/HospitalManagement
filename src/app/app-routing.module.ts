@@ -45,6 +45,21 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardGuard],
   },
+  {
+    path: "staff",
+    loadChildren: () =>
+      import("./app-main/staff/staff.module").then((m) => m.StaffModule),
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: "patient",
+    loadChildren: () =>
+      import("./app-main/patients/patients.module").then(
+        (m) => m.PatientsModule
+      ),
+    canActivate: [AuthGuardGuard],
+  },
+  { path: 'department', loadChildren: () => import('./app-main/department/department.module').then(m => m.DepartmentModule) },
 ];
 
 @NgModule({
