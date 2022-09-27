@@ -1,12 +1,42 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  <ul class="nav">
 
+  <ul class="nav">
     <li *ngIf="AllModules[2].right" class="nav-item" [ngClass]="{ active: dashboard.isActive }">
       <a class="nav-link" routerLink="/dashboards" routerLinkActive #dashboard="routerLinkActive">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
+
+    <li *ngIf="AllModules[1].right" class="nav-item" [ngClass]="{
+      active:
+      DefineUser.isActive ||
+      screenRights.isActive
+    }">
+    <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="Definitions" aria-controls="auth">
+      <span class="menu-title">Control Panel</span>
+      <i class="menu-arrow"></i>
+      <i class="mdi mdi-account-settings menu-icon"></i>
+    </a>
+    <div class="collapse" id="auth" [ngbCollapse]="!Definitions">
+      <ul class="nav flex-column sub-menu">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
+            #DefineUser="routerLinkActive">
+            Define User
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/definitions/screen-rights" routerLinkActive="active"
+            #screenRights="routerLinkActive">
+            Screen Rights
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
 
     <li class="nav-item" *ngIf="AllModules[7].right" [ngClass]="{ 'active': icons.isActive }">
       <a class="nav-link" routerLink="/department" routerLinkActive #icons="routerLinkActive">
@@ -50,7 +80,7 @@
     </li> -->
 
     <!-- BAsic Ui Components -->
-    <li *ngIf="AllModules[4].right" class="nav-item" [ngClass]="{
+    <!-- <li *ngIf="AllModules[4].right" class="nav-item" [ngClass]="{
         active:
           accordions.isActive ||
           buttons.isActive ||
@@ -122,15 +152,15 @@
           </li>
         </ul>
       </div>
-    </li>
+    </li> -->
     <!-- Basic UI Components -->
 
-    <li class="nav-item" *ngIf="AllModules[3].right" [ngClass]="{ 'active': icons.isActive }">
+    <!-- <li class="nav-item" *ngIf="AllModules[3].right" [ngClass]="{ 'active': icons.isActive }">
       <a class="nav-link" routerLink="/icons/mdi" routerLinkActive #icons="routerLinkActive">
         <span class="menu-title">Icons</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
-    </li>
+    </li> -->
 
     <li *ngIf="AllModules[0].right" class="nav-item" [ngClass]="{
         active:
@@ -183,35 +213,7 @@
         </ul>
       </div>
     </li>
-    <li *ngIf="AllModules[1].right" class="nav-item" [ngClass]="{
-        active:
-        DefineUser.isActive ||
-        screenRights.isActive
-      }">
-      <a class="nav-link" (click)="Definitions = !Definitions" [attr.aria-expanded]="Definitions" aria-controls="auth">
-        <span class="menu-title">Definitions</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-book-plus menu-icon"></i>
-      </a>
-      <div class="collapse" id="auth" [ngbCollapse]="!Definitions">
-        <ul class="nav flex-column sub-menu">
-
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/definitions/user-define" routerLinkActive="active"
-              #DefineUser="routerLinkActive">
-              Define User
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/definitions/screen-rights" routerLinkActive="active"
-              #screenRights="routerLinkActive">
-              Screen Rights
-            </a>
-          </li>
-        </ul>
-      </div>
-    </li>
+    
     <li class="nav-item">
       <a class="nav-link" (click)="logOut()">
         <span class="menu-title">Logout</span>
